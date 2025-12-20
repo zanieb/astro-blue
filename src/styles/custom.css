@@ -162,6 +162,35 @@ h1#_top,
   left: 2rem !important;
   /* Fix scroll behavior - allow scrolling on hover without click */
   overscroll-behavior: contain;
+  /* Stable scrollbar gutter prevents layout shift when scrollbar appears */
+  scrollbar-gutter: stable;
+}
+
+/* ===========================================
+   Scrollbar Styling (Mintlify-like thin scrollbars)
+   =========================================== */
+/* Webkit browsers (Chrome, Safari, Edge) */
+.sidebar-pane::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar-pane::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar-pane::-webkit-scrollbar-thumb {
+  background: var(--theme-border);
+  border-radius: 3px;
+}
+
+.sidebar-pane::-webkit-scrollbar-thumb:hover {
+  background: var(--theme-text-muted);
+}
+
+/* Firefox */
+.sidebar-pane {
+  scrollbar-width: thin;
+  scrollbar-color: var(--theme-border) transparent;
 }
 
 /* Main content needs padding-left = sidebar-left + sidebar-width */
