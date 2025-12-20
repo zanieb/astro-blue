@@ -8,7 +8,6 @@ A comparison of our Astro Blue theme against the PYX Documentation (https://docs
 
 | Feature | Mintlify/PYX | Astro Blue | Priority |
 |---------|--------------|------------|----------|
-| Search bar styling | Rounded, subtle placeholder | Default Starlight | Medium |
 | Header border | Very subtle bottom border | More prominent | Low |
 
 ---

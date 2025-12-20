@@ -131,6 +131,24 @@ pre {
 }
 
 /* ===========================================
+   Search Bar (Mintlify style)
+   =========================================== */
+.search-item button {
+  border-radius: 0.5rem;
+  border: 1px solid var(--theme-border);
+  background: transparent;
+}
+
+.search-item button:hover {
+  border-color: var(--sl-color-gray-4);
+}
+
+/* Pagefind modal styling */
+.pagefind-ui {
+  --pagefind-ui-border-radius: 0.5rem;
+}
+
+/* ===========================================
    Links
    =========================================== */
 a:hover {
