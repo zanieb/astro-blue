@@ -361,13 +361,20 @@ header.header > .header {
 
 /* Breadcrumb reset - prevent global ol styling from applying */
 .breadcrumbs ol {
+  display: flex !important;
+  flex-wrap: nowrap !important;
   list-style: none !important;
   list-style-type: none !important;
   padding-left: 0 !important;
+  margin: 0 !important;
+  gap: 0 !important;
 }
 
 .breadcrumbs ol > li {
+  display: inline-flex !important;
+  align-items: center !important;
   padding-left: 0 !important;
+  margin-bottom: 0 !important;
 }
 
 /* ===========================================
