@@ -191,11 +191,34 @@ h1#_top,
 }
 
 /* ===========================================
-   Code blocks
+   Code blocks (clean, no window/header)
    =========================================== */
 pre {
   border: 1px solid var(--theme-border);
   border-radius: 0.75rem;
+}
+
+/* Hide code block header/frame */
+.expressive-code .frame:not(.has-title):not(.is-terminal) .header,
+.expressive-code .frame .header:empty {
+  display: none;
+}
+
+/* Clean up code block frame */
+.expressive-code .frame {
+  border: 1px solid var(--theme-border);
+  border-radius: 0.75rem;
+  overflow: hidden;
+}
+
+.expressive-code .frame:not(.has-title) {
+  border-top-left-radius: 0.75rem;
+  border-top-right-radius: 0.75rem;
+}
+
+/* Remove copy button styling issues */
+.expressive-code .copy button {
+  border-radius: 0.375rem;
 }
 
 /* ===========================================
