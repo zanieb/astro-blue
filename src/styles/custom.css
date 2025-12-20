@@ -160,8 +160,14 @@ h1#_top,
 
 /* Match PYX left margin (~32px) for whole page */
 /* Sidebar uses position:fixed, so needs explicit left value */
+/* Only apply on desktop when sidebar is visible */
+@media (min-width: 50rem) {
+  .sidebar-pane {
+    left: 2rem !important;
+  }
+}
+
 .sidebar-pane {
-  left: 2rem !important;
   /* Fix scroll behavior - allow scrolling on hover without click */
   overscroll-behavior: contain;
   /* Stable scrollbar gutter prevents layout shift when scrollbar appears */
@@ -197,8 +203,11 @@ h1#_top,
 
 /* Main content needs padding-left = sidebar-left + sidebar-width */
 /* Default sidebar width is 300px (18.75rem), so total = 2rem + 18.75rem = 20.75rem */
-.main-frame {
-  padding-left: calc(2rem + var(--sl-sidebar-width, 18.75rem)) !important;
+/* Only apply on desktop when sidebar is visible */
+@media (min-width: 50rem) {
+  .main-frame {
+    padding-left: calc(2rem + var(--sl-sidebar-width, 18.75rem)) !important;
+  }
 }
 
 /* Header - symmetric padding (32px) to match PYX */
