@@ -47,13 +47,18 @@ export default defineConfig({
         {
           label: 'Concepts',
           items: [
-            { label: 'Components', slug: 'concepts/components' },
-            { label: 'Asides', slug: 'concepts/asides' },
-            { label: 'Code Blocks', slug: 'concepts/code-blocks' },
-            { label: 'Cards', slug: 'concepts/cards' },
-            { label: 'Tabs', slug: 'concepts/tabs' },
-            { label: 'Steps', slug: 'concepts/steps' },
             { label: 'Lists', slug: 'concepts/lists' },
+            {
+              label: 'Components',
+              items: [
+                { label: 'Overview', slug: 'concepts/components' },
+                { label: 'Asides', slug: 'concepts/asides' },
+                { label: 'Code Blocks', slug: 'concepts/code-blocks' },
+                { label: 'Cards', slug: 'concepts/cards' },
+                { label: 'Tabs', slug: 'concepts/tabs' },
+                { label: 'Steps', slug: 'concepts/steps' },
+              ],
+            },
           ],
         },
         {
