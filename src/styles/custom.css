@@ -956,13 +956,13 @@ a:hover {
   color: #cccccc;
 }
 
-/* Discord - blurple on light, white on dark */
+/* Discord - black on light, white on dark */
 :root[data-theme='light'] .social-icons a[href*="discord.com"] {
-  color: #5865F2;
+  color: #000000;
 }
 
 :root[data-theme='light'] .social-icons a[href*="discord.com"]:hover {
-  color: #4752c4;
+  color: #333333;
 }
 
 :root[data-theme='dark'] .social-icons a[href*="discord.com"] {
