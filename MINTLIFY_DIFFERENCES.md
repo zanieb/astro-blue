@@ -14,11 +14,6 @@ A comparison of our Astro Blue theme against the PYX Documentation (https://docs
 
 ## Sidebar
 
-### Background & Colors
-| Feature | Mintlify/PYX | Astro Blue | Priority |
-|---------|--------------|------------|----------|
-| Border/separator | Subtle right border | Starlight default | Medium |
-
 ### Links
 | Feature | Mintlify/PYX | Astro Blue | Priority |
 |---------|--------------|------------|----------|

@@ -159,6 +159,11 @@ a:hover {
    Mintlify-style Sidebar
    =========================================== */
 
+/* Sidebar panel - subtle right border */
+.sidebar {
+  border-right: 1px solid var(--theme-border);
+}
+
 /* Sidebar container */
 .sidebar-content {
   padding: 1rem 0.75rem;

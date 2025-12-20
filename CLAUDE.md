@@ -1,14 +1,19 @@
 # Claude Code Notes
 
-See `DEVELOPMENT.md` for setup instructions (MCP browser tools, dev server).
+## Setup
+See `DEVELOPMENT.md` for setup (MCP browser tools, dev server).
 
-See `MINTLIFY_DIFFERENCES.md` for remaining styling items to match Mintlify.
+## Current Task
+Work through items in `MINTLIFY_DIFFERENCES.md` to match Mintlify/PYX docs styling.
 
-## Current Work
+**Workflow:**
+1. Pick next item from `MINTLIFY_DIFFERENCES.md`
+2. Implement the CSS/component change
+3. Remove completed item from `MINTLIFY_DIFFERENCES.md`
+4. Commit with descriptive message
 
-Styling Astro Starlight to match Mintlify/PYX docs appearance.
-
-Key customization files:
+## Key Files
 - `src/styles/custom.css` - Theme CSS
 - `src/components/` - Starlight component overrides
 - `astro.config.mjs` - Configuration
+- `MINTLIFY_DIFFERENCES.md` - Remaining styling items
