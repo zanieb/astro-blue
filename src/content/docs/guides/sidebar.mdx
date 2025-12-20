@@ -1,0 +1,69 @@
+---
+title: Sidebar
+description: Configure the navigation sidebar.
+---
+
+The sidebar is configured in `astro.config.mjs`.
+
+## Basic Structure
+
+```javascript
+sidebar: [
+  {
+    label: 'Getting Started',
+    items: [
+      { label: 'Installation', slug: 'getting-started/installation' },
+      { label: 'First Steps', slug: 'getting-started/first-steps' },
+    ],
+  },
+  {
+    label: 'Guides',
+    items: [
+      { label: 'Customization', slug: 'guides/customization' },
+    ],
+  },
+],
+```
+
+## Nested Groups
+
+Create sub-sections with nested items:
+
+```javascript
+{
+  label: 'Guides',
+  items: [
+    { label: 'Overview', slug: 'guides/overview' },
+    {
+      label: 'Integrations',
+      items: [
+        { label: 'Docker', slug: 'guides/integrations/docker' },
+        { label: 'Vercel', slug: 'guides/integrations/vercel' },
+      ],
+    },
+  ],
+}
+```
+
+## Auto-generated Sidebar
+
+Let Starlight generate the sidebar from your file structure:
+
+```javascript
+sidebar: [
+  {
+    label: 'Guides',
+    autogenerate: { directory: 'guides' },
+  },
+],
+```
+
+## Styling
+
+The sidebar uses Mintlify-style styling:
+
+- **Top-level sections**: Uppercase headers
+- **First-level items**: Same indent as header
+- **Nested items**: Indented under parent
+
+See `src/styles/custom.css` for the sidebar CSS.

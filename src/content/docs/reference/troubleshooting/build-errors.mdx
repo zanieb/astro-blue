@@ -1,0 +1,83 @@
+---
+title: Build Errors
+description: Troubleshoot build and deployment errors.
+---
+
+Diagnose and fix build errors.
+
+## TypeScript Errors
+
+### Type Checking
+
+Run type checking separately:
+
+```bash
+bunx astro check
+```
+
+### Missing Types
+
+Install Astro types:
+
+```bash
+bun add -D @types/node
+```
+
+## MDX Errors
+
+### Invalid JSX
+
+Ensure all JSX tags are properly closed:
+
+```mdx
+<!-- Wrong -->
+<Aside>Content
+
+<!-- Correct -->
+<Aside>Content</Aside>
+```
+
+### Import Errors
+
+Import components at the top of the file, after frontmatter:
+
+```mdx
+---
+title: My Page
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+<Aside>Content</Aside>
+```
+
+## Production Build
+
+### Out of Memory
+
+Increase Node.js memory limit:
+
+```bash
+NODE_OPTIONS="--max-old-space-size=4096" bun run build
+```
+
+### Missing Files
+
+Check that all referenced files exist:
+
+- Images in `src/assets/` or `public/`
+- Components in correct paths
+
+## Deployment Errors
+
+### Vercel
+
+Check build output directory is `dist`.
+
+### GitHub Pages
+
+Ensure `base` is set correctly for repo-based URLs.
+
+### Cloudflare
+
+Verify `NODE_VERSION` environment variable is set.

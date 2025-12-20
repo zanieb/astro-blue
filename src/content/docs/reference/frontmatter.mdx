@@ -1,0 +1,79 @@
+---
+title: Frontmatter
+description: Page frontmatter options reference.
+---
+
+Every documentation page starts with YAML frontmatter.
+
+## Required Fields
+
+```yaml
+---
+title: Page Title
+---
+```
+
+## Optional Fields
+
+```yaml
+---
+title: Page Title
+description: A brief description for SEO and link previews.
+sidebar:
+  label: Custom Sidebar Label
+  order: 1
+  badge: New
+tableOfContents:
+  minHeadingLevel: 2
+  maxHeadingLevel: 4
+editUrl: false
+head:
+  - tag: meta
+    attrs:
+      property: og:image
+      content: /images/og.png
+---
+```
+
+## Field Reference
+
+### title
+
+**Required.** The page title displayed in the header and sidebar.
+
+### description
+
+Meta description for SEO. Appears in search results and social previews.
+
+### sidebar
+
+Customize how the page appears in the sidebar:
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `label` | string | Override the sidebar label |
+| `order` | number | Sort order (lower = higher) |
+| `hidden` | boolean | Hide from sidebar |
+| `badge` | string \| object | Add a badge |
+
+### tableOfContents
+
+Configure the table of contents:
+
+```yaml
+tableOfContents:
+  minHeadingLevel: 2  # Default: 2
+  maxHeadingLevel: 3  # Default: 3
+```
+
+Set to `false` to disable.
+
+### editUrl
+
+Override or disable the "Edit page" link:
+
+```yaml
+editUrl: https://github.com/my/repo/edit/main/docs/page.mdx
+# or
+editUrl: false
+```

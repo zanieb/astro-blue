@@ -1,0 +1,49 @@
+---
+title: Installation
+description: Install and set up Astro Blue for your documentation site.
+---
+
+Get started with Astro Blue in a few steps.
+
+## Prerequisites
+
+- Node.js 18 or later
+- Package manager (npm, pnpm, or bun)
+
+## Create a New Project
+
+```bash
+# Clone the template
+git clone https://github.com/example/astro-blue my-docs
+cd my-docs
+
+# Install dependencies
+bun install
+```
+
+## Start Development Server
+
+```bash
+bun run dev
+```
+
+Your site will be available at `http://localhost:4321`.
+
+## Project Structure
+
+```
+my-docs/
+├── astro.config.mjs      # Astro & Starlight config
+├── src/
+│   ├── content/
+│   │   └── docs/         # Your documentation pages
+│   └── styles/
+│       └── custom.css    # Theme customizations
+├── package.json
+└── bun.lock
+```
+
+## Next Steps
+
+- [Configure the theme](/getting-started/configuration/)
+- [Add your first page](/getting-started/first-page/)

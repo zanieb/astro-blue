@@ -1,0 +1,80 @@
+---
+title: Asides (Admonitions)
+description: Callout boxes for highlighting important information.
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+Asides (also called admonitions or callouts) highlight important information.
+
+## Types
+
+### Note
+
+Use for general supplementary information.
+
+<Aside>
+  This is a note. It provides additional context that might be helpful.
+</Aside>
+
+```mdx
+<Aside>
+  This is a note.
+</Aside>
+```
+
+### Tip
+
+Use for helpful suggestions and best practices.
+
+<Aside type="tip">
+  Pro tip: Use keyboard shortcuts to navigate faster.
+</Aside>
+
+```mdx
+<Aside type="tip">
+  Pro tip: Use keyboard shortcuts.
+</Aside>
+```
+
+### Caution
+
+Use for warnings about potential issues.
+
+<Aside type="caution">
+  Be careful when modifying configuration files.
+</Aside>
+
+```mdx
+<Aside type="caution">
+  Be careful when modifying configuration files.
+</Aside>
+```
+
+### Danger
+
+Use for critical warnings about destructive actions.
+
+<Aside type="danger">
+  This action cannot be undone. Make sure you have a backup.
+</Aside>
+
+```mdx
+<Aside type="danger">
+  This action cannot be undone.
+</Aside>
+```
+
+## Custom Titles
+
+Override the default title:
+
+<Aside type="tip" title="Did you know?">
+  You can customize the aside title.
+</Aside>
+
+```mdx
+<Aside type="tip" title="Did you know?">
+  You can customize the aside title.
+</Aside>
+```

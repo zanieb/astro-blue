@@ -1,0 +1,72 @@
+---
+title: CSS Variables
+description: All CSS custom properties available in Astro Blue.
+---
+
+Reference for all CSS variables you can customize.
+
+## Astral Palette
+
+```css
+:root {
+  --astral-primary: rgb(38 18 48);
+  --astral-primary-light: rgb(215 255 100);
+  --astral-primary-dark: rgb(99 64 172);
+
+  --astral-bg-light: rgb(255 255 255);
+  --astral-bg-dark: rgb(13 14 13);
+
+  --astral-gray-50: rgb(244 243 244);
+  --astral-gray-100: rgb(239 238 239);
+  --astral-gray-200: rgb(223 223 223);
+  --astral-gray-300: rgb(207 206 207);
+  --astral-gray-400: rgb(159 159 159);
+  --astral-gray-500: rgb(113 112 113);
+  --astral-gray-600: rgb(81 80 81);
+  --astral-gray-700: rgb(63 63 64);
+  --astral-gray-800: rgb(38 37 38);
+  --astral-gray-900: rgb(23 23 24);
+  --astral-gray-950: rgb(11 10 11);
+}
+```
+
+## Starlight Variables
+
+These Starlight variables are mapped to Astral colors:
+
+```css
+:root {
+  /* Accent colors */
+  --sl-color-accent-low: var(--astral-primary);
+  --sl-color-accent: var(--astral-primary-dark);
+  --sl-color-accent-high: var(--astral-primary-light);
+
+  /* Grayscale */
+  --sl-color-white: var(--astral-bg-light);
+  --sl-color-gray-1: var(--astral-gray-100);
+  --sl-color-gray-2: var(--astral-gray-200);
+  --sl-color-gray-3: var(--astral-gray-400);
+  --sl-color-gray-4: var(--astral-gray-600);
+  --sl-color-gray-5: var(--astral-gray-700);
+  --sl-color-gray-6: var(--astral-gray-800);
+  --sl-color-black: var(--astral-bg-dark);
+
+  /* Backgrounds */
+  --sl-color-bg: var(--astral-bg-dark);
+  --sl-color-bg-nav: var(--astral-gray-950);
+  --sl-color-bg-sidebar: var(--astral-gray-950);
+
+  /* Borders */
+  --sl-color-hairline-light: var(--astral-gray-800);
+  --sl-color-hairline: var(--astral-gray-700);
+}
+```
+
+## Typography
+
+```css
+:root {
+  --sl-font: system-ui, sans-serif;
+  --sl-font-mono: ui-monospace, monospace;
+}
+```

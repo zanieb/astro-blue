@@ -1,0 +1,78 @@
+---
+title: Code Blocks
+description: Syntax highlighted code with various features.
+---
+
+Code blocks support syntax highlighting for many languages.
+
+## Basic Usage
+
+Use triple backticks with a language identifier:
+
+```typescript
+function greet(name: string): string {
+  return `Hello, ${name}!`;
+}
+```
+
+## Supported Languages
+
+Common languages include:
+
+- `javascript` / `js`
+- `typescript` / `ts`
+- `bash` / `shell`
+- `json`
+- `yaml`
+- `css`
+- `html`
+- `mdx`
+- `python`
+- `rust`
+- `go`
+
+## Titles
+
+Add a title to your code block:
+
+```typescript title="greet.ts"
+export function greet(name: string) {
+  return `Hello, ${name}!`;
+}
+```
+
+````mdx
+```typescript title="greet.ts"
+export function greet(name: string) {
+  return `Hello, ${name}!`;
+}
+```
+````
+
+## Line Highlighting
+
+Highlight specific lines:
+
+```typescript {2-3}
+function example() {
+  const highlighted = true;
+  const alsoHighlighted = true;
+  const notHighlighted = false;
+}
+```
+
+## Inline Code
+
+Use single backticks for `inline code` in text.
+
+For inline code with syntax highlighting, use the `<code>` element.
+
+## Terminal Output
+
+```bash
+$ bun run dev
+  astro  v5.16.6 ready in 552 ms
+
+  ┃ Local    http://localhost:4321/
+  ┃ Network  use --host to expose
+```

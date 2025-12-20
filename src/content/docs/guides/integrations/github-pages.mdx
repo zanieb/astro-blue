@@ -1,0 +1,64 @@
+---
+title: GitHub Pages
+description: Deploy your docs to GitHub Pages.
+---
+
+Host your documentation for free on GitHub Pages.
+
+## GitHub Actions Workflow
+
+Create `.github/workflows/deploy.yml`:
+
+```yaml
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v1
+      - run: bun install
+      - run: bun run build
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/deploy-pages@v4
+        id: deployment
+```
+
+## Configure Base URL
+
+If deploying to `username.github.io/repo-name`, set the base:
+
+```javascript
+// astro.config.mjs
+export default defineConfig({
+  site: 'https://username.github.io',
+  base: '/repo-name',
+  // ...
+});
+```
+
+## Enable GitHub Pages
+
+1. Go to repository Settings → Pages
+2. Set Source to "GitHub Actions"
+3. Push to main to trigger deployment

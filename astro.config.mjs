@@ -6,37 +6,60 @@ export default defineConfig({
     starlight({
       title: 'Astro Blue',
       social: [
-        { icon: 'github', label: 'GitHub', href: 'https://github.com/withastro/starlight' },
+        { icon: 'github', label: 'GitHub', href: 'https://github.com/example/astro-blue' },
       ],
       sidebar: [
         {
           label: 'Getting Started',
           items: [
-            { label: 'Introduction', slug: 'getting-started/introduction' },
+            { label: 'Installation', slug: 'getting-started/installation' },
+            { label: 'First Steps', slug: 'getting-started/first-steps' },
+            { label: 'Configuration', slug: 'getting-started/configuration' },
+            { label: 'Features', slug: 'getting-started/features' },
           ],
         },
         {
           label: 'Guides',
           items: [
-            { label: 'Overview', slug: 'guides/overview' },
+            { label: 'Customization', slug: 'guides/customization' },
+            { label: 'Colors', slug: 'guides/colors' },
+            { label: 'Sidebar', slug: 'guides/sidebar' },
             {
               label: 'Integrations',
               items: [
                 { label: 'Docker', slug: 'guides/integrations/docker' },
-                { label: 'GitHub Actions', slug: 'guides/integrations/github-actions' },
                 { label: 'Vercel', slug: 'guides/integrations/vercel' },
+                { label: 'GitHub Pages', slug: 'guides/integrations/github-pages' },
+                { label: 'Cloudflare Pages', slug: 'guides/integrations/cloudflare' },
               ],
             },
-            { label: 'Migration', slug: 'guides/migration' },
           ],
         },
         {
-          label: 'Demo',
+          label: 'Concepts',
           items: [
-            { label: 'Quickstart', slug: 'demo/quickstart' },
-            { label: 'Configuration', slug: 'demo/configuration' },
-            { label: 'API Reference', slug: 'demo/api-reference' },
-            { label: 'Examples', slug: 'demo/examples' },
+            { label: 'Components', slug: 'concepts/components' },
+            { label: 'Asides', slug: 'concepts/asides' },
+            { label: 'Code Blocks', slug: 'concepts/code-blocks' },
+            { label: 'Cards', slug: 'concepts/cards' },
+            { label: 'Tabs', slug: 'concepts/tabs' },
+            { label: 'Steps', slug: 'concepts/steps' },
+          ],
+        },
+        {
+          label: 'Reference',
+          items: [
+            { label: 'Configuration', slug: 'reference/configuration' },
+            { label: 'CSS Variables', slug: 'reference/css-variables' },
+            { label: 'Frontmatter', slug: 'reference/frontmatter' },
+            {
+              label: 'Troubleshooting',
+              items: [
+                { label: 'Common Issues', slug: 'reference/troubleshooting/common-issues' },
+                { label: 'Build Errors', slug: 'reference/troubleshooting/build-errors' },
+              ],
+            },
+            { label: 'Changelog', slug: 'reference/changelog' },
           ],
         },
       ],

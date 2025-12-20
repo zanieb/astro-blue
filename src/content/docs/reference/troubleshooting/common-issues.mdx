@@ -1,0 +1,74 @@
+---
+title: Common Issues
+description: Solutions to common problems.
+---
+
+Solutions to frequently encountered issues.
+
+## Build Errors
+
+### "Cannot find module"
+
+Ensure dependencies are installed:
+
+```bash
+rm -rf node_modules bun.lock
+bun install
+```
+
+### "Port already in use"
+
+Another process is using port 4321:
+
+```bash
+# Find the process
+lsof -i :4321
+
+# Kill it or use a different port
+bun run dev -- --port 4322
+```
+
+## Content Issues
+
+### Page Not Appearing in Sidebar
+
+1. Check the file is in `src/content/docs/`
+2. Verify the frontmatter is valid YAML
+3. Ensure the slug matches your sidebar config
+
+### MDX Syntax Errors
+
+Common causes:
+
+- Unclosed JSX tags
+- Invalid YAML frontmatter
+- Unescaped special characters
+
+### Images Not Loading
+
+Use the correct path format:
+
+```mdx
+![Alt text](./relative/path/image.png)
+// or
+![Alt text](/absolute/path/image.png)
+```
+
+## Styling Issues
+
+### Custom CSS Not Applied
+
+1. Check the path in `astro.config.mjs`:
+   ```javascript
+   customCss: ['./src/styles/custom.css'],
+   ```
+
+2. Clear the cache:
+   ```bash
+   rm -rf .astro
+   bun run dev
+   ```
+
+### Dark Mode Issues
+
+Ensure colors have sufficient contrast in both modes.

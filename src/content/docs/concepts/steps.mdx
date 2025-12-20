@@ -1,0 +1,95 @@
+---
+title: Steps
+description: Numbered step-by-step instructions.
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+Steps help guide users through sequential processes.
+
+## Basic Steps
+
+<Steps>
+
+1. **Install dependencies**
+
+   ```bash
+   bun install
+   ```
+
+2. **Configure the project**
+
+   Edit `astro.config.mjs` to customize your site.
+
+3. **Start development**
+
+   ```bash
+   bun run dev
+   ```
+
+4. **Deploy**
+
+   Build and deploy to your hosting provider.
+
+</Steps>
+
+````mdx
+<Steps>
+
+1. **Install dependencies**
+
+   ```bash
+   bun install
+   ```
+
+2. **Configure the project**
+
+   Edit `astro.config.mjs`.
+
+3. **Start development**
+
+   ```bash
+   bun run dev
+   ```
+
+</Steps>
+````
+
+## Steps with Details
+
+<Steps>
+
+1. **Clone the repository**
+
+   Start by cloning the Astro Blue template:
+
+   ```bash
+   git clone https://github.com/example/astro-blue
+   cd astro-blue
+   ```
+
+2. **Install dependencies**
+
+   Use your preferred package manager:
+
+   ```bash
+   bun install
+   ```
+
+3. **Run the development server**
+
+   Start the server and open your browser:
+
+   ```bash
+   bun run dev
+   ```
+
+   Navigate to `http://localhost:4321` to see your site.
+
+</Steps>
+
+## Notes
+
+- Steps must be an ordered list (`1.`, `2.`, etc.)
+- Each step can contain any content (text, code, images)
+- Nesting is supported within steps

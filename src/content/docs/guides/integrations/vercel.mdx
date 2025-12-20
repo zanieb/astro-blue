@@ -1,38 +1,46 @@
 ---
 title: Vercel
-description: Deploy to Vercel with edge functions.
+description: Deploy your docs to Vercel.
 ---
 
-## Setup
+Deploy your documentation site to Vercel with zero configuration.
 
-1. Install the Vercel CLI:
-   ```bash
-   npm i -g vercel
-   ```
+## Quick Deploy
 
-2. Add your API key to Vercel environment variables:
-   ```bash
-   vercel env add ACME_API_KEY
-   ```
+1. Push your code to GitHub
+2. Import the repository in Vercel
+3. Vercel auto-detects Astro and configures the build
 
-3. Deploy:
-   ```bash
-   vercel --prod
-   ```
+## Manual Configuration
 
-## Edge Functions
+Create `vercel.json` in your project root:
 
-```typescript
-import { createClient } from '@acme/sdk';
-
-export const config = { runtime: 'edge' };
-
-export default async function handler(req: Request) {
-  const client = createClient({
-    apiKey: process.env.ACME_API_KEY,
-  });
-
-  const data = await client.getData();
-  return Response.json(data);
+```json
+{
+  "buildCommand": "bun run build",
+  "outputDirectory": "dist",
+  "framework": "astro"
 }
 ```
+
+## Environment Variables
+
+Set environment variables in the Vercel dashboard or via CLI:
+
+```bash
+vercel env add MY_VARIABLE
+```
+
+## Preview Deployments
+
+Every pull request gets a preview deployment automatically.
+
+## Custom Domain
+
+1. Go to Project Settings → Domains
+2. Add your custom domain
+3. Configure DNS as instructed
+
+## Build Output
+
+Astro Blue produces static output by default, perfect for Vercel's edge network.

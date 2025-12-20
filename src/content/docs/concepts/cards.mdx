@@ -1,0 +1,79 @@
+---
+title: Cards
+description: Feature cards and link cards for content organization.
+---
+
+import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+Cards help organize and highlight content.
+
+## Basic Card
+
+<Card title="Getting Started">
+  Learn how to set up Astro Blue for your documentation site.
+</Card>
+
+```mdx
+<Card title="Getting Started">
+  Learn how to set up Astro Blue.
+</Card>
+```
+
+## Card with Icon
+
+<Card title="Fast" icon="rocket">
+  Optimized for speed with minimal overhead.
+</Card>
+
+```mdx
+<Card title="Fast" icon="rocket">
+  Optimized for speed.
+</Card>
+```
+
+## Card Grid
+
+<CardGrid>
+  <Card title="Simple" icon="pencil">
+    Easy to use and customize.
+  </Card>
+  <Card title="Powerful" icon="setting">
+    Full access to Starlight features.
+  </Card>
+  <Card title="Beautiful" icon="star">
+    Astral-inspired design system.
+  </Card>
+  <Card title="Accessible" icon="heart">
+    WCAG compliant out of the box.
+  </Card>
+</CardGrid>
+
+```mdx
+<CardGrid>
+  <Card title="Simple" icon="pencil">...</Card>
+  <Card title="Powerful" icon="setting">...</Card>
+</CardGrid>
+```
+
+## Link Cards
+
+<CardGrid>
+  <LinkCard
+    title="Installation"
+    description="Get started with Astro Blue"
+    href="/getting-started/installation/"
+  />
+  <LinkCard
+    title="Components"
+    description="Explore available components"
+    href="/concepts/components/"
+  />
+</CardGrid>
+
+```mdx
+<LinkCard
+  title="Installation"
+  description="Get started"
+  href="/getting-started/installation/"
+/>
+```

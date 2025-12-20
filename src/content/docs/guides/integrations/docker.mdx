@@ -1,25 +1,52 @@
 ---
 title: Docker
-description: Run the SDK in Docker containers.
+description: Build and serve your docs with Docker.
 ---
 
-## Dockerfile Example
+Containerize your documentation site for consistent deployments.
+
+## Dockerfile
 
 ```dockerfile
-FROM node:20-alpine
+FROM node:20-alpine AS build
 
 WORKDIR /app
-COPY package*.json ./
-RUN npm install
-COPY . .
+COPY package*.json bun.lock ./
+RUN npm install -g bun && bun install
 
-CMD ["node", "index.js"]
+COPY . .
+RUN bun run build
+
+FROM nginx:alpine
+COPY --from=build /app/dist /usr/share/nginx/html
+EXPOSE 80
 ```
 
-## Environment Variables
-
-Pass your API key as an environment variable:
+## Build the Image
 
 ```bash
-docker run -e ACME_API_KEY=your_key my-app
+docker build -t my-docs .
+```
+
+## Run the Container
+
+```bash
+docker run -p 8080:80 my-docs
+```
+
+Your docs will be available at `http://localhost:8080`.
+
+## Docker Compose
+
+```yaml
+version: '3'
+services:
+  docs:
+    build: .
+    ports:
+      - '8080:80'
+```
+
+```bash
+docker compose up
 ```

@@ -1,0 +1,55 @@
+---
+title: First Steps
+description: Create your first documentation page.
+---
+
+Learn how to create and organize documentation pages.
+
+## Create a Page
+
+Create a new `.mdx` file in `src/content/docs/`:
+
+```mdx
+---
+title: My First Page
+description: This is my first documentation page.
+---
+
+Welcome to my documentation!
+
+## Section One
+
+Content goes here.
+```
+
+## Frontmatter
+
+Every page needs frontmatter with at least a `title`:
+
+| Field | Required | Description |
+|-------|----------|-------------|
+| `title` | Yes | Page title shown in sidebar and header |
+| `description` | No | Meta description for SEO |
+| `sidebar` | No | Override sidebar behavior |
+| `tableOfContents` | No | Configure table of contents |
+
+## Organize with Folders
+
+```
+src/content/docs/
+├── index.mdx              # Home page
+├── getting-started/
+│   ├── installation.mdx
+│   └── first-steps.mdx
+├── guides/
+│   ├── customization.mdx
+│   └── integrations/
+│       ├── docker.mdx
+│       └── vercel.mdx
+```
+
+## Link Between Pages
+
+```mdx
+Check out the [installation guide](/getting-started/installation/).
+```

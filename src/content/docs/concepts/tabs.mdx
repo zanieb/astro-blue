@@ -1,0 +1,76 @@
+---
+title: Tabs
+description: Organize content into tabbed panels.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+Tabs help organize related content into switchable panels.
+
+## Basic Tabs
+
+<Tabs>
+  <TabItem label="npm">
+    ```bash
+    npm install @astrojs/starlight
+    ```
+  </TabItem>
+  <TabItem label="pnpm">
+    ```bash
+    pnpm add @astrojs/starlight
+    ```
+  </TabItem>
+  <TabItem label="bun">
+    ```bash
+    bun add @astrojs/starlight
+    ```
+  </TabItem>
+</Tabs>
+
+```mdx
+<Tabs>
+  <TabItem label="npm">
+    Content for npm tab
+  </TabItem>
+  <TabItem label="pnpm">
+    Content for pnpm tab
+  </TabItem>
+</Tabs>
+```
+
+## With Icons
+
+<Tabs>
+  <TabItem label="macOS" icon="apple">
+    Download the `.dmg` installer.
+  </TabItem>
+  <TabItem label="Windows" icon="seti:windows">
+    Download the `.exe` installer.
+  </TabItem>
+  <TabItem label="Linux" icon="linux">
+    Install via your package manager.
+  </TabItem>
+</Tabs>
+
+## Synced Tabs
+
+Tabs with the same `syncKey` stay synchronized:
+
+<Tabs syncKey="package-manager">
+  <TabItem label="npm">npm install</TabItem>
+  <TabItem label="bun">bun add</TabItem>
+</Tabs>
+
+Selecting a tab here will also switch the tab below:
+
+<Tabs syncKey="package-manager">
+  <TabItem label="npm">npm run dev</TabItem>
+  <TabItem label="bun">bun run dev</TabItem>
+</Tabs>
+
+```mdx
+<Tabs syncKey="package-manager">
+  <TabItem label="npm">...</TabItem>
+  <TabItem label="bun">...</TabItem>
+</Tabs>
+```

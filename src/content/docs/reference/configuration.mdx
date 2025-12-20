@@ -1,0 +1,82 @@
+---
+title: Configuration
+description: Complete configuration reference for Astro Blue.
+---
+
+Full reference for `astro.config.mjs` options.
+
+## Starlight Options
+
+```javascript
+starlight({
+  // Required
+  title: 'My Docs',
+
+  // Optional
+  description: 'Documentation for my project',
+  logo: { src: './src/assets/logo.svg' },
+  favicon: '/favicon.ico',
+
+  // Sidebar
+  sidebar: [...],
+
+  // Social links
+  social: [...],
+
+  // Custom CSS
+  customCss: ['./src/styles/custom.css'],
+
+  // Localization
+  defaultLocale: 'en',
+  locales: { ... },
+
+  // Table of contents
+  tableOfContents: { minHeadingLevel: 2, maxHeadingLevel: 3 },
+
+  // Search
+  pagefind: true,
+
+  // Components
+  components: { ... },
+})
+```
+
+## Sidebar Configuration
+
+```javascript
+sidebar: [
+  // Static item
+  { label: 'Home', slug: 'index' },
+
+  // Group with items
+  {
+    label: 'Getting Started',
+    items: [
+      { label: 'Installation', slug: 'getting-started/installation' },
+    ],
+  },
+
+  // Auto-generated group
+  {
+    label: 'Reference',
+    autogenerate: { directory: 'reference' },
+  },
+
+  // Collapsed by default
+  {
+    label: 'Advanced',
+    collapsed: true,
+    items: [...],
+  },
+]
+```
+
+## Social Links
+
+```javascript
+social: [
+  { icon: 'github', label: 'GitHub', href: '...' },
+  { icon: 'discord', label: 'Discord', href: '...' },
+  { icon: 'x.com', label: 'Twitter', href: '...' },
+]
+```

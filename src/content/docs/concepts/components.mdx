@@ -1,0 +1,34 @@
+---
+title: Components
+description: Overview of available Starlight components.
+---
+
+Astro Blue includes all Starlight components with custom styling.
+
+## Available Components
+
+| Component | Description |
+|-----------|-------------|
+| [Asides](/concepts/asides/) | Callout boxes for notes, tips, cautions, dangers |
+| [Code Blocks](/concepts/code-blocks/) | Syntax highlighted code with copy button |
+| [Cards](/concepts/cards/) | Feature cards and link cards |
+| [Tabs](/concepts/tabs/) | Tabbed content panels |
+| [Steps](/concepts/steps/) | Numbered step-by-step instructions |
+
+## Importing Components
+
+Components are imported from `@astrojs/starlight/components`:
+
+```mdx
+---
+title: My Page
+---
+
+import { Aside, Card, CardGrid, Tabs, TabItem, Steps } from '@astrojs/starlight/components';
+
+<Aside>This is a note.</Aside>
+```
+
+## Styling
+
+All components inherit the Astral color palette automatically. Custom styling can be added in `src/styles/custom.css`.

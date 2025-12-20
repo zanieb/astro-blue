@@ -1,0 +1,65 @@
+---
+title: Configuration
+description: Configure Astro Blue for your project.
+---
+
+Astro Blue is configured through `astro.config.mjs`.
+
+## Basic Configuration
+
+```javascript
+import { defineConfig } from 'astro/config';
+import starlight from '@astrojs/starlight';
+
+export default defineConfig({
+  integrations: [
+    starlight({
+      title: 'My Docs',
+      social: [
+        { icon: 'github', label: 'GitHub', href: 'https://github.com/...' },
+      ],
+      sidebar: [
+        {
+          label: 'Getting Started',
+          items: [
+            { label: 'Installation', slug: 'getting-started/installation' },
+          ],
+        },
+      ],
+      customCss: ['./src/styles/custom.css'],
+    }),
+  ],
+});
+```
+
+## Site Title
+
+```javascript
+starlight({
+  title: 'My Documentation',
+  // Optional: Add a logo
+  logo: {
+    src: './src/assets/logo.svg',
+  },
+})
+```
+
+## Social Links
+
+```javascript
+social: [
+  { icon: 'github', label: 'GitHub', href: '...' },
+  { icon: 'discord', label: 'Discord', href: '...' },
+  { icon: 'x.com', label: 'Twitter', href: '...' },
+]
+```
+
+## Custom CSS
+
+Point to your custom styles:
+
+```javascript
+customCss: ['./src/styles/custom.css'],
+```
+
+See [Customization](/guides/customization/) for styling options.

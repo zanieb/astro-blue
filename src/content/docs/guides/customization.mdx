@@ -1,0 +1,51 @@
+---
+title: Customization
+description: Customize the look and feel of your documentation.
+---
+
+Astro Blue is fully customizable through CSS variables and configuration.
+
+## Custom CSS
+
+All customizations go in `src/styles/custom.css`:
+
+```css
+:root {
+  /* Override color variables */
+  --sl-color-accent: rgb(99 64 172);
+  --sl-color-accent-high: rgb(215 255 100);
+}
+```
+
+## Color Palette
+
+See [Colors](/guides/colors/) for the full Astral palette.
+
+## Typography
+
+Customize fonts by importing and setting:
+
+```css
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  --sl-font: 'Inter', sans-serif;
+}
+```
+
+## Sidebar
+
+See [Sidebar](/guides/sidebar/) for navigation customization.
+
+## Component Overrides
+
+Starlight supports [component overrides](https://starlight.astro.build/guides/overriding-components/) for deep customization.
+
+```javascript
+// astro.config.mjs
+starlight({
+  components: {
+    Header: './src/components/CustomHeader.astro',
+  },
+})
+```

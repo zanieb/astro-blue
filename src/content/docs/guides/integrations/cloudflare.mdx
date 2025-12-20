@@ -1,0 +1,46 @@
+---
+title: Cloudflare Pages
+description: Deploy your docs to Cloudflare Pages.
+---
+
+Deploy to Cloudflare's global edge network.
+
+## Connect Repository
+
+1. Go to Cloudflare Dashboard → Pages
+2. Click "Create a project"
+3. Connect your GitHub repository
+
+## Build Settings
+
+| Setting | Value |
+|---------|-------|
+| Framework preset | Astro |
+| Build command | `bun run build` |
+| Build output directory | `dist` |
+
+## Environment Variables
+
+Set `NODE_VERSION` to ensure compatibility:
+
+```
+NODE_VERSION=20
+```
+
+## Custom Domain
+
+1. Go to your project → Custom domains
+2. Add your domain
+3. Update DNS to point to Cloudflare
+
+## Preview Branches
+
+Every branch and PR gets a preview deployment at:
+
+```
+https://<commit-hash>.<project>.pages.dev
+```
+
+## Build Cache
+
+Cloudflare caches `node_modules` automatically for faster builds.
