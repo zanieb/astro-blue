@@ -27,7 +27,6 @@ A comparison of our Astro Blue theme against the PYX Documentation (https://docs
 ### Typography
 | Feature | Mintlify/PYX | Astro Blue | Priority |
 |---------|--------------|------------|----------|
-| Heading font | Appears slightly different weight | Starlight default | Medium |
 | Body line-height | Generous, very readable | Good but different | Low |
 
 ### Lists
