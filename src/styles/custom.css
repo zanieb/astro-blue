@@ -305,7 +305,33 @@ header.header > .header {
    Lists (PYX/Mintlify style)
    =========================================== */
 .sl-markdown-content ul {
-  padding-left: 2.125rem; /* 34px - matches pyx.dev */
+  list-style-type: none; /* Hide native bullets, use custom ::before */
+  padding-left: 0;
+  margin-left: 0;
+}
+
+.sl-markdown-content ul > li {
+  position: relative;
+  padding-left: 2rem; /* 32px - matches Mintlify exactly */
+}
+
+.sl-markdown-content ul > li::before {
+  content: "";
+  position: absolute;
+  left: 0.5rem; /* 8px from left edge */
+  top: 0.6875rem; /* 11px - vertically centered with text */
+  width: 0.375rem; /* 6px bullet */
+  height: 0.375rem; /* 6px bullet */
+  background-color: var(--theme-text-muted);
+  border-radius: 50%;
+}
+
+/* Nested bullet lists - use open circles for child items */
+.sl-markdown-content ul ul > li::before {
+  background-color: transparent;
+  border: 1.5px solid var(--theme-text-muted);
+  width: 0.3125rem; /* 5px - slightly smaller */
+  height: 0.3125rem;
 }
 
 .sl-markdown-content ol {
