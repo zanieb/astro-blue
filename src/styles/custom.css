@@ -123,6 +123,17 @@ h1#_top,
 }
 
 /* ===========================================
+   Content Layout (Mintlify style - narrower)
+   =========================================== */
+.sl-container {
+  --sl-content-width: 45rem;
+}
+
+.content-panel {
+  max-width: var(--sl-content-width);
+}
+
+/* ===========================================
    Code blocks
    =========================================== */
 pre {

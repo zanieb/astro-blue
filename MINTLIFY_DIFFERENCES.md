@@ -48,7 +48,6 @@ A comparison of our Astro Blue theme against the PYX Documentation (https://docs
 ### Whitespace & Spacing
 | Feature | Mintlify/PYX | Astro Blue | Priority |
 |---------|--------------|------------|----------|
-| Content max-width | Narrower, more focused | Wider | Medium |
 | Sidebar width | Narrower | Wider | Low |
 
 ### Animations & Transitions
