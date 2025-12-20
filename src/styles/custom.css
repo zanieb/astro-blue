@@ -63,9 +63,9 @@
   --theme-sidebar-link: var(--astral-gray-700);
   --theme-sidebar-link-hover: var(--astral-gray-900);
 
-  /* Light mode accent - use purple instead of lime for better contrast */
-  --theme-accent: var(--astral-primary-dark);
-  --theme-accent-bg: rgb(99 64 172 / 0.1);
+  /* Light mode accent - subtle gray for selected items like Mintlify */
+  --theme-accent: var(--astral-gray-900);
+  --theme-accent-bg: var(--astral-gray-100);
 }
 
 /* ===========================================
