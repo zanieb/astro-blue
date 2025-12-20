@@ -66,9 +66,132 @@ a:hover {
   color: var(--astral-primary-light);
 }
 
-/* Selected sidebar item */
-[aria-current="page"],
-[aria-current="page"]:hover {
-  background: var(--astral-primary);
+/* ===========================================
+   Mintlify-style Sidebar
+   =========================================== */
+
+/* Sidebar container */
+.sidebar-content {
+  padding: 1rem 0.75rem;
+}
+
+/* Top-level list - remove default spacing */
+.sidebar-content ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+/* Group container (details element) */
+.sidebar-content details {
+  margin-bottom: 0.25rem;
+}
+
+/* Group header (summary) */
+.sidebar-content summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--astral-gray-400);
+  cursor: pointer;
+  border-radius: 0.375rem;
+  transition: color 0.15s ease;
+}
+
+.sidebar-content summary:hover {
+  color: var(--astral-gray-200);
+}
+
+/* Hide default marker */
+.sidebar-content summary::-webkit-details-marker,
+.sidebar-content summary::marker {
+  display: none;
+  content: "";
+}
+
+/* Group label text */
+.sidebar-content .group-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Override Starlight's .large class on group labels */
+.sidebar-content .group-label .large {
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+/* Caret icon */
+.sidebar-content .caret {
+  width: 1rem;
+  height: 1rem;
+  opacity: 0.5;
+  transition: transform 0.2s ease, opacity 0.15s ease;
+}
+
+.sidebar-content summary:hover .caret {
+  opacity: 0.8;
+}
+
+.sidebar-content details[open] > summary .caret {
+  transform: rotate(90deg);
+}
+
+/* Nested list (links) */
+.sidebar-content details > ul {
+  margin-top: 0.25rem;
+  margin-left: 0.5rem;
+  padding-left: 0.75rem;
+  border-left: 1px solid var(--astral-gray-800);
+}
+
+/* Link items */
+.sidebar-content li {
+  margin: 0;
+}
+
+/* Links */
+.sidebar-content a {
+  display: block;
+  padding: 0.375rem 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: var(--astral-gray-300);
+  text-decoration: none;
+  border-radius: 0.375rem;
+  transition: color 0.15s ease, background-color 0.15s ease;
+}
+
+.sidebar-content a:hover {
+  color: var(--astral-gray-50);
+  background: var(--astral-gray-800);
+}
+
+/* Selected item */
+.sidebar-content a[aria-current="page"] {
   color: var(--astral-primary-light);
+  background: var(--astral-primary);
+  font-weight: 500;
+}
+
+.sidebar-content a[aria-current="page"]:hover {
+  color: var(--astral-primary-light);
+  background: var(--astral-primary);
+}
+
+/* Remove Starlight's default top-level styling */
+.sidebar-content .top-level > li {
+  margin-bottom: 0.5rem;
+}
+
+/* Divider between major sections */
+.sidebar-content .top-level > li:not(:first-child) {
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--astral-gray-800);
 }
