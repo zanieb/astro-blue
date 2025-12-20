@@ -49,6 +49,7 @@ export default defineConfig({
           label: 'Concepts',
           items: [
             { label: 'Lists', slug: 'concepts/lists' },
+            { label: 'TOC Demo', slug: 'concepts/toc-demo' },
             {
               label: 'Components',
               items: [
