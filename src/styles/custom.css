@@ -310,12 +310,20 @@ summary {
 }
 
 /* ===========================================
-   Search Bar (Mintlify style)
+   Search Bar (Mintlify style - centered and wider)
    =========================================== */
+.search-item {
+  flex-grow: 1;
+  max-width: 20rem;
+}
+
 .search-item button {
+  width: 100%;
   border-radius: 0.5rem;
   border: 1px solid var(--theme-border);
   background: transparent;
+  padding: 0.5rem 1rem;
+  justify-content: flex-start;
 }
 
 .search-item button:hover {
