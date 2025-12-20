@@ -191,10 +191,23 @@ pre {
 }
 
 /* ===========================================
-   Header (Mintlify style)
+   Header (Mintlify style - minimal border)
    =========================================== */
 header.header {
-  border-bottom: 1px solid var(--theme-border);
+  border-bottom: none;
+}
+
+/* ===========================================
+   Remove excessive rules/dividers
+   =========================================== */
+hr,
+.sl-markdown-content hr {
+  display: none;
+}
+
+/* Remove content panel borders */
+.content-panel {
+  border: none;
 }
 
 /* ===========================================
@@ -390,8 +403,8 @@ a:hover {
   margin-bottom: 0.5rem;
 }
 
-/* Divider between major sections */
+/* Remove dividers between major sections */
 .sidebar-content .top-level > li:not(:first-child) {
   padding-top: 0.5rem;
-  border-top: 1px solid var(--theme-border);
+  border-top: none;
 }
