@@ -934,3 +934,40 @@ a:hover {
     margin-right: 2.5rem;
   }
 }
+
+/* ===========================================
+   Social Icons (Brand-appropriate colors)
+   =========================================== */
+/* GitHub - black on light, white on dark */
+:root[data-theme='light'] .social-icons a[href*="github.com"] {
+  color: #000000;
+}
+
+:root[data-theme='light'] .social-icons a[href*="github.com"]:hover {
+  color: #333333;
+}
+
+:root[data-theme='dark'] .social-icons a[href*="github.com"] {
+  color: #ffffff;
+}
+
+:root[data-theme='dark'] .social-icons a[href*="github.com"]:hover {
+  color: #cccccc;
+}
+
+/* Discord - blurple on light, white on dark */
+:root[data-theme='light'] .social-icons a[href*="discord.com"] {
+  color: #5865F2;
+}
+
+:root[data-theme='light'] .social-icons a[href*="discord.com"]:hover {
+  color: #4752c4;
+}
+
+:root[data-theme='dark'] .social-icons a[href*="discord.com"] {
+  color: #ffffff;
+}
+
+:root[data-theme='dark'] .social-icons a[href*="discord.com"]:hover {
+  color: #5865F2;
+}
