@@ -359,7 +359,7 @@ pre {
   overflow: hidden;
 }
 
-/* Copy button styling - Mintlify style (always visible, small icon) */
+/* Copy button styling - Mintlify style (always visible, clean icon, no border) */
 .expressive-code .copy {
   opacity: 1 !important;
   position: absolute;
@@ -373,21 +373,37 @@ pre {
   padding: 0.25rem;
   width: 1.5rem;
   height: 1.5rem;
-  background: transparent;
-  border: none;
-  color: var(--theme-text-muted);
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
   cursor: pointer;
-  transition: color 0.15s ease, background-color 0.15s ease;
+  transition: opacity 0.15s ease;
 }
 
 .expressive-code .copy button:hover {
-  color: var(--theme-text);
-  background: var(--theme-bg-hover);
+  background: transparent !important;
 }
 
+/* The div inside uses CSS mask for the icon - its background becomes the icon color */
 .expressive-code .copy button div {
   width: 1rem;
   height: 1rem;
+  background: var(--theme-text-muted) !important;
+  transition: background 0.15s ease;
+  /* Clipboard/copy icon SVG as mask - filled version for proper masking */
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='currentColor'%3E%3Cpath d='M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z'/%3E%3C/svg%3E") !important;
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='currentColor'%3E%3Cpath d='M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z'/%3E%3C/svg%3E") !important;
+  -webkit-mask-size: contain !important;
+  mask-size: contain !important;
+  -webkit-mask-repeat: no-repeat !important;
+  mask-repeat: no-repeat !important;
+  -webkit-mask-position: center !important;
+  mask-position: center !important;
+}
+
+.expressive-code .copy button:hover div {
+  background: var(--theme-text) !important;
 }
 
 /* ===========================================
