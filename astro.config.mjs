@@ -7,6 +7,7 @@ export default defineConfig({
       title: 'Astro Blue',
       components: {
         ThemeSelect: './src/components/ThemeSelect.astro',
+        PageTitle: './src/components/PageTitle.astro',
       },
       social: [
         { icon: 'github', label: 'GitHub', href: 'https://github.com/example/astro-blue' },
