@@ -191,6 +191,22 @@ pre {
 }
 
 /* ===========================================
+   Header (Mintlify style)
+   =========================================== */
+header.header {
+  border-bottom: 1px solid var(--theme-border);
+}
+
+/* ===========================================
+   Transitions (smooth hovers)
+   =========================================== */
+a,
+button,
+summary {
+  transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
+}
+
+/* ===========================================
    Search Bar (Mintlify style)
    =========================================== */
 .search-item button {
@@ -344,13 +360,12 @@ a:hover {
 /* Links */
 .sidebar-content a {
   display: block;
-  padding: 0.375rem 0.75rem;
+  padding: 0.25rem 0.75rem;
   font-size: 0.875rem;
   font-weight: 400;
   color: var(--theme-sidebar-link);
   text-decoration: none;
   border-radius: 0.375rem;
-  transition: color 0.15s ease, background-color 0.15s ease;
 }
 
 .sidebar-content a:hover {
