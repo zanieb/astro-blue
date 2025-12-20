@@ -151,11 +151,19 @@ h1#_top,
    Content Layout (Mintlify style - narrower)
    =========================================== */
 .sl-container {
-  --sl-content-width: 45rem;
+  --sl-content-width: 42rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+/* Add padding to sidebar */
+.sidebar {
+  padding-left: 1rem;
 }
 
 .content-panel {
   max-width: var(--sl-content-width);
+  padding-left: 2rem;
 }
 
 /* ===========================================
