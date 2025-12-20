@@ -22,25 +22,6 @@ A comparison of our Astro Blue theme against the PYX Documentation (https://docs
 
 ---
 
-## Content Area
-
-### Typography
-| Feature | Mintlify/PYX | Astro Blue | Priority |
-|---------|--------------|------------|----------|
-| Body line-height | Generous, very readable | Good but different | Low |
-
-### Lists
-| Feature | Mintlify/PYX | Astro Blue | Priority |
-|---------|--------------|------------|----------|
-| List spacing | More generous | Tighter | Low |
-
-### Code Blocks
-| Feature | Mintlify/PYX | Astro Blue | Priority |
-|---------|--------------|------------|----------|
-| Border radius | More rounded | Less rounded | Low |
-
----
-
 ## Overall Polish
 
 ### Whitespace & Spacing

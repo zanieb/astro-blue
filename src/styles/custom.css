@@ -121,6 +121,21 @@ html {
   font-weight: 500;
 }
 
+/* Body line-height - more generous like Mintlify */
+.sl-markdown-content {
+  line-height: 1.75;
+}
+
+/* List spacing - more generous */
+.sl-markdown-content ul,
+.sl-markdown-content ol {
+  margin-bottom: 1.25rem;
+}
+
+.sl-markdown-content li {
+  margin-bottom: 0.5rem;
+}
+
 /* Page title - no underline (Mintlify style) */
 h1#_top,
 .page-title-wrapper h1 {
@@ -172,7 +187,7 @@ h1#_top,
    =========================================== */
 pre {
   border: 1px solid var(--theme-border);
-  border-radius: 0.5rem;
+  border-radius: 0.75rem;
 }
 
 /* ===========================================
