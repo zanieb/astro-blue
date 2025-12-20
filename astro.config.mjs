@@ -16,6 +16,21 @@ export default defineConfig({
           ],
         },
         {
+          label: 'Guides',
+          items: [
+            { label: 'Overview', slug: 'guides/overview' },
+            {
+              label: 'Integrations',
+              items: [
+                { label: 'Docker', slug: 'guides/integrations/docker' },
+                { label: 'GitHub Actions', slug: 'guides/integrations/github-actions' },
+                { label: 'Vercel', slug: 'guides/integrations/vercel' },
+              ],
+            },
+            { label: 'Migration', slug: 'guides/migration' },
+          ],
+        },
+        {
           label: 'Demo',
           items: [
             { label: 'Quickstart', slug: 'demo/quickstart' },

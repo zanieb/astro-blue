@@ -1,0 +1,38 @@
+---
+title: Vercel
+description: Deploy to Vercel with edge functions.
+---
+
+## Setup
+
+1. Install the Vercel CLI:
+   ```bash
+   npm i -g vercel
+   ```
+
+2. Add your API key to Vercel environment variables:
+   ```bash
+   vercel env add ACME_API_KEY
+   ```
+
+3. Deploy:
+   ```bash
+   vercel --prod
+   ```
+
+## Edge Functions
+
+```typescript
+import { createClient } from '@acme/sdk';
+
+export const config = { runtime: 'edge' };
+
+export default async function handler(req: Request) {
+  const client = createClient({
+    apiKey: process.env.ACME_API_KEY,
+  });
+
+  const data = await client.getData();
+  return Response.json(data);
+}
+```

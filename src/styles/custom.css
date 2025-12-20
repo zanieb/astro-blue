@@ -143,10 +143,17 @@ a:hover {
   transform: rotate(90deg);
 }
 
-/* Nested list (links) */
+/* First-level links - same indent as header */
 .sidebar-content details > ul {
   margin-top: 0.25rem;
-  margin-left: 0.5rem;
+  margin-left: 0;
+  padding-left: 0;
+  border-left: none;
+}
+
+/* Only indent nested groups (2+ levels deep) */
+.sidebar-content details details > ul {
+  margin-left: 0.75rem;
   padding-left: 0.75rem;
   border-left: 1px solid var(--astral-gray-800);
 }

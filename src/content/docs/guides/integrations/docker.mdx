@@ -1,0 +1,25 @@
+---
+title: Docker
+description: Run the SDK in Docker containers.
+---
+
+## Dockerfile Example
+
+```dockerfile
+FROM node:20-alpine
+
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+
+CMD ["node", "index.js"]
+```
+
+## Environment Variables
+
+Pass your API key as an environment variable:
+
+```bash
+docker run -e ACME_API_KEY=your_key my-app
+```

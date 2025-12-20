@@ -1,0 +1,28 @@
+---
+title: Migration
+description: Migrate from other solutions.
+---
+
+## From v1 to v2
+
+The v2 SDK includes breaking changes. Here's how to migrate:
+
+### Client Initialization
+
+```typescript
+// v1
+import Acme from 'acme';
+const client = new Acme(apiKey);
+
+// v2
+import { createClient } from '@acme/sdk';
+const client = createClient({ apiKey });
+```
+
+### Method Names
+
+| v1 | v2 |
+|----|----|
+| `client.getUsers()` | `client.users.list()` |
+| `client.createUser()` | `client.users.create()` |
+| `client.deleteUser()` | `client.users.delete()` |
