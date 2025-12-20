@@ -100,3 +100,43 @@ When merging produces conflicts:
 - Provide feedback on rejected work
 - Coordinate parallel work streams
 - Communicate status to the user
+
+## Parallel Coordination
+
+### Dev Server Ports
+
+**Port 4321 is reserved for the main repo** so the user can demo and review the site. Workers must use different ports.
+
+When spawning workers, assign ports sequentially starting from 4322:
+
+| Worktree | Port | Branch |
+|----------|------|--------|
+| Main repo (`astro-blue`) | 4321 | main |
+| First worker | 4322 | fix/task-1 |
+| Second worker | 4323 | fix/task-2 |
+| Third worker | 4324 | fix/task-3 |
+
+Include the port in the worker's task prompt:
+```
+Work in /Users/zb/workspace/astro-blue-<task>
+Use port 4322 for the dev server: npm run dev -- --port 4322
+```
+
+### Browser Context
+
+The Playwright MCP browser is shared across all agents. This works fine:
+- Each agent should use browser tabs for isolation
+- Use descriptive screenshot filenames to avoid overwrites
+- Workers should close their tabs when done testing
+
+### Spawning Workers in Parallel
+
+When delegating multiple tasks, spawn all workers in a single message with multiple Task tool calls:
+
+```
+[Task 1: fix/copy-button on port 4322]
+[Task 2: fix/header on port 4323]
+[Task 3: fix/favicon on port 4324]
+```
+
+This maximizes parallelism and reduces turnaround time.

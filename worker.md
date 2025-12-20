@@ -112,3 +112,48 @@ You are working in a separate directory (worktree) with its own git branch:
 - Your changes are isolated from the main repo
 - Commit freely - the main agent will review and merge
 - If you need to see the main branch state, it's at `/Users/zb/workspace/astro-blue`
+
+## Parallel Development
+
+Multiple agents may be working simultaneously in different worktrees. Follow these guidelines to avoid conflicts:
+
+### Dev Server Ports
+
+**Use a unique port for your dev server** to avoid conflicts with other agents:
+
+```bash
+# Use --port to specify a unique port
+npm run dev -- --port 4322
+```
+
+Port allocation:
+- **Port 4321 is reserved for the main repo** (user demos and reviews)
+- Workers start at port 4322 and increment
+- The main agent will specify your port in the task prompt
+
+If no port is specified, use 4322. If that's in use, increment until you find an available port.
+
+### Browser Context (Playwright MCP)
+
+The browser MCP tools are shared across all agents. This works fine - the browser can handle multiple navigations and tabs:
+
+- **Use browser tabs** - You can open new tabs with `browser_tabs` action: `new`
+- **Navigate freely** - Your navigation won't interfere with other agents' tabs
+- **Take screenshots** - Use descriptive filenames to avoid overwriting others' screenshots
+- **Close your tab** when done testing to keep the browser clean
+
+Example workflow:
+```
+1. browser_tabs action: new          # Open a new tab for your work
+2. browser_navigate to your port     # Navigate to http://localhost:YOUR_PORT/
+3. browser_take_screenshot           # Use descriptive filename like "copy-button-fix.png"
+4. browser_tabs action: close        # Close your tab when done
+```
+
+### Screenshot Naming
+
+Use descriptive, unique filenames for screenshots:
+- Good: `copy-button-fixed.png`, `header-border-before.png`
+- Bad: `screenshot.png`, `test.png`
+
+This prevents agents from overwriting each other's verification screenshots.
