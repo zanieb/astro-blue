@@ -46,10 +46,10 @@
   --sl-color-gray-6: var(--astral-gray-100);
   --sl-color-black: var(--astral-bg-light);
 
-  /* Light mode backgrounds */
+  /* Light mode backgrounds - sidebar matches content for clean look */
   --sl-color-bg: var(--astral-bg-light);
-  --sl-color-bg-nav: var(--astral-gray-50);
-  --sl-color-bg-sidebar: var(--astral-gray-50);
+  --sl-color-bg-nav: var(--astral-bg-light);
+  --sl-color-bg-sidebar: var(--astral-bg-light);
   --sl-color-hairline-light: var(--astral-gray-200);
   --sl-color-hairline: var(--astral-gray-300);
 
