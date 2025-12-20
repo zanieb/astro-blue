@@ -1,5 +1,8 @@
 /* Astral color theme from pyx.dev */
 
+/* ===========================================
+   Base Color Palette (shared)
+   =========================================== */
 :root {
   /* Primary purple */
   --astral-primary: rgb(38 18 48);
@@ -23,11 +26,53 @@
   --astral-gray-900: rgb(23 23 24);
   --astral-gray-950: rgb(11 10 11);
 
-  /* Map to Starlight variables */
+  /* Accent colors - shared */
   --sl-color-accent-low: var(--astral-primary);
   --sl-color-accent: var(--astral-primary-dark);
   --sl-color-accent-high: var(--astral-primary-light);
+}
 
+/* ===========================================
+   Light Theme
+   =========================================== */
+:root[data-theme='light'] {
+  /* Starlight color mappings */
+  --sl-color-white: var(--astral-bg-dark);
+  --sl-color-gray-1: var(--astral-gray-900);
+  --sl-color-gray-2: var(--astral-gray-800);
+  --sl-color-gray-3: var(--astral-gray-600);
+  --sl-color-gray-4: var(--astral-gray-400);
+  --sl-color-gray-5: var(--astral-gray-200);
+  --sl-color-gray-6: var(--astral-gray-100);
+  --sl-color-black: var(--astral-bg-light);
+
+  /* Light mode backgrounds */
+  --sl-color-bg: var(--astral-bg-light);
+  --sl-color-bg-nav: var(--astral-gray-50);
+  --sl-color-bg-sidebar: var(--astral-gray-50);
+  --sl-color-hairline-light: var(--astral-gray-200);
+  --sl-color-hairline: var(--astral-gray-300);
+
+  /* Theme-aware colors for components */
+  --theme-text: var(--astral-gray-900);
+  --theme-text-muted: var(--astral-gray-600);
+  --theme-text-subtle: var(--astral-gray-500);
+  --theme-bg-hover: var(--astral-gray-100);
+  --theme-border: var(--astral-gray-200);
+  --theme-sidebar-header: var(--astral-gray-500);
+  --theme-sidebar-link: var(--astral-gray-700);
+  --theme-sidebar-link-hover: var(--astral-gray-900);
+
+  /* Light mode accent - use purple instead of lime for better contrast */
+  --theme-accent: var(--astral-primary-dark);
+  --theme-accent-bg: rgb(99 64 172 / 0.1);
+}
+
+/* ===========================================
+   Dark Theme
+   =========================================== */
+:root[data-theme='dark'] {
+  /* Starlight color mappings */
   --sl-color-white: var(--astral-bg-light);
   --sl-color-gray-1: var(--astral-gray-100);
   --sl-color-gray-2: var(--astral-gray-200);
@@ -43,27 +88,42 @@
   --sl-color-bg-sidebar: var(--astral-gray-950);
   --sl-color-hairline-light: var(--astral-gray-800);
   --sl-color-hairline: var(--astral-gray-700);
+
+  /* Theme-aware colors for components */
+  --theme-text: var(--astral-gray-100);
+  --theme-text-muted: var(--astral-gray-300);
+  --theme-text-subtle: var(--astral-gray-400);
+  --theme-bg-hover: var(--astral-gray-800);
+  --theme-border: var(--astral-gray-700);
+  --theme-sidebar-header: var(--astral-gray-400);
+  --theme-sidebar-link: var(--astral-gray-300);
+  --theme-sidebar-link-hover: var(--astral-gray-50);
+
+  /* Dark mode accent - lime green */
+  --theme-accent: var(--astral-primary-light);
+  --theme-accent-bg: var(--astral-primary);
 }
 
-/* Typography */
+/* ===========================================
+   Typography
+   =========================================== */
 html {
   font-feature-settings: "kern" 1, "liga" 1;
 }
 
-/* Code blocks */
+/* ===========================================
+   Code blocks
+   =========================================== */
 pre {
-  border: 1px solid var(--astral-gray-700);
+  border: 1px solid var(--theme-border);
   border-radius: 0.5rem;
 }
 
-/* Lime accent on interactive elements */
+/* ===========================================
+   Links
+   =========================================== */
 a:hover {
-  color: var(--astral-primary-light);
-}
-
-/* Sidebar link hover */
-.sidebar-content a:hover {
-  color: var(--astral-primary-light);
+  color: var(--theme-accent);
 }
 
 /* ===========================================
@@ -97,14 +157,14 @@ a:hover {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--astral-gray-400);
+  color: var(--theme-sidebar-header);
   cursor: pointer;
   border-radius: 0.375rem;
   transition: color 0.15s ease;
 }
 
 .sidebar-content summary:hover {
-  color: var(--astral-gray-200);
+  color: var(--theme-sidebar-link-hover);
 }
 
 /* Hide default marker */
@@ -133,13 +193,13 @@ a:hover {
   font-weight: 400;
   text-transform: none;
   letter-spacing: normal;
-  color: var(--astral-gray-300);
+  color: var(--theme-sidebar-link);
   padding: 0.375rem 0.75rem;
 }
 
 .sidebar-content details details summary:hover {
-  color: var(--astral-gray-50);
-  background: var(--astral-gray-800);
+  color: var(--theme-sidebar-link-hover);
+  background: var(--theme-bg-hover);
 }
 
 .sidebar-content details details .group-label .large {
@@ -195,27 +255,27 @@ a:hover {
   padding: 0.375rem 0.75rem;
   font-size: 0.875rem;
   font-weight: 400;
-  color: var(--astral-gray-300);
+  color: var(--theme-sidebar-link);
   text-decoration: none;
   border-radius: 0.375rem;
   transition: color 0.15s ease, background-color 0.15s ease;
 }
 
 .sidebar-content a:hover {
-  color: var(--astral-gray-50);
-  background: var(--astral-gray-800);
+  color: var(--theme-sidebar-link-hover);
+  background: var(--theme-bg-hover);
 }
 
 /* Selected item */
 .sidebar-content a[aria-current="page"] {
-  color: var(--astral-primary-light);
-  background: var(--astral-primary);
+  color: var(--theme-accent);
+  background: var(--theme-accent-bg);
   font-weight: 500;
 }
 
 .sidebar-content a[aria-current="page"]:hover {
-  color: var(--astral-primary-light);
-  background: var(--astral-primary);
+  color: var(--theme-accent);
+  background: var(--theme-accent-bg);
 }
 
 /* Remove Starlight's default top-level styling */
@@ -226,5 +286,5 @@ a:hover {
 /* Divider between major sections */
 .sidebar-content .top-level > li:not(:first-child) {
   padding-top: 0.5rem;
-  border-top: 1px solid var(--astral-gray-800);
+  border-top: 1px solid var(--theme-border);
 }
