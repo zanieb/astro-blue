@@ -1,0 +1,50 @@
+/* PYX-inspired dark theme with purple/lime accents */
+
+:root {
+  --sl-color-accent-low: #1a0a24;
+  --sl-color-accent: #8b5cf6;
+  --sl-color-accent-high: #c4b5fd;
+
+  --sl-color-white: #ffffff;
+  --sl-color-gray-1: #eceef2;
+  --sl-color-gray-2: #c0c2c7;
+  --sl-color-gray-3: #888b96;
+  --sl-color-gray-4: #545861;
+  --sl-color-gray-5: #353841;
+  --sl-color-gray-6: #24272f;
+  --sl-color-black: #0d0e0d;
+
+  /* Lime accent for highlights */
+  --sl-color-green-high: #d7ff64;
+  --sl-color-green-low: #1a2e05;
+}
+
+/* Force dark mode */
+:root {
+  --sl-color-bg: var(--sl-color-black);
+  --sl-color-bg-nav: #141517;
+  --sl-color-bg-sidebar: #141517;
+  --sl-color-hairline-light: var(--sl-color-gray-6);
+  --sl-color-hairline: var(--sl-color-gray-5);
+}
+
+/* Refined typography */
+html {
+  font-feature-settings: "kern" 1, "liga" 1;
+}
+
+/* Sidebar refinements */
+.sidebar-content {
+  padding-top: 1.5rem;
+}
+
+/* Code block styling */
+pre {
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: 0.5rem;
+}
+
+/* Link styling with lime accent on hover */
+a:hover {
+  color: var(--sl-color-green-high);
+}

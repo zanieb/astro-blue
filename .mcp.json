@@ -4,7 +4,7 @@
       "command": "bun",
       "args": ["run", "mcp:playwright"],
       "env": {
-        "BROWSER": "chrome"
+        "BROWSER": "chromium"
       }
     },
     "puppeteer": {

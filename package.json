@@ -2,11 +2,18 @@
   "name": "astro-blue",
   "type": "module",
   "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
     "mcp:playwright": "mcp-server-playwright",
     "mcp:puppeteer": "mcp-server-puppeteer"
   },
   "devDependencies": {
     "@playwright/mcp": "0.0.53",
     "@modelcontextprotocol/server-puppeteer": "2025.5.12"
+  },
+  "dependencies": {
+    "@astrojs/starlight": "^0.37.1",
+    "astro": "^5.16.6"
   }
 }
