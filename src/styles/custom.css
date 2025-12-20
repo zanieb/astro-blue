@@ -59,6 +59,7 @@
   --theme-text-subtle: var(--astral-gray-500);
   --theme-bg-hover: var(--astral-gray-100);
   --theme-border: var(--astral-gray-200);
+  --theme-header-border: rgba(113, 112, 113, 0.05); /* Subtle header border like Mintlify */
   --theme-sidebar-header: var(--astral-gray-500);
   --theme-sidebar-link: var(--astral-gray-700);
   --theme-sidebar-link-hover: var(--astral-gray-900);
@@ -95,6 +96,7 @@
   --theme-text-subtle: var(--astral-gray-400);
   --theme-bg-hover: var(--astral-gray-800);
   --theme-border: var(--astral-gray-700);
+  --theme-header-border: rgba(207, 206, 207, 0.06); /* Subtle header border like Mintlify */
   --theme-sidebar-header: var(--astral-gray-400);
   --theme-sidebar-link: var(--astral-gray-300);
   --theme-sidebar-link-hover: var(--astral-gray-50);
@@ -505,7 +507,7 @@ pre {
    Header (Mintlify style - subtle border, more padding)
    =========================================== */
 header.header {
-  border-bottom: 1px solid var(--theme-border);
+  border-bottom: 1px solid var(--theme-header-border);
   padding-top: 1rem;
   padding-bottom: 1rem;
 }
