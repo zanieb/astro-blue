@@ -592,7 +592,7 @@ summary {
   header.header .header > .sl-flex:has(site-search) {
     flex: 1 1 0%;
     justify-content: center;
-    max-width: 28rem;
+    max-width: 36rem;
     margin: 0 auto;
   }
 
