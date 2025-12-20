@@ -5,11 +5,11 @@
  */
 
 // Get route data from Starlight
-const { entry, slug } = Astro.locals.starlightRoute;
+const { entry, id } = Astro.locals.starlightRoute;
 const title = entry?.data?.title || 'Untitled';
 
-// Extract breadcrumb path from the slug
-const parts = (slug || '').split('/');
+// Extract breadcrumb path from the id
+const parts = (id || '').split('/');
 
 // Build breadcrumb items with links
 const breadcrumbItems = parts.slice(0, -1).map((part, index) => {
