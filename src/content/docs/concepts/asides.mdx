@@ -4,10 +4,42 @@ description: Callout boxes for highlighting important information.
 ---
 
 import { Aside } from '@astrojs/starlight/components';
+import Callout from '../../../components/Callout.astro';
 
-Asides (also called admonitions or callouts) highlight important information.
+Asides (also called admonitions or callouts) highlight important information. We provide two styles: the standard Starlight `Aside` and a Mintlify-style `Callout`.
 
-## Types
+## Callout (Mintlify Style)
+
+The `Callout` component provides a clean, minimal style with just an icon and content - no title text.
+
+<Callout>
+  This is a note. It provides additional context that might be helpful.
+</Callout>
+
+<Callout type="tip">
+  Pro tip: Use keyboard shortcuts to navigate faster.
+</Callout>
+
+<Callout type="warning">
+  Be careful when modifying configuration files.
+</Callout>
+
+<Callout type="danger">
+  This action cannot be undone. Make sure you have a backup.
+</Callout>
+
+```mdx
+import Callout from '../../../components/Callout.astro';
+
+<Callout>This is a note.</Callout>
+<Callout type="tip">This is a tip.</Callout>
+<Callout type="warning">Be careful!</Callout>
+<Callout type="danger">This is dangerous!</Callout>
+```
+
+## Standard Aside
+
+The built-in Starlight `Aside` component includes a title label.
 
 ### Note
 

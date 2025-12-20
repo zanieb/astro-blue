@@ -11,9 +11,11 @@ export default defineConfig({
       components: {
         ThemeSelect: './src/components/ThemeSelect.astro',
         PageTitle: './src/components/PageTitle.astro',
+        SiteTitle: './src/components/SiteTitle.astro',
       },
       social: [
         { icon: 'github', label: 'GitHub', href: 'https://github.com/example/astro-blue' },
+        { icon: 'discord', label: 'Discord', href: 'https://discord.com/invite/astral-sh' },
       ],
       sidebar: [
         {
@@ -51,6 +53,7 @@ export default defineConfig({
             { label: 'Cards', slug: 'concepts/cards' },
             { label: 'Tabs', slug: 'concepts/tabs' },
             { label: 'Steps', slug: 'concepts/steps' },
+            { label: 'Lists', slug: 'concepts/lists' },
           ],
         },
         {

@@ -1,0 +1,48 @@
+---
+/**
+ * Custom SiteTitle component - PYX style
+ * Shows logo + "Astro Blue" like PYX shows logo + "PYX Documentation"
+ */
+import { logos } from 'virtual:starlight/user-images';
+import config from 'virtual:starlight/user-config';
+
+const { siteTitle, siteTitleHref } = Astro.locals.starlightRoute;
+---
+
+<a href={siteTitleHref} class="site-title">
+  {config.logo && logos.dark && (
+    <img
+      src={logos.dark.src}
+      width={logos.dark.width}
+      height={logos.dark.height}
+      alt={config.logo.alt || ''}
+      class="site-logo"
+    />
+  )}
+  <span class="title-text">{siteTitle}</span>
+</a>
+
+<style>
+  .site-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    line-height: 1;
+  }
+
+  .site-logo {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .title-text {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--sl-color-white);
+  }
+
+  .site-title:hover .title-text {
+    color: var(--sl-color-white);
+  }
+</style>

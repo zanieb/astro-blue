@@ -76,3 +76,147 @@ $ bun run dev
   ┃ Local    http://localhost:4321/
   ┃ Network  use --host to expose
 ```
+
+## Language Examples
+
+### Python
+
+```python
+from dataclasses import dataclass
+from typing import Optional
+
+@dataclass
+class User:
+    name: str
+    email: str
+    age: Optional[int] = None
+
+def greet(user: User) -> str:
+    """Generate a greeting for the user."""
+    return f"Hello, {user.name}!"
+
+if __name__ == "__main__":
+    user = User(name="Alice", email="alice@example.com")
+    print(greet(user))
+```
+
+### Rust
+
+```rust
+use std::collections::HashMap;
+
+#[derive(Debug)]
+struct Config {
+    name: String,
+    values: HashMap<String, i32>,
+}
+
+impl Config {
+    fn new(name: &str) -> Self {
+        Config {
+            name: name.to_string(),
+            values: HashMap::new(),
+        }
+    }
+
+    fn set(&mut self, key: &str, value: i32) {
+        self.values.insert(key.to_string(), value);
+    }
+}
+
+fn main() {
+    let mut config = Config::new("default");
+    config.set("max_connections", 100);
+    println!("{:?}", config);
+}
+```
+
+### Shell
+
+```sh
+#!/bin/bash
+
+# Install dependencies
+echo "Installing dependencies..."
+npm install
+
+# Build the project
+npm run build
+
+# Deploy
+if [ "$ENV" = "production" ]; then
+    echo "Deploying to production..."
+    rsync -avz ./dist/ server:/var/www/app/
+else
+    echo "Deploying to staging..."
+    rsync -avz ./dist/ staging:/var/www/app/
+fi
+```
+
+### Console Output
+
+```console
+$ uv run python app.py
+Starting server on port 8000...
+[INFO] Connected to database
+[INFO] Loading configuration from config.yaml
+[WARN] Cache directory not found, creating...
+[INFO] Server ready to accept connections
+```
+
+### Go
+
+```go
+package main
+
+import (
+    "fmt"
+    "net/http"
+)
+
+func handler(w http.ResponseWriter, r *http.Request) {
+    fmt.Fprintf(w, "Hello, %s!", r.URL.Path[1:])
+}
+
+func main() {
+    http.HandleFunc("/", handler)
+    fmt.Println("Server starting on :8080")
+    http.ListenAndServe(":8080", nil)
+}
+```
+
+### JSON
+
+```json
+{
+  "name": "astro-blue",
+  "version": "1.0.0",
+  "dependencies": {
+    "astro": "^5.0.0",
+    "@astrojs/starlight": "^0.32.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build"
+  }
+}
+```
+
+### YAML
+
+```yaml
+# Configuration file
+server:
+  host: localhost
+  port: 8080
+  ssl:
+    enabled: true
+    cert: /etc/ssl/cert.pem
+
+database:
+  driver: postgres
+  connection:
+    host: db.example.com
+    port: 5432
+    name: myapp
+```

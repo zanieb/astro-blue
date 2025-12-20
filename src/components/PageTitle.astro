@@ -1,7 +1,7 @@
 ---
 /**
- * Custom PageTitle with breadcrumb - Mintlify style
- * Shows full clickable path above the page title (e.g., "Guides > Integrations")
+ * Custom PageTitle with breadcrumb - Mintlify/PYX style
+ * Shows section identifier above the page title (like PYX docs)
  */
 
 // Get route data from Starlight
@@ -17,48 +17,32 @@ const breadcrumbItems = parts.slice(0, -1).map((part, index) => {
   const href = '/' + parts.slice(0, index + 1).join('/') + '/';
   return { label, href };
 });
+
+// Determine the supertitle (section identifier like PYX style)
+// For homepage (no breadcrumbs), show "Astro Blue"
+// For other pages, show the first breadcrumb item (section name)
+const isHomepage = breadcrumbItems.length === 0;
+const supertitle = isHomepage ? 'Astro Blue' : breadcrumbItems[0]?.label;
 ---
 
 <div class="page-title-wrapper">
-  {breadcrumbItems.length > 0 && (
-    <nav class="breadcrumb" aria-label="Breadcrumb">
-      {breadcrumbItems.map((item, i) => (
-        <>
-          <a href={item.href}>{item.label}</a>
-          {i < breadcrumbItems.length - 1 && <span class="separator">&gt;</span>}
-        </>
-      ))}
-    </nav>
+  {supertitle && (
+    <div class="supertitle">{supertitle}</div>
   )}
   <h1 id="_top">{title}</h1>
+  <div class="title-rule"></div>
 </div>
 
 <style>
   .page-title-wrapper {
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
   }
 
-  .breadcrumb {
+  .supertitle {
     font-size: 0.875rem;
     font-weight: 500;
+    color: var(--sl-color-gray-3);
     margin-bottom: 0.25rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
-  .breadcrumb a {
-    color: var(--theme-text-muted, var(--sl-color-gray-3));
-    text-decoration: none;
-  }
-
-  .breadcrumb a:hover {
-    color: var(--theme-accent);
-    text-decoration: underline;
-  }
-
-  .breadcrumb .separator {
-    color: var(--theme-text-subtle, var(--sl-color-gray-4));
   }
 
   h1 {
@@ -67,5 +51,12 @@ const breadcrumbItems = parts.slice(0, -1).map((part, index) => {
     line-height: 1.2;
     color: var(--sl-color-white);
     margin: 0;
+    padding-bottom: 1rem;
+  }
+
+  .title-rule {
+    height: 1px;
+    background: var(--sl-color-hairline-light);
+    margin-top: 0;
   }
 </style>
