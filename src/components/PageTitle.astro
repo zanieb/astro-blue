@@ -1,31 +1,27 @@
 ---
 /**
  * Custom PageTitle with breadcrumb - Mintlify style
- * Shows parent section above the page title
+ * Shows full path above the page title (e.g., "Guides > Integrations")
  */
 
 // Get route data from Starlight
 const { entry, slug } = Astro.locals.starlightRoute;
 const title = entry?.data?.title || 'Untitled';
 
-// Extract parent section from the slug (e.g., "getting-started/installation" -> "Getting Started")
+// Extract breadcrumb path from the slug
 const parts = (slug || '').split('/');
 
-// Get parent section (first part of path, if exists and not the only part)
-let parentSection = '';
-if (parts.length > 1 && parts[0]) {
-  // Convert slug to title case (e.g., "getting-started" -> "Getting Started")
-  parentSection = parts[0]
-    .split('-')
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ');
-}
+// Build breadcrumb from all path segments except the last (current page)
+const breadcrumbParts = parts.slice(0, -1).map(part =>
+  part.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
+);
+const breadcrumb = breadcrumbParts.join(' > ');
 ---
 
 <div class="page-title-wrapper">
-  {parentSection && (
+  {breadcrumb && (
     <div class="breadcrumb">
-      {parentSection}
+      {breadcrumb}
     </div>
   )}
   <h1 id="_top">{title}</h1>
