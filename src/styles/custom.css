@@ -152,18 +152,18 @@ h1#_top,
    =========================================== */
 .sl-container {
   --sl-content-width: 48rem;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
+  padding-left: 2.5rem;
+  padding-right: 2rem;
 }
 
 /* Add padding to sidebar */
 .sidebar {
-  padding-left: 1rem;
+  padding-left: 1.5rem;
 }
 
 .content-panel {
   max-width: var(--sl-content-width);
-  padding-left: 2rem;
+  padding-left: 2.5rem;
 }
 
 /* Reduce right-side whitespace - hide TOC on smaller widths */
