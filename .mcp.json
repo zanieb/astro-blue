@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "playwright": {
+      "command": "bun",
+      "args": ["run", "mcp:playwright"],
+      "env": {
+        "BROWSER": "chrome"
+      }
+    },
+    "puppeteer": {
+      "command": "bun",
+      "args": ["run", "mcp:puppeteer"]
+    }
+  }
+}
