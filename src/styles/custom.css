@@ -359,6 +359,17 @@ header.header > .header {
   font-weight: 400;
 }
 
+/* Breadcrumb reset - prevent global ol styling from applying */
+.breadcrumbs ol {
+  list-style: none !important;
+  list-style-type: none !important;
+  padding-left: 0 !important;
+}
+
+.breadcrumbs ol > li {
+  padding-left: 0 !important;
+}
+
 /* ===========================================
    Code blocks (clean, Mintlify style - no window chrome)
    =========================================== */
