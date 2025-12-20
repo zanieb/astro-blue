@@ -355,6 +355,26 @@ header.header > .header {
   height: 0.3125rem;
 }
 
+/* Tabs component - reset list styling to prevent bullets on tab items */
+.sl-markdown-content starlight-tabs ul,
+.sl-markdown-content [role="tablist"] {
+  list-style: none;
+  padding-left: 0;
+  margin-left: 0;
+}
+
+.sl-markdown-content starlight-tabs ul > li,
+.sl-markdown-content [role="tablist"] > li {
+  padding-left: 0;
+  margin-bottom: 0;
+}
+
+.sl-markdown-content starlight-tabs ul > li::before,
+.sl-markdown-content [role="tablist"] > li::before {
+  content: none;
+  display: none;
+}
+
 .sl-markdown-content ol:not(.sl-steps) {
   list-style-type: decimal;
   list-style-position: outside;
