@@ -532,18 +532,21 @@ summary {
 /* ===========================================
    Search Bar (Mintlify/PYX style - wider)
    =========================================== */
-/* Header layout - center the search bar */
-header.header .header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-/* Make search button wider like PYX/Mintlify */
+/* Make the search container expand to fill available header space (like PYX) */
 @media (min-width: 50rem) {
+  /* The container holding site-search - make it grow to fill space */
+  header.header .header > .sl-flex:has(site-search) {
+    flex: 1 1 0%;
+    justify-content: center;
+    max-width: 32rem;
+    margin: 0 2rem;
+  }
+
+  /* Make the search button fill its container */
   site-search button[data-open-modal] {
-    min-width: 16rem;
-    max-width: 28rem;
+    width: 100%;
+    min-width: 0;
+    max-width: none;
   }
 }
 
