@@ -33,7 +33,6 @@ A comparison of our Astro Blue theme against the PYX Documentation (https://docs
 ### Lists
 | Feature | Mintlify/PYX | Astro Blue | Priority |
 |---------|--------------|------------|----------|
-| Ordered list numbers | Gray, slightly separated | Default Starlight | Medium |
 | List spacing | More generous | Tighter | Low |
 
 ### Code Blocks
