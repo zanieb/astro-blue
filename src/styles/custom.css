@@ -583,16 +583,16 @@ summary {
 }
 
 /* ===========================================
-   Search Bar (Mintlify/PYX style - wider)
+   Search Bar (Mintlify style - centered, compact)
    =========================================== */
-/* Make the search container expand to fill available header space (like PYX) */
+/* Make the search container expand and center in header */
 @media (min-width: 50rem) {
-  /* The container holding site-search - make it grow to fill space */
+  /* The container holding site-search - center it properly */
   header.header .header > .sl-flex:has(site-search) {
     flex: 1 1 0%;
     justify-content: center;
-    max-width: 32rem;
-    margin: 0 2rem;
+    max-width: 28rem;
+    margin: 0 auto;
   }
 
   /* Make the search button fill its container */
@@ -601,6 +601,36 @@ summary {
     min-width: 0;
     max-width: none;
   }
+}
+
+/* Search bar height - reduce to match Mintlify (shorter/more compact) */
+site-search button[data-open-modal] {
+  height: 2rem; /* 32px - matches Mintlify's compact search bar */
+  padding-block: 0.25rem;
+  font-size: 0.875rem;
+}
+
+/* Search bar placeholder text - lighter gray like Mintlify */
+site-search button[data-open-modal] > span:first-of-type {
+  color: var(--astral-gray-400); /* Lighter gray for placeholder */
+  opacity: 0.7;
+}
+
+/* Hide the default "Search" text and show "Search..." via CSS */
+site-search button[data-open-modal] > span:first-of-type {
+  font-size: 0;
+}
+
+site-search button[data-open-modal] > span:first-of-type::after {
+  content: "Search...";
+  font-size: 0.875rem;
+  color: var(--astral-gray-400);
+}
+
+/* Keyboard shortcut badge - smaller to match reduced height */
+site-search button[data-open-modal] kbd {
+  font-size: 0.6875rem;
+  padding: 0.125rem 0.25rem;
 }
 
 /* Pagefind modal styling */
