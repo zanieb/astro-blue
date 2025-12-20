@@ -132,12 +132,24 @@ html {
 
 /* List spacing - more generous */
 .sl-markdown-content ul,
-.sl-markdown-content ol {
+.sl-markdown-content ol:not(.sl-steps) {
   margin-bottom: 1.25rem;
 }
 
 .sl-markdown-content li {
   margin-bottom: 0.5rem;
+}
+
+/* Steps component reset - ensure Starlight Steps styles work correctly */
+.sl-markdown-content .sl-steps {
+  list-style: none !important;
+  padding-left: 0 !important;
+  padding-inline-start: 0 !important;
+}
+
+.sl-markdown-content .sl-steps > li {
+  margin-bottom: 0;
+  padding-left: calc(var(--bullet-size, 1.75rem) + 1rem) !important;
 }
 
 /* Page title - no underline (Mintlify style) */
@@ -343,19 +355,19 @@ header.header > .header {
   height: 0.3125rem;
 }
 
-.sl-markdown-content ol {
+.sl-markdown-content ol:not(.sl-steps) {
   list-style-type: decimal;
   list-style-position: outside;
   padding-left: 1.5rem; /* 24px - matches Mintlify exactly */
   margin-left: 0;
 }
 
-.sl-markdown-content ol > li {
+.sl-markdown-content ol:not(.sl-steps) > li {
   padding-left: 0.5rem; /* 8px gap between number and text - matches Mintlify */
   margin-bottom: 0.5rem;
 }
 
-.sl-markdown-content ol > li::marker {
+.sl-markdown-content ol:not(.sl-steps) > li::marker {
   color: var(--theme-text-muted); /* Lighter than text, matches Mintlify */
   font-weight: 400;
 }
