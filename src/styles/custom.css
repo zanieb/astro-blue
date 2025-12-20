@@ -584,19 +584,19 @@ summary {
 }
 
 /* ===========================================
-   Search Bar (Mintlify style - centered, compact)
+   Search Bar (Mintlify style - wide, spanning available space)
    =========================================== */
-/* Make the search container expand and center in header */
+/* Make the search container expand to fill available header space */
 @media (min-width: 50rem) {
-  /* The container holding site-search - center it properly */
+  /* The container holding site-search - expand to fill space between logo and icons */
   header.header .header > .sl-flex:has(site-search) {
-    flex: 1 1 0%;
+    flex: 1 1 auto;
     justify-content: center;
-    max-width: 36rem;
-    margin: 0 auto;
+    max-width: none;
+    margin: 0 2rem;
   }
 
-  /* Make the search button fill its container */
+  /* Make the search button fill its container - matches Mintlify's wide search bar */
   site-search button[data-open-modal] {
     width: 100%;
     min-width: 0;
