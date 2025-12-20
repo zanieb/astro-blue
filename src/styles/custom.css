@@ -349,8 +349,8 @@ a:hover {
   align-items: center;
   justify-content: space-between;
   padding: 0.5rem 0.75rem;
-  font-size: 0.8125rem;
-  font-weight: 500;
+  font-size: 0.875rem;
+  font-weight: 600;
   color: var(--theme-sidebar-header);
   cursor: pointer;
   border-radius: 0.375rem;
@@ -377,8 +377,8 @@ a:hover {
 
 /* Override Starlight's .large class on group labels */
 .sidebar-content .group-label .large {
-  font-size: 0.8125rem;
-  font-weight: 500;
+  font-size: 0.875rem;
+  font-weight: 600;
 }
 
 /* Nested group headers - styled like regular links */
