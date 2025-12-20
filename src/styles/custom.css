@@ -178,6 +178,15 @@ h1#_top,
   }
 }
 
+/* Right sidebar TOC - larger font */
+.right-sidebar-panel a {
+  font-size: 0.9375rem;
+}
+
+.right-sidebar-panel h2 {
+  font-size: 0.875rem;
+}
+
 /* Center main content better */
 .main-pane {
   margin-right: auto;
@@ -374,7 +383,7 @@ a:hover {
   align-items: center;
   justify-content: space-between;
   padding: 0.5rem 0.75rem;
-  font-size: 0.875rem;
+  font-size: 0.9375rem;
   font-weight: 600;
   color: var(--theme-sidebar-header);
   cursor: pointer;
@@ -402,13 +411,13 @@ a:hover {
 
 /* Override Starlight's .large class on group labels */
 .sidebar-content .group-label .large {
-  font-size: 0.875rem;
+  font-size: 0.9375rem;
   font-weight: 600;
 }
 
 /* Nested group headers - styled like regular links */
 .sidebar-content details details summary {
-  font-size: 0.875rem;
+  font-size: 0.9375rem;
   font-weight: 400;
   text-transform: none;
   letter-spacing: normal;
@@ -422,7 +431,7 @@ a:hover {
 }
 
 .sidebar-content details details .group-label .large {
-  font-size: 0.875rem;
+  font-size: 0.9375rem;
   font-weight: 400;
   color: inherit;
 }
@@ -472,7 +481,7 @@ a:hover {
 .sidebar-content a {
   display: block;
   padding: 0.25rem 0.75rem;
-  font-size: 0.875rem;
+  font-size: 0.9375rem;
   font-weight: 400;
   color: var(--theme-sidebar-link);
   text-decoration: none;
