@@ -346,8 +346,8 @@ header.header > .header {
 }
 
 .sl-markdown-content ol > li::marker {
-  color: var(--theme-text-muted);
-  font-weight: 500;
+  color: var(--theme-text-subtle);
+  font-weight: 400;
 }
 
 /* ===========================================
