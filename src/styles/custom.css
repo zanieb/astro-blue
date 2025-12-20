@@ -460,10 +460,12 @@ pre {
 }
 
 /* ===========================================
-   Header (Mintlify style - minimal border)
+   Header (Mintlify style - subtle border, more padding)
    =========================================== */
 header.header {
-  border-bottom: none;
+  border-bottom: 1px solid var(--theme-border);
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
 /* ===========================================
@@ -491,22 +493,32 @@ summary {
 /* ===========================================
    Search Bar (Mintlify style - centered and wider)
    =========================================== */
+/* Header layout - center the search bar */
+header.header .header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Search item takes up more space and centers */
 .search-item {
   flex-grow: 1;
-  max-width: 20rem;
+  max-width: 22rem;
+  margin: 0 auto;
 }
 
 .search-item button {
   width: 100%;
   border-radius: 0.5rem;
   border: 1px solid var(--theme-border);
-  background: transparent;
+  background: var(--theme-bg-hover);
   padding: 0.5rem 1rem;
   justify-content: flex-start;
 }
 
 .search-item button:hover {
   border-color: var(--sl-color-gray-4);
+  background: var(--theme-bg-hover);
 }
 
 /* Pagefind modal styling */
