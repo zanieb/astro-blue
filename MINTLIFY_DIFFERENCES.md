@@ -23,18 +23,12 @@ A comparison of our Astro Blue theme against the PYX Documentation (https://docs
 ### Links
 | Feature | Mintlify/PYX | Astro Blue | Priority |
 |---------|--------------|------------|----------|
-| Selected item | Subtle gray rounded background | Purple background | High |
 | Hover state | Light gray background | Similar but different shade | Low |
 | Link padding | Tighter vertical padding | Slightly more padding | Low |
 
 ---
 
 ## Content Area
-
-### Page Header
-| Feature | Mintlify/PYX | Astro Blue | Priority |
-|---------|--------------|------------|----------|
-| Title underline/border | None | Subtle line under title | High |
 
 ### Typography
 | Feature | Mintlify/PYX | Astro Blue | Priority |

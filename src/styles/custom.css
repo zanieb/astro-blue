@@ -111,6 +111,17 @@ html {
   font-feature-settings: "kern" 1, "liga" 1;
 }
 
+/* Page title - no underline (Mintlify style) */
+h1#_top,
+.page-title-wrapper h1 {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.content-panel h1 {
+  border-bottom: none;
+}
+
 /* ===========================================
    Code blocks
    =========================================== */
