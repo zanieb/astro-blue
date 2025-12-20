@@ -1,0 +1,101 @@
+---
+title: Examples
+description: Common patterns and use cases.
+---
+
+import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
+
+## Use Cases
+
+<CardGrid>
+  <Card title="Authentication" icon="lock">
+    Implement secure user authentication with OAuth 2.0 and session management.
+  </Card>
+  <Card title="Data Sync" icon="refresh">
+    Keep your local data in sync with real-time webhooks and polling.
+  </Card>
+  <Card title="Batch Operations" icon="list">
+    Process large datasets efficiently with bulk API endpoints.
+  </Card>
+  <Card title="Error Handling" icon="warning">
+    Build resilient applications with proper error handling and retries.
+  </Card>
+</CardGrid>
+
+## Authentication Flow
+
+```typescript
+import { createClient } from '@acme/sdk';
+
+const client = createClient({
+  apiKey: process.env.ACME_API_KEY,
+});
+
+// OAuth flow
+const authUrl = client.auth.getAuthorizationUrl({
+  redirectUri: 'https://yourapp.com/callback',
+  scopes: ['users:read', 'users:write'],
+});
+
+// After user authorizes, exchange code for token
+const tokens = await client.auth.exchangeCode({
+  code: 'authorization_code_here',
+  redirectUri: 'https://yourapp.com/callback',
+});
+
+// Use the access token
+const authenticatedClient = createClient({
+  accessToken: tokens.accessToken,
+});
+```
+
+## Webhook Handler
+
+```typescript
+import { verifyWebhook } from '@acme/sdk';
+import express from 'express';
+
+const app = express();
+
+app.post('/webhooks', express.raw({ type: 'application/json' }), (req, res) => {
+  const signature = req.headers['x-acme-signature'];
+
+  const isValid = verifyWebhook({
+    payload: req.body,
+    signature,
+    secret: process.env.WEBHOOK_SECRET,
+  });
+
+  if (!isValid) {
+    return res.status(401).send('Invalid signature');
+  }
+
+  const event = JSON.parse(req.body);
+
+  switch (event.type) {
+    case 'user.created':
+      console.log('New user:', event.data);
+      break;
+    case 'user.deleted':
+      console.log('User deleted:', event.data.id);
+      break;
+  }
+
+  res.status(200).send('OK');
+});
+```
+
+## Related
+
+<CardGrid>
+  <LinkCard
+    title="API Reference"
+    description="Complete API documentation"
+    href="/demo/api-reference"
+  />
+  <LinkCard
+    title="Configuration"
+    description="Advanced configuration options"
+    href="/demo/configuration"
+  />
+</CardGrid>

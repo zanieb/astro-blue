@@ -1,0 +1,67 @@
+---
+title: API Reference
+description: Complete API documentation for the SDK.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+The SDK provides a simple interface for interacting with the service.
+
+## Authentication
+
+All API requests require authentication via bearer token.
+
+```bash
+curl -X GET https://api.example.com/v1/users \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+## Endpoints
+
+### GET /users
+
+Retrieve a list of users.
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `limit` | `integer` | Maximum number of results (default: 20) |
+| `offset` | `integer` | Pagination offset |
+| `status` | `string` | Filter by status: `active`, `pending`, `disabled` |
+
+### POST /users
+
+Create a new user.
+
+<Tabs>
+  <TabItem label="Request">
+```json
+{
+  "name": "Jane Doe",
+  "email": "jane@example.com",
+  "role": "admin"
+}
+```
+  </TabItem>
+  <TabItem label="Response">
+```json
+{
+  "id": "usr_abc123",
+  "name": "Jane Doe",
+  "email": "jane@example.com",
+  "role": "admin",
+  "created_at": "2025-01-15T10:30:00Z"
+}
+```
+  </TabItem>
+</Tabs>
+
+## Error Codes
+
+| Code | Description |
+|------|-------------|
+| `400` | Bad Request — Invalid parameters |
+| `401` | Unauthorized — Invalid or missing API key |
+| `403` | Forbidden — Insufficient permissions |
+| `404` | Not Found — Resource doesn't exist |
+| `429` | Too Many Requests — Rate limit exceeded |
+| `500` | Internal Server Error |

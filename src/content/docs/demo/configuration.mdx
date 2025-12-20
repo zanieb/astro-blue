@@ -1,0 +1,76 @@
+---
+title: Configuration
+description: Configure the SDK for your environment.
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+## Environment Variables
+
+The SDK can be configured using environment variables.
+
+```bash
+# Required
+ACME_API_KEY=your_api_key_here
+ACME_API_URL=https://api.example.com
+
+# Optional
+ACME_TIMEOUT=30000
+ACME_RETRY_COUNT=3
+ACME_LOG_LEVEL=info
+```
+
+<Aside type="caution">
+  Never commit your API keys to version control. Use environment variables or a secrets manager.
+</Aside>
+
+## Configuration File
+
+Alternatively, create an `acme.config.js` file in your project root:
+
+```javascript
+export default {
+  apiKey: process.env.ACME_API_KEY,
+  baseUrl: 'https://api.example.com',
+
+  // Request settings
+  timeout: 30000,
+  retryCount: 3,
+
+  // Logging
+  logLevel: 'info',
+  logFormat: 'json',
+
+  // Advanced
+  hooks: {
+    beforeRequest: async (config) => {
+      console.log('Making request to:', config.url);
+      return config;
+    },
+    afterResponse: async (response) => {
+      console.log('Response status:', response.status);
+      return response;
+    },
+  },
+};
+```
+
+## TypeScript Support
+
+Full TypeScript definitions are included:
+
+```typescript
+import { createClient, type Config } from '@acme/sdk';
+
+const config: Config = {
+  apiKey: process.env.ACME_API_KEY!,
+  baseUrl: 'https://api.example.com',
+  timeout: 30000,
+};
+
+const client = createClient(config);
+```
+
+<Aside type="tip">
+  Enable strict mode in your `tsconfig.json` for the best type checking experience.
+</Aside>

@@ -15,6 +15,15 @@ export default defineConfig({
             { label: 'Introduction', slug: 'getting-started/introduction' },
           ],
         },
+        {
+          label: 'Demo',
+          items: [
+            { label: 'Quickstart', slug: 'demo/quickstart' },
+            { label: 'Configuration', slug: 'demo/configuration' },
+            { label: 'API Reference', slug: 'demo/api-reference' },
+            { label: 'Examples', slug: 'demo/examples' },
+          ],
+        },
       ],
       customCss: ['./src/styles/custom.css'],
     }),
