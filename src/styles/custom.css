@@ -148,22 +148,23 @@ h1#_top,
 }
 
 /* ===========================================
-   Content Layout (Mintlify style - narrower)
+   Content Layout (Mintlify style)
    =========================================== */
 .sl-container {
   --sl-content-width: 48rem;
-  padding-left: 2.5rem;
-  padding-right: 2rem;
 }
 
-/* Add padding to sidebar */
+/* Match PYX left margin (~47px) for whole page */
+header.header {
+  padding-left: 1.5rem;
+}
+
 .sidebar {
   padding-left: 1.5rem;
 }
 
 .content-panel {
   max-width: var(--sl-content-width);
-  padding-left: 2.5rem;
 }
 
 /* Reduce right-side whitespace - hide TOC on smaller widths */
