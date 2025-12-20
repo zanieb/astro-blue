@@ -5,6 +5,9 @@ export default defineConfig({
   integrations: [
     starlight({
       title: 'Astro Blue',
+      logo: {
+        src: './src/assets/logo.svg',
+      },
       components: {
         ThemeSelect: './src/components/ThemeSelect.astro',
         PageTitle: './src/components/PageTitle.astro',
