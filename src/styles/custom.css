@@ -273,10 +273,10 @@ header.header > .header {
   font-weight: 500;
 }
 
-/* Top-level TOC items (h2 headings) - slightly bolder */
+/* Top-level TOC items (h2 headings) - muted like child items */
 .right-sidebar-panel li[style*="--depth: 0"] > a {
   font-weight: 500;
-  color: var(--theme-text);
+  color: var(--theme-text-muted);
 }
 
 .right-sidebar-panel li[style*="--depth: 0"] > a:hover {
