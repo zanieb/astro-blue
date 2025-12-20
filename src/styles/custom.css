@@ -155,11 +155,11 @@ h1#_top,
 }
 
 /* Match PYX left margin (~47px) for whole page */
-header.header {
+.page.sl-flex {
   padding-left: 1.5rem;
 }
 
-.sidebar {
+header.header > .header {
   padding-left: 1.5rem;
 }
 
