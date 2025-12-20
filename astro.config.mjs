@@ -5,6 +5,9 @@ export default defineConfig({
   integrations: [
     starlight({
       title: 'Astro Blue',
+      components: {
+        ThemeSelect: './src/components/ThemeSelect.astro',
+      },
       social: [
         { icon: 'github', label: 'GitHub', href: 'https://github.com/example/astro-blue' },
       ],
