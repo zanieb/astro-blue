@@ -335,21 +335,38 @@ pre {
   border-radius: 0.75rem;
 }
 
-/* Hide ALL code block headers - no window chrome, no tabs */
+/* Hide code block headers by default - no window chrome, no tabs */
 .expressive-code .frame .header {
   display: none !important;
 }
 
-/* For titled code blocks, show title inline above the code */
-.expressive-code .frame.has-title::before {
-  content: attr(data-title);
-  display: block;
+/* Show header for titled code blocks */
+.expressive-code .frame.has-title .header {
+  display: block !important;
   padding: 0.5rem 1rem;
   font-size: 0.8125rem;
   font-weight: 500;
   color: var(--theme-text-muted);
   background: var(--theme-bg-hover);
   border-bottom: 1px solid var(--theme-border);
+}
+
+/* Style the title text */
+.expressive-code .frame.has-title .header .title {
+  color: var(--theme-text-muted);
+}
+
+/* Hide screen reader only text in titled headers */
+.expressive-code .frame.has-title .header .sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 /* Clean up code block frame */
