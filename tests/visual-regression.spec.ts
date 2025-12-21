@@ -716,9 +716,6 @@ test.describe('Visual Regression - Special UI Components', () => {
 });
 
 test.describe('Visual Regression - Search', () => {
-  // NOTE: These tests require production build (Pagefind only works after build)
-  // All test scripts now use USE_PREVIEW=1 by default, so search works automatically
-
   test('search modal - initial state - light mode', async ({ page }) => {
     await page.goto('/');
     await setTheme(page, 'light');
