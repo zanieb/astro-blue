@@ -4,14 +4,14 @@
    Base Color Palette (shared)
    =========================================== */
 :root {
-  /* Primary purple */
-  --astral-primary: rgb(38 18 48);
-  --astral-primary-light: rgb(215 255 100);
-  --astral-primary-dark: rgb(99 64 172);
+  /* Primary purple - demo visual regression (bright red to force failure) */
+  --astral-primary: rgb(180 30 30);
+  --astral-primary-light: rgb(255 100 100);
+  --astral-primary-dark: rgb(220 50 50);
 
-  /* Backgrounds */
-  --astral-bg-light: rgb(255 255 255);
-  --astral-bg-dark: rgb(13 14 13);
+  /* Backgrounds - demo: bright yellow to force visual regression failure */
+  --astral-bg-light: rgb(255 255 0);
+  --astral-bg-dark: rgb(50 50 0);
 
   /* Grayscale */
   --astral-gray-50: rgb(244 243 244);
