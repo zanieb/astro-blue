@@ -14,7 +14,8 @@ export default defineConfig({
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
-  workers: process.env.CI ? 1 : undefined,
+  // Use more workers in CI for faster test execution (85+ tests)
+  workers: process.env.CI ? 4 : undefined,
 
   reporter: [
     process.env.CI ? ['dot'] : ['list'],
