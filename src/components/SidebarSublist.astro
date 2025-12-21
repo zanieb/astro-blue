@@ -233,16 +233,16 @@ function getDisplayEntries(entry: SidebarGroup): SidebarEntry[] {
 
 		/* Highlight entire summary when section index is current */
 		summary.is-current {
-			background-color: var(--sl-color-text-accent);
+			background-color: var(--sl-color-gray-6);
 		}
 
 		summary.is-current .large {
-			color: var(--sl-color-text-invert);
+			color: var(--sl-color-white);
 			font-weight: 600;
 		}
 
 		summary.is-current .caret {
-			color: var(--sl-color-text-invert);
+			color: var(--sl-color-gray-3);
 		}
 
 		.group-label {
@@ -268,7 +268,7 @@ function getDisplayEntries(entry: SidebarGroup): SidebarEntry[] {
 		/* Don't change color on hover when current */
 		summary.is-current .group-link:hover .large,
 		summary.is-current .group-link:focus .large {
-			color: var(--sl-color-text-invert);
+			color: var(--sl-color-white);
 		}
 
 		.caret {
@@ -300,8 +300,8 @@ function getDisplayEntries(entry: SidebarGroup): SidebarEntry[] {
 		[aria-current='page']:hover,
 		[aria-current='page']:focus {
 			font-weight: 600;
-			color: var(--sl-color-text-invert);
-			background-color: var(--sl-color-text-accent);
+			color: var(--sl-color-white);
+			background-color: var(--sl-color-gray-6);
 		}
 
 		/* Override for group links - don't apply the regular link highlight */
