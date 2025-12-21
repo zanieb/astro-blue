@@ -755,6 +755,7 @@ a:hover {
 
 .sidebar-content summary:hover {
   color: var(--theme-sidebar-link-hover);
+  background: var(--theme-bg-hover);
 }
 
 /* Active/current state for top-level group summaries */

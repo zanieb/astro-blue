@@ -231,6 +231,11 @@ function getDisplayEntries(entry: SidebarGroup): SidebarEntry[] {
 			display: none;
 		}
 
+		/* Hover highlight for ALL summaries - full row including caret */
+		summary:hover {
+			background-color: var(--sl-color-gray-6);
+		}
+
 		/* Highlight entire summary when section index is current */
 		summary.is-current {
 			background-color: var(--sl-color-gray-6);
