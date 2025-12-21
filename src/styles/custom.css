@@ -775,6 +775,12 @@ dialog[aria-label='Search'][aria-label='Search'] {
   outline-offset: 2px;
 }
 
+/* Hover styles - theme-agnostic background */
+.pagefind-ui__result-inner > .pagefind-ui__result-title:hover,
+.pagefind-ui__result-nested:hover {
+  background: var(--theme-bg-hover);
+}
+
 /* Light mode specific styles */
 :root[data-theme='light'] .pagefind-ui__result-title {
   background: transparent;
@@ -782,17 +788,6 @@ dialog[aria-label='Search'][aria-label='Search'] {
 
 :root[data-theme='light'] .pagefind-ui__result-excerpt {
   color: var(--theme-text-muted);
-}
-
-:root[data-theme='light'] .pagefind-ui__result-inner > .pagefind-ui__result-title:hover,
-:root[data-theme='light'] .pagefind-ui__result-nested:hover {
-  background: var(--theme-bg-hover);
-}
-
-/* Dark mode hover - subtle background */
-:root[data-theme='dark'] .pagefind-ui__result-inner > .pagefind-ui__result-title:hover,
-:root[data-theme='dark'] .pagefind-ui__result-nested:hover {
-  background: var(--theme-bg-hover);
 }
 
 /* Remove any default yellow outlines from Pagefind */
@@ -804,21 +799,21 @@ dialog[aria-label='Search'][aria-label='Search'] {
   outline: none;
 }
 
-/* Search result mark/highlight - match theme */
-:root[data-theme='light'] .pagefind-ui mark {
-  color: var(--theme-text);
-  background: rgba(99, 64, 172, 0.12);
+/* Search result mark/highlight - shared styles */
+.pagefind-ui mark {
   font-weight: 500;
   border-radius: 0.125rem;
   padding: 0 0.125rem;
 }
 
+:root[data-theme='light'] .pagefind-ui mark {
+  color: var(--theme-text);
+  background: rgba(99, 64, 172, 0.12);
+}
+
 :root[data-theme='dark'] .pagefind-ui mark {
   color: var(--theme-accent);
   background: rgba(215, 255, 100, 0.12);
-  font-weight: 500;
-  border-radius: 0.125rem;
-  padding: 0 0.125rem;
 }
 
 /* ===========================================
@@ -1182,34 +1177,26 @@ nav.sidebar li {
 /* ===========================================
    Social Icons (Brand-appropriate colors)
    =========================================== */
-/* GitHub - black on light, white on dark */
-:root[data-theme='light'] .social-icons a[href*='github.com'] {
-  color: #000000;
-}
-
-:root[data-theme='light'] .social-icons a[href*='github.com']:hover {
-  color: #333333;
-}
-
-:root[data-theme='dark'] .social-icons a[href*='github.com'] {
-  color: #ffffff;
-}
-
-:root[data-theme='dark'] .social-icons a[href*='github.com']:hover {
-  color: #cccccc;
-}
-
-/* Discord - black on light, white on dark */
+/* Light mode - black icons with gray hover */
+:root[data-theme='light'] .social-icons a[href*='github.com'],
 :root[data-theme='light'] .social-icons a[href*='discord.com'] {
   color: #000000;
 }
 
+:root[data-theme='light'] .social-icons a[href*='github.com']:hover,
 :root[data-theme='light'] .social-icons a[href*='discord.com']:hover {
   color: #333333;
 }
 
+/* Dark mode - white icons */
+:root[data-theme='dark'] .social-icons a[href*='github.com'],
 :root[data-theme='dark'] .social-icons a[href*='discord.com'] {
   color: #ffffff;
+}
+
+/* Dark mode hover - brand colors */
+:root[data-theme='dark'] .social-icons a[href*='github.com']:hover {
+  color: #cccccc;
 }
 
 :root[data-theme='dark'] .social-icons a[href*='discord.com']:hover {
