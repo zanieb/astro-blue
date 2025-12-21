@@ -5,7 +5,7 @@ description: Organize content into tabbed panels.
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
-Tabs help organize related content into switchable panels.
+Use tabs to organize content into multiple panels that users can switch between. Tabs are ideal for showing different options or versions, such as package managers or operating systems.
 
 ## Basic Tabs
 
@@ -74,3 +74,18 @@ Selecting a tab here will also switch the tab below:
   <TabItem label="bun">...</TabItem>
 </Tabs>
 ```
+
+## Properties
+
+### Tabs
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `syncKey` | `string` | Optional key to synchronize multiple tab groups. Tabs with the same `syncKey` will switch together. |
+
+### TabItem
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `label` | `string` | **Required.** The text displayed on the tab. |
+| `icon` | `string` | Optional icon name from [Starlight icons](https://starlight.astro.build/reference/icons/). |
