@@ -820,16 +820,16 @@ a:hover {
   border-left: none !important;
 }
 
-/* First-level links - same indent as header */
+/* Child items inside groups - indent from parent heading */
 .sidebar-content details > ul {
   margin-top: 0.25rem;
-  margin-left: 0;
+  margin-left: 0.75rem;
   padding-left: 0;
 }
 
-/* Only indent nested groups (2+ levels deep) */
+/* Nested groups - additional indent */
 .sidebar-content details details > ul {
-  margin-left: 1rem;
+  margin-left: 0.75rem;
   padding-left: 0;
 }
 
