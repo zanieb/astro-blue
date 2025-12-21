@@ -31,7 +31,7 @@ const isHomepage = breadcrumbItems.length === 0;
         {breadcrumbItems.map((item, index) => (
           <li>
             <a href={item.href}>{item.label}</a>
-            {index < breadcrumbItems.length - 1 && <span class="separator">/</span>}
+            <span class="separator">&gt;</span>
           </li>
         ))}
       </ol>
@@ -59,11 +59,12 @@ const isHomepage = breadcrumbItems.length === 0;
 
   .breadcrumbs ol {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     list-style: none;
     margin: 0;
     padding: 0;
     gap: 0;
+    white-space: nowrap;
   }
 
   .breadcrumbs li {
@@ -73,19 +74,24 @@ const isHomepage = breadcrumbItems.length === 0;
 
   .breadcrumbs a {
     font-size: 0.875rem;
-    font-weight: 500;
-    color: var(--sl-color-gray-3);
+    font-weight: 400;
+    color: var(--theme-text-muted);
     text-decoration: none;
   }
 
   .breadcrumbs a:hover {
-    color: var(--sl-color-white);
+    color: var(--theme-text);
+    text-decoration: underline;
   }
 
   .breadcrumbs .separator {
-    font-size: 0.875rem;
-    color: var(--sl-color-gray-4);
+    font-size: 0.75rem;
+    color: var(--theme-text-subtle);
     margin: 0 0.5rem;
+  }
+
+  .breadcrumbs li:last-child .separator {
+    display: none;
   }
 
   h1 {

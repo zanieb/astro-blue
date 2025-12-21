@@ -401,6 +401,7 @@ header.header > .header {
   padding-left: 0 !important;
   margin: 0 !important;
   gap: 0 !important;
+  white-space: nowrap !important;
 }
 
 .breadcrumbs ol > li {
@@ -408,6 +409,15 @@ header.header > .header {
   align-items: center !important;
   padding-left: 0 !important;
   margin-bottom: 0 !important;
+}
+
+/* Breadcrumb link styling - muted gray, not accent colors */
+.breadcrumbs a {
+  color: var(--theme-text-muted) !important;
+}
+
+.breadcrumbs a:hover {
+  color: var(--theme-text) !important;
 }
 
 /* ===========================================
