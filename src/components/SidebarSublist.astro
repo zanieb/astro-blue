@@ -39,16 +39,6 @@ interface Props {
 
 const { sublist, nested } = Astro.props;
 
-// SidebarRestorePoint logic inlined
-const currentGroupIndexSymbol = Symbol.for('starlight-sidebar-group-index');
-const locals = Astro.locals as App.Locals & { [currentGroupIndexSymbol]: number };
-
-function getRestoreIndex(): number {
-	const index = locals[currentGroupIndexSymbol] || 0;
-	locals[currentGroupIndexSymbol] = index + 1;
-	return index;
-}
-
 /**
  * Flatten a sidebar tree into a list of links.
  */
@@ -177,7 +167,6 @@ function getDisplayEntries(entry: SidebarGroup): SidebarEntry[] {
 							)}
 							<Icon name="right-caret" class="caret" size="1.25rem" />
 						</summary>
-						<sl-sidebar-restore data-index={getRestoreIndex()}></sl-sidebar-restore>
 						<Astro.self sublist={getDisplayEntries(entry)} nested />
 					</details>
 				)}
