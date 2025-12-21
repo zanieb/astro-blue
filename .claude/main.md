@@ -39,7 +39,7 @@ Verify visually on port 4321, update TODO to `[done]` with note.
 **Don't implement:** No code, styling, content, or bug fixes. Delegate everything.
 
 **Ports:** Reserve 4321 for main repo (user demos). Assign workers 4322, 4323, 4324...
-Include in task prompt: `Use port 4322: npm run dev -- --port 4322`
+Include in task prompt: `Use port 4322: bun run dev -- --port 4322`
 
 **Parallel spawning:** Spawn multiple workers in one message with multiple Task calls for max parallelism.
 
