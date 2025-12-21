@@ -1,0 +1,129 @@
+name: Update Visual Snapshots
+
+on:
+  issue_comment:
+    types: [created]
+
+# Only allow one snapshot update at a time per PR
+concurrency:
+  group: snapshots-${{ github.event.issue.number }}
+  cancel-in-progress: true
+
+jobs:
+  update-snapshots:
+    name: 'update snapshots'
+    # Only run on PR comments that say "/update-snapshots"
+    if: >
+      github.event.issue.pull_request &&
+      github.event.comment.body == '/update-snapshots'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: 'React to comment'
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
+        with:
+          script: |
+            await github.rest.reactions.createForIssueComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              comment_id: context.payload.comment.id,
+              content: 'eyes'
+            });
+
+      - name: 'Get PR branch'
+        id: pr
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
+        with:
+          script: |
+            const { data: pr } = await github.rest.pulls.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number
+            });
+            core.setOutput('ref', pr.head.ref);
+            core.setOutput('sha', pr.head.sha);
+
+      - name: 'Checkout PR branch'
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+        with:
+          ref: ${{ steps.pr.outputs.ref }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 'Setup Bun'
+        uses: oven-sh/setup-bun@735343b667d3e6f658f44d0eca948eb6282f2b76 # v2.0.2
+        with:
+          bun-version: 'latest'
+
+      - name: 'Install dependencies'
+        run: bun install --frozen-lockfile
+
+      - name: 'Install Playwright browsers'
+        run: bunx playwright install chromium --with-deps
+
+      - name: 'Update snapshots'
+        run: bun run test:visual:update
+
+      - name: 'Check for changes'
+        id: changes
+        run: |
+          if [ -n "$(git status --porcelain tests/__screenshots__)" ]; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+            echo "📸 Snapshots have been updated"
+          else
+            echo "changed=false" >> $GITHUB_OUTPUT
+            echo "✅ No snapshot changes needed"
+          fi
+
+      - name: 'Commit and push'
+        if: steps.changes.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add tests/__screenshots__/
+          git commit -m "test: update visual regression baselines
+
+          Triggered by /update-snapshots command"
+          git push
+
+      - name: 'Comment result'
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
+        with:
+          script: |
+            const changed = '${{ steps.changes.outputs.changed }}' === 'true';
+            const runUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+
+            let body;
+            if (changed) {
+              body = `✅ **Visual snapshots updated!**
+
+            New baseline screenshots have been committed to this PR.
+
+            The visual regression tests should pass on the next run.
+
+            [View workflow run](${runUrl})`;
+            } else {
+              body = `ℹ️ **No snapshot changes needed**
+
+            All screenshots already match the current state.
+
+            [View workflow run](${runUrl})`;
+            }
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: body
+            });
+
+            // Add success reaction
+            await github.rest.reactions.createForIssueComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              comment_id: context.payload.comment.id,
+              content: changed ? 'rocket' : 'thumbs_up'
+            });

@@ -16,7 +16,11 @@ export default defineConfig({
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : undefined,
 
-  reporter: 'html',
+  // Use multiple reporters: HTML for human review, JSON for CI reporting
+  reporter: [
+    ['html', { open: 'never' }],
+    ['json', { outputFile: 'test-results/results.json' }],
+  ],
 
   // Use platform-agnostic snapshot paths (removes -darwin, -linux suffix)
   snapshotPathTemplate: '{testDir}/__screenshots__/{testFilePath}/{arg}-{projectName}{ext}',

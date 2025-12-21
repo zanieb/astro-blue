@@ -124,10 +124,19 @@ jobs:
         run: bunx playwright install chromium --with-deps
 
       - name: 'Run visual regression tests'
+        id: visual-tests
         run: bunx playwright test
+        continue-on-error: true
+
+      - name: 'Generate test report'
+        if: always()
+        run: |
+          bun run scripts/generate-visual-report.ts --output visual-report.md
+          # Write to GitHub Step Summary (click "Summary" in the workflow run)
+          cat visual-report.md >> $GITHUB_STEP_SUMMARY
 
       - name: 'Upload test results'
-        if: failure()
+        if: steps.visual-tests.outcome == 'failure'
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: visual-regression-results
@@ -135,6 +144,10 @@ jobs:
             test-results/
             playwright-report/
           retention-days: 7
+
+      - name: 'Fail if tests failed'
+        if: steps.visual-tests.outcome == 'failure'
+        run: exit 1
 
   accessibility:
     name: 'accessibility'
