@@ -1,0 +1,190 @@
+# Design Issues to Address
+
+## How This File Works
+
+Items use status tags to track progress:
+- `[new]` - Not started yet
+- `[in progress]` - Currently being worked on
+- `[done]` - Implementation complete (user will review async)
+- `[rejected]` - User reviewed and it didn't work, needs different approach
+
+**Workflow:**
+1. **Prioritize `[rejected]` items first** - they're still in context and need a different approach
+2. Pick a `[rejected]` or `[new]` item and change status to `[in progress]`
+3. Implement and verify the fix visually using browser tools
+4. Update status to `[done]` with a brief note of what was changed
+5. **Keep going** - move to the next item without waiting for review
+6. User reviews async and marks `[rejected]` if it didn't work
+
+**Important:**
+- `[rejected]` items take priority - context is still fresh
+- If an item gets rejected multiple times, add notes about what approaches failed
+- Try meaningfully different approaches each time (e.g., different CSS selectors, different properties, component overrides vs CSS)
+- Don't stop to wait for review - keep working through items
+- User will clean up `[done]` items when confirmed working
+
+---
+
+1. [done] Add more left padding
+   Reduced from 3rem to 2rem (48px to 32px) to match PYX sidebar position exactly
+
+2. [done] Remove the window/header elements on top of code blocks
+   Added CSS to hide all expressive-code headers with `display: none !important`
+
+3. [done] Asides/admonitions styling - Mintlify style
+   Created new `Callout` component (`src/components/Callout.astro`) with Mintlify-style design - icon only, no title text, subtle colored backgrounds. Updated asides.mdx to showcase both options.
+
+4. [done] Fix left sidebar scroll behavior
+   Added `overscroll-behavior: contain` to sidebar-pane and `overscroll-behavior: none` to html element to prevent scroll chaining
+
+5. [done] Remove vertical rules around the content
+   Added `!important` to `.sidebar-pane` border-right and added `.right-sidebar { border-left: none !important }` to remove all vertical borders
+
+6. [done] Fix breadcrumb link colors
+   Changed to muted gray using `var(--sl-color-gray-3)` in PageTitle.astro
+
+7. [done] Code blocks still have title bar elements on top
+   Same fix as #2 - headers hidden via CSS
+
+8. [done] Create demo code blocks in multiple languages (console, Python, Rust, Shell) to test and verify code block styling across different language types
+   Added Python, Rust, Shell, Console, Go, JSON, and YAML examples to code-blocks.mdx
+
+9. [done] Style the site title next to the logo in the upper left header to match PYX docs styling
+   Created custom SiteTitle.astro component that properly imports logo from virtual:starlight/user-images and displays logo + "Astro Blue" text in a flex layout matching PYX's "PYX Documentation" header pattern.
+
+10. [done] Right side table of contents ("on this page") font is too big - reduce font size
+    Reduced to 0.8125rem for links, 0.75rem for heading with uppercase styling
+
+11. [done] Bullet pointed list items in the text are too indented at the start - reduce left indentation
+    Added `.sl-markdown-content ul { padding-left: 1.25rem; }`
+
+12. [done] Match list indentation styling to PYX docs - compare with https://docs.pyx.dev/publishing and https://docs.pyx.dev/gpu and ensure numbered and bulleted lists match their styling
+    Verified styling matches PYX: numbered lists have muted gray numbers with proper indentation, bullet lists have proper hierarchy (solid bullets for parent, open circles for children). CSS already set up correctly in custom.css.
+
+13. [done] Create a demo page showing various list styles (single nested, double nested, bullets, numbered, mixed) to preview list styling
+    Created src/content/docs/concepts/lists.mdx with comprehensive list demos including bulleted, numbered, mixed content, single/double nested, and mixed nested lists. Added to sidebar in astro.config.mjs.
+
+14. [done] Add horizontal rule under the top level header to match PYX docs styling
+    Included in PageTitle.astro update with .title-rule div
+
+15. [done] Restructure documentation navigation - create a top-level "Components" page with subsections for individual components (like Steps). Components should be nested under the Components section in the sidebar, not at the top level. Non-component pages can remain at top level.
+    Moved Asides, Code Blocks, Cards, Tabs, Steps under a nested "Components" group with Overview page. Lists remains at Concepts top level as a non-component page.
+
+16. [done] Fix navigation scrollbar behavior - scrollbar appears when clicking between nav elements, but should only appear when actively scrolling in that area (like Mintlify docs)
+    Added scrollbar-gutter: stable to prevent layout shift, thin scrollbar styling (6px width, subtle colors) for both webkit and Firefox browsers.
+
+17. [done] Add link to Astral Discord next to the GitHub link - get the Discord link from the uv docs icon
+    Added Discord social link to astro.config.mjs with href https://discord.com/invite/astral-sh
+
+18. [new] Investigate mobile experience - compare with Mintlify mobile layout and identify any degradations or differences that need fixing
+
+19. [done] Fix navigation item highlight spacing - when hovering over an item next to the active/highlighted item, the two highlights touch. Should have white space between them like Mintlify
+    Added margin-bottom: 0.125rem to sidebar li items to create whitespace between adjacent highlights.
+
+20. [done] Increase main content width - content is narrower than PYX docs, doesn't extend far enough to the right toward the "on this page" TOC. Most visible with code blocks which are cut off compared to PYX.
+    Increased --sl-content-width and .content-panel max-width from 42rem to 50rem. Content width increased from 624px to 696px.
+
+21. [done] Fix code block copy button to match Mintlify - should be persistently present (not hover-only), smaller, and better styled like Mintlify's copy button
+    Fixed ghost/outline by hiding default expressive-code ::before/::after pseudo-elements.
+
+22. [done] Replace huge next/previous page buttons with small Mintlify-style pagination - should be small with just the text of the page, matching Mintlify's simple design
+    Removed card box styling, added CSS to show page title first (larger), "Previous/Next" label below (smaller, muted), with small arrows. Clean border-top separator.
+
+23. [done] Fix right TOC ("on this page") styling for heading hierarchy - different level headings should have different colors/font sizes like PYX. Create a test page with subheadings to demonstrate proper hierarchy rendering. Reference: PYX publishing page.
+    Added CSS using Starlight's --depth CSS variable: top-level items (h2) are bolder with full color, nested items (h3+) are lighter weight with muted color and proper indentation.
+
+24. [done] Fix favicon - not being set properly
+    Created public/favicon.svg from logo, added `favicon: '/favicon.svg'` to Starlight config.
+
+25. [done] **PRIORITY** Review HEADER_DIFFERENCES.md and create comprehensive plan to address all header-related issues. This should be prioritized above other items.
+    Fixed: header bottom border, vertical padding, search bar width/centering/background, site title with "Documentation" suffix (Astro Blue Documentation).
+
+26. [done] Fix code block titles - titles on code blocks are broken and not rendering.
+    Fixed by showing .header for .has-title code blocks while keeping default headers hidden.
+
+27. [done] Create sample page for table of contents testing - should show single, double, and triple nested headings to demonstrate how they render in the right-side "on this page" TOC
+    Created src/content/docs/concepts/toc-demo.mdx with comprehensive heading examples.
+
+28. [rejected] Fix search bar width - search bar is super narrow, needs to be wider like Mintlify/PYX
+    REGRESSION: Was previously fixed (used flex-grow, 512px wide), but fixing search placeholder text caused it to become narrow again. Need to fix width without breaking placeholder text styling.
+
+29. [done] Fix header horizontal ruler color - it's darker in our version than in Mintlify, should be lighter/more subtle
+    Added --theme-header-border variable with 5-6% opacity for subtle border.
+
+30. [new] Comprehensive documentation review - Use 1M context sonnet agent to read through all existing documentation, create a temporary docs changes file, ensure docs make sense (fix any fake/placeholder content), and verify docs are comprehensive of the features being discussed
+
+31. [done] Lighten "on this page" parent items - top-level TOC items on the right are rendered a bit too dark, make them lighter
+    Changed top-level TOC color from --theme-text to --theme-text-muted.
+
+32. [done] Test search functionality in production build - search is currently disabled in preview, need to do a production build and verify search bar works correctly
+    Tested with npm run build && preview - Pagefind indexed 26 pages, search works correctly.
+
+33. [done] Fix GitHub and Discord link colors in both light and dark mode - should use brand-appropriate colors. Check what GitHub and Discord use for their own icons in light/dark mode
+    Added CSS for brand-appropriate colors: GitHub uses black/white, Discord uses blurple/white in light/dark modes
+
+34. [rejected] Fix numbered list spacing - lists are not indented enough, and the distance between the number and the start of the sentence is too big. Look closely at the spacing Mintlify uses for numbered lists and match it. Reference: https://docs.pyx.dev/publishing has numbered list examples.
+    SPLIT INTO TWO SPECIFIC ITEMS BELOW - see items #36 and #37
+
+35. [new] Add external reference links to documentation pages - After documentation review, add a final section to each doc page linking out to relevant Starlight and Astro docs for those topics (follow-up to item #30)
+
+36. [new] **CRITICAL** Fix bulleted list styling to EXACTLY match Mintlify - Measure and compare pixel-by-pixel. Key differences: In Mintlify, the bullet is further LEFT and the text is further RIGHT than in ours. This has been wrong multiple times - must compare exactly and match precisely. Reference: https://docs.pyx.dev/publishing
+
+37. [done] **CRITICAL** Fix numbered list styling to EXACTLY match Mintlify - Measure and compare pixel-by-pixel. Key differences: 1) Number is LIGHTER font color than main text in Mintlify (but not in ours), 2) Spacing issues with indentation and gap between number and text. This has been wrong multiple times - must compare exactly and match precisely. Reference: https://docs.pyx.dev/publishing
+    Changed marker color to --theme-text-muted (lighter), padding-left to 1.5rem (24px), gap to 0.5rem (8px)
+
+38. [done] **CRITICAL** Fix breadcrumbs - major styling/rendering issues: breadcrumbs rendering as a list, wrong color (blue instead of muted gray), multi-depth breadcrumbs not showing properly. Update styling to match Mintlify/uv docs: use carrot (>) instead of slash (/), single line, lighter styling, fix link colors. Create breadcrumbs sample page with nested structure (breadcrumbs page > child page > child child page) to test depth 2-3 breadcrumbs display and styling. Reference: https://docs.astral.sh/uv/guides/integration/docker/
+    Changed separator to >, muted gray colors, single line nowrap, lighter font-weight.
+
+39. [done] Run Astro Audit - execute the Astro audit command to identify and fix any issues
+    Added tsconfig.json, src/env.d.ts, fixed slug→id deprecation. 0 errors, 0 warnings.
+
+40. [done] Fix search bar centering - search bar should be more centered on the page
+    Fixed with margin: 0 auto and max-width: 36rem
+
+41. [done] Fix search placeholder text styling - placeholder text should be lighter gray with "..." (ellipsis)
+    Added "Search..." placeholder with muted gray color using CSS ::after
+
+42. [done] Fix search bar height - search bar in Mintlify is less tall, reduce height to match
+    Reduced height to 2rem (32px) with proper padding
+
+43. [done] Comprehensive search bar comparison - Compare the search bar itself and its positioning on the page to Mintlify to identify any remaining differences that may have been missed
+    Completed as part of #54 which did thorough visual comparison and fixed all differences.
+
+44. [done] Test complex content within nested lists - Create test docs page with various complex content inside indented bulleted list items: code blocks, admonitions/callouts, etc. Verify if allowed and how they render compared to Mintlify. Test various nesting levels and formatting.
+    Created src/content/docs/concepts/complex-lists.mdx with code blocks, callouts, tables in lists.
+
+45. [done] Research and implement tab switchers - Figure out what Starlight/Astro provides for tabbed content (e.g., switching between Windows/macOS commands). Check if built-in component exists or if we need to create a custom Tabs component. Compare styling to Mintlify tab switchers.
+    Starlight has built-in Tabs with syncKey, icons. Styling similar to Mintlify. Enhanced docs.
+
+46. [done] Fix mobile view search button - search button is rendering underneath the hamburger menu button in mobile view. Fix z-index or layout issue to ensure search button is clickable and properly positioned.
+    Added z-index: 15 to search button container and 2.5rem right margin
+
+47. [done] Create demo page for links - Create a test page showing various link styles: inline links, external links, internal links, links in lists, links in headings, etc. Compare styling to Mintlify.
+    Created src/content/docs/concepts/links.mdx with comprehensive link examples
+
+48. [done] Investigate clickable sidebar section headings - Research if Astro/Starlight supports making sidebar section headings clickable to navigate to overview pages (like uv docs). Currently clicking heading toggles section open/closed. Goal: clicking heading text navigates to overview page, clicking arrow icon toggles open/closed. Reference: https://docs.astral.sh/uv/ - click "Getting Started" to see example.
+    NOT SUPPORTED by Starlight (rejected in GitHub #965). uv uses MkDocs. Workaround: add Overview as first item.
+
+49. [done] Fix Steps component regression - Steps component rendering broke when list styling was changed. List CSS changes are affecting the Steps component. Need to fix Steps styling without breaking regular list styling.
+    Added :not(.sl-steps) exclusion to ol selectors and explicit Steps reset CSS
+
+50. [done] Fix Tabs component regression - Tabs component has bullets appearing before tab items. List styling changes are affecting the Tabs component. Need to fix Tabs styling without breaking regular list styling.
+    Added CSS reset for starlight-tabs ul and [role="tablist"] to remove list styling
+
+51. [done] Add multi-line paragraph examples to Callout component demo - Update the Callout component demo to include examples with multi-line paragraphs to ensure they render nicely and verify styling handles longer content properly.
+    Added multi-line callout section to asides.mdx with multi-paragraph examples.
+
+52. [rejected] Fix search bar width with visual confirmation - Search bar is still too narrow (related to rejected item #28). Must use screenshots to visually compare with Mintlify and ensure width matches exactly. Do not mark as done without screenshot proof that width matches Mintlify reference.
+    ISSUE: Now too wide - removed max-width constraint but it's wider than Mintlify. Need to find the exact width Mintlify uses (somewhere between previous narrow width and current wide width).
+
+53. [done] Fix Cmd+K keyboard shortcut styling in search bar - The Cmd+K indicator looks unbalanced and doesn't fit well. Compare to Mintlify - in Mintlify it doesn't have a gray background. Match Mintlify styling exactly.
+    Fixed as part of #54: transparent background, font-weight 600, no padding.
+
+54. [done] **IMPORTANT** Comprehensive visual search bar comparison and final verification - Do a thorough side-by-side visual comparison of our search bar vs Mintlify using screenshots. Check EVERY aspect: width, height, centering, placeholder text, Cmd+K indicator, colors, spacing, padding, borders, etc. Create a checklist of all differences and fix them ALL at once to avoid further regressions. This has regressed multiple times - be extremely careful not to break existing fixes while adding new ones.
+    Fixed: width 424px, height 36px, border-radius 12px, no border, transparent Cmd+K bg, font-weight 600.
+
+55. [done] Audit and create all missing demo pages - Review the entire TODO list for all demo page requests and verify they've been created. Missing demo pages include: breadcrumbs (from #38), complex content in nested lists (#44), and any others. Create a comprehensive list of missing demo pages and create them all. Ensure demo pages are consistent and comprehensive.
+    Created complex-lists.mdx, updated asides.mdx with multi-line examples. Breadcrumb pages already existed.
+
+56. [done] Reduce vertical spacing between page heading and content - The gap between the page heading and the start of content seems too large. Compare to Mintlify and reduce vertical space to match their spacing.
+    Reduced margin-bottom on title, removed title-rule, removed top margin on first content element.
