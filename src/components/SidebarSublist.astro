@@ -96,6 +96,22 @@ function hasCurrentPage(entry: SidebarGroup): boolean {
 }
 
 /**
+ * Check if a section should be open.
+ * A section should be open if:
+ * 1. It contains the current page (including the index page)
+ * 2. It's not marked as collapsed in the config
+ * 3. The index page is the current page (auto-expand when navigating to section index)
+ */
+function shouldBeOpen(entry: SidebarGroup): boolean {
+	// Always open if current page is in this section (including index)
+	if (hasCurrentPage(entry)) {
+		return true;
+	}
+	// Otherwise respect the collapsed setting
+	return !entry.collapsed;
+}
+
+/**
  * Get entries to display, excluding the index page (since heading links to it).
  */
 function getDisplayEntries(entry: SidebarGroup): SidebarEntry[] {
@@ -129,29 +145,38 @@ function getDisplayEntries(entry: SidebarGroup): SidebarEntry[] {
 					</a>
 				) : (
 					<details
-						open={hasCurrentPage(entry) || !entry.collapsed}
+						open={shouldBeOpen(entry)}
 					>
-						<summary>
-							<span class="group-label">
-								{getIndexPageLink(entry) ? (
-									<a
-										href={getIndexPageLink(entry)}
-										class="group-link"
-										aria-current={isIndexPageCurrent(entry) && 'page'}
-									>
+						<summary class:list={[{ 'is-current': isIndexPageCurrent(entry) }]}>
+							{getIndexPageLink(entry) ? (
+								<a
+									href={getIndexPageLink(entry)}
+									class="group-link"
+									aria-current={isIndexPageCurrent(entry) && 'page'}
+								>
+									<span class="group-label">
 										<span class="large">{entry.label}</span>
-									</a>
-								) : (
+										{entry.badge && (
+											<Badge
+												variant={entry.badge.variant}
+												class={entry.badge.class}
+												text={entry.badge.text}
+											/>
+										)}
+									</span>
+								</a>
+							) : (
+								<span class="group-label">
 									<span class="large">{entry.label}</span>
-								)}
-								{entry.badge && (
-									<Badge
-										variant={entry.badge.variant}
-										class={entry.badge.class}
-										text={entry.badge.text}
-									/>
-								)}
-							</span>
+									{entry.badge && (
+										<Badge
+											variant={entry.badge.variant}
+											class={entry.badge.class}
+											text={entry.badge.text}
+										/>
+									)}
+								</span>
+							)}
 							<Icon name="right-caret" class="caret" size="1.25rem" />
 						</summary>
 						<sl-sidebar-restore data-index={getRestoreIndex()}></sl-sidebar-restore>
@@ -195,14 +220,29 @@ function getDisplayEntries(entry: SidebarGroup): SidebarEntry[] {
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
-			padding: 0.2em 0;
+			padding: 0.2em var(--sl-sidebar-item-padding-inline);
 			line-height: 1.4;
 			cursor: pointer;
 			user-select: none;
+			border-radius: 0.25rem;
 		}
 		summary::marker,
 		summary::-webkit-details-marker {
 			display: none;
+		}
+
+		/* Highlight entire summary when section index is current */
+		summary.is-current {
+			background-color: var(--sl-color-text-accent);
+		}
+
+		summary.is-current .large {
+			color: var(--sl-color-text-invert);
+			font-weight: 600;
+		}
+
+		summary.is-current .caret {
+			color: var(--sl-color-text-invert);
 		}
 
 		.group-label {
@@ -214,7 +254,8 @@ function getDisplayEntries(entry: SidebarGroup): SidebarEntry[] {
 		.group-link {
 			text-decoration: none;
 			color: inherit;
-			display: inline;
+			display: flex;
+			flex: 1;
 			padding: 0;
 			border-radius: 0;
 		}
@@ -224,9 +265,10 @@ function getDisplayEntries(entry: SidebarGroup): SidebarEntry[] {
 			color: var(--sl-color-text-accent);
 		}
 
-		/* Highlight group label when index page is current */
-		.group-link[aria-current='page'] .large {
-			color: var(--sl-color-text-accent);
+		/* Don't change color on hover when current */
+		summary.is-current .group-link:hover .large,
+		summary.is-current .group-link:focus .large {
+			color: var(--sl-color-text-invert);
 		}
 
 		.caret {
@@ -262,10 +304,10 @@ function getDisplayEntries(entry: SidebarGroup): SidebarEntry[] {
 			background-color: var(--sl-color-text-accent);
 		}
 
-		/* Override for group links - don't use full background highlight */
-		summary a[aria-current='page'],
-		summary a[aria-current='page']:hover,
-		summary a[aria-current='page']:focus {
+		/* Override for group links - don't apply the regular link highlight */
+		summary .group-link[aria-current='page'],
+		summary .group-link[aria-current='page']:hover,
+		summary .group-link[aria-current='page']:focus {
 			background-color: transparent;
 			color: inherit;
 		}
