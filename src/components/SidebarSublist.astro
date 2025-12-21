@@ -1,0 +1,302 @@
+---
+/**
+ * Custom SidebarSublist component that makes group headings clickable links.
+ *
+ * If a group's first entry is a link, the group label becomes a clickable link
+ * to that page. The expand/collapse chevron still works independently.
+ *
+ * This mimics the behavior of MkDocs Material's sidebar.
+ */
+import { Icon, Badge } from '@astrojs/starlight/components';
+
+// Define sidebar types locally since they're not exported
+interface SidebarLink {
+	type: 'link';
+	label: string;
+	href: string;
+	isCurrent: boolean;
+	badge: { variant?: string; class?: string; text: string } | undefined;
+	attrs: Record<string, unknown>;
+}
+
+interface SidebarGroup {
+	type: 'group';
+	label: string;
+	entries: SidebarEntry[];
+	collapsed: boolean;
+	badge: { variant?: string; class?: string; text: string } | undefined;
+}
+
+type SidebarEntry = SidebarLink | SidebarGroup;
+
+interface Props {
+	sublist: SidebarEntry[];
+	nested?: boolean;
+}
+
+const { sublist, nested } = Astro.props;
+
+// SidebarRestorePoint logic inlined
+const currentGroupIndexSymbol = Symbol.for('starlight-sidebar-group-index');
+const locals = Astro.locals as App.Locals & { [currentGroupIndexSymbol]: number };
+
+function getRestoreIndex(): number {
+	const index = locals[currentGroupIndexSymbol] || 0;
+	locals[currentGroupIndexSymbol] = index + 1;
+	return index;
+}
+
+/**
+ * Flatten a sidebar tree into a list of links.
+ */
+function flattenSidebar(sidebar: SidebarEntry[]): SidebarLink[] {
+	return sidebar.flatMap((entry) =>
+		entry.type === 'group' ? flattenSidebar(entry.entries) : entry
+	);
+}
+
+/**
+ * Get the link href for a group if it should be clickable.
+ * Returns the href of the first entry if it's a link, otherwise undefined.
+ */
+function getGroupLink(entry: SidebarGroup): string | undefined {
+	const firstEntry = entry.entries[0];
+	if (firstEntry && firstEntry.type === 'link') {
+		return firstEntry.href;
+	}
+	return undefined;
+}
+
+/**
+ * Check if any entry in the group is the current page.
+ */
+function hasCurrentPage(entry: SidebarGroup): boolean {
+	return flattenSidebar(entry.entries).some((i) => i.isCurrent);
+}
+---
+
+<ul class:list={{ 'top-level': !nested }}>
+	{
+		sublist.map((entry) => (
+			<li>
+				{entry.type === 'link' ? (
+					<a
+						href={entry.href}
+						aria-current={entry.isCurrent && 'page'}
+						class:list={[{ large: !nested }, entry.attrs.class]}
+						{...entry.attrs}
+					>
+						<span>{entry.label}</span>
+						{entry.badge && (
+							<Badge
+								variant={entry.badge.variant}
+								class={entry.badge.class}
+								text={entry.badge.text}
+							/>
+						)}
+					</a>
+				) : (
+					<details
+						open={hasCurrentPage(entry) || !entry.collapsed}
+						class="sidebar-group"
+					>
+						<summary>
+							{getGroupLink(entry) ? (
+								<a href={getGroupLink(entry)} class="group-link">
+									<span class="group-label">
+										<span class="large">{entry.label}</span>
+										{entry.badge && (
+											<Badge
+												variant={entry.badge.variant}
+												class={entry.badge.class}
+												text={entry.badge.text}
+											/>
+										)}
+									</span>
+								</a>
+							) : (
+								<span class="group-label">
+									<span class="large">{entry.label}</span>
+									{entry.badge && (
+										<Badge
+											variant={entry.badge.variant}
+											class={entry.badge.class}
+											text={entry.badge.text}
+										/>
+									)}
+								</span>
+							)}
+							<button type="button" class="caret-button" aria-label="Toggle section">
+								<Icon name="right-caret" class="caret" size="1.25rem" />
+							</button>
+						</summary>
+						<sl-sidebar-restore data-index={getRestoreIndex()}></sl-sidebar-restore>
+						<Astro.self sublist={entry.entries} nested />
+					</details>
+				)}
+			</li>
+		))
+	}
+</ul>
+
+<script>
+	// Handle caret button clicks to toggle details without following the link
+	document.querySelectorAll('.sidebar-group .caret-button').forEach((button) => {
+		button.addEventListener('click', (e) => {
+			e.preventDefault();
+			e.stopPropagation();
+			const details = button.closest('details');
+			if (details) {
+				details.open = !details.open;
+			}
+		});
+	});
+
+	// Prevent summary default behavior when clicking the link
+	document.querySelectorAll('.sidebar-group summary').forEach((summary) => {
+		summary.addEventListener('click', (e) => {
+			const target = e.target as HTMLElement;
+			// If clicking on the link or its children, let the link work
+			if (target.closest('.group-link')) {
+				// Don't toggle details when clicking the link
+				e.preventDefault();
+				const link = target.closest('.group-link') as HTMLAnchorElement;
+				if (link) {
+					window.location.href = link.href;
+				}
+			}
+			// If clicking on the caret button, it handles itself
+			else if (target.closest('.caret-button')) {
+				// Button handler will deal with it
+			}
+			// Clicking elsewhere on summary (not link, not button) - toggle
+			else {
+				// Default summary behavior handles this
+			}
+		});
+	});
+</script>
+
+<style>
+	@layer starlight.core {
+		ul {
+			--sl-sidebar-item-padding-inline: 0.5rem;
+			list-style: none;
+			padding: 0;
+		}
+
+		li {
+			overflow-wrap: anywhere;
+		}
+
+		ul ul li {
+			margin-inline-start: var(--sl-sidebar-item-padding-inline);
+			border-inline-start: 1px solid var(--sl-color-hairline-light);
+			padding-inline-start: var(--sl-sidebar-item-padding-inline);
+		}
+
+		.large {
+			font-size: var(--sl-text-lg);
+			font-weight: 600;
+			color: var(--sl-color-white);
+		}
+
+		.top-level > li + li {
+			margin-top: 0.75rem;
+		}
+
+		summary {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			padding: 0.2em var(--sl-sidebar-item-padding-inline);
+			line-height: 1.4;
+			cursor: pointer;
+			user-select: none;
+		}
+		summary::marker,
+		summary::-webkit-details-marker {
+			display: none;
+		}
+
+		.group-link {
+			text-decoration: none;
+			color: inherit;
+			flex: 1;
+		}
+
+		.group-link:hover .large,
+		.group-link:focus .large {
+			color: var(--sl-color-text-accent);
+		}
+
+		.caret-button {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			background: none;
+			border: none;
+			padding: 0.25rem;
+			margin: -0.25rem;
+			margin-inline-start: 0.25rem;
+			cursor: pointer;
+			color: inherit;
+			border-radius: 0.25rem;
+		}
+
+		.caret-button:hover,
+		.caret-button:focus {
+			background-color: var(--sl-color-gray-6);
+		}
+
+		.caret {
+			transition: transform 0.2s ease-in-out;
+			flex-shrink: 0;
+		}
+		:global([dir='rtl']) .caret {
+			transform: rotateZ(180deg);
+		}
+		[open] > summary .caret {
+			transform: rotateZ(90deg);
+		}
+
+		a {
+			display: block;
+			border-radius: 0.25rem;
+			text-decoration: none;
+			color: var(--sl-color-gray-2);
+			padding: 0.3em var(--sl-sidebar-item-padding-inline);
+			line-height: 1.4;
+		}
+
+		a:hover,
+		a:focus {
+			color: var(--sl-color-white);
+		}
+
+		[aria-current='page'],
+		[aria-current='page']:hover,
+		[aria-current='page']:focus {
+			font-weight: 600;
+			color: var(--sl-color-text-invert);
+			background-color: var(--sl-color-text-accent);
+		}
+
+		a > *:not(:last-child),
+		.group-label > *:not(:last-child) {
+			margin-inline-end: 0.25em;
+		}
+
+		@media (min-width: 50rem) {
+			.top-level > li + li {
+				margin-top: 0.5rem;
+			}
+			.large {
+				font-size: var(--sl-text-base);
+			}
+			a {
+				font-size: var(--sl-text-sm);
+			}
+		}
+	}
+</style>

@@ -13,6 +13,7 @@ export default defineConfig({
         ThemeSelect: './src/components/ThemeSelect.astro',
         PageTitle: './src/components/PageTitle.astro',
         SiteTitle: './src/components/SiteTitle.astro',
+        Sidebar: './src/components/Sidebar.astro',
       },
       social: [
         { icon: 'github', label: 'GitHub', href: 'https://github.com/example/astro-blue' },
