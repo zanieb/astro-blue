@@ -14,9 +14,10 @@
     "format:check": "prettier --check .",
     "test:visual": "./dev/run-visual-tests.sh",
     "test:visual:update": "./dev/update-snapshots.sh",
-    "test:visual:preview": "USE_PREVIEW=1 playwright test",
-    "test:visual:preview:update": "USE_PREVIEW=1 playwright test --update-snapshots",
+    "test:visual:preview": "./dev/run-visual-tests-preview.sh",
+    "test:visual:preview:update": "./dev/update-snapshots-preview.sh",
     "test:visual:ui": "playwright test --ui",
+    "test:visual:ui:preview": "USE_PREVIEW=1 playwright test --ui",
     "test:visual:report": "playwright show-report",
     "test:a11y": "lhci autorun"
   },
