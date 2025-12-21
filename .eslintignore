@@ -1,0 +1,15 @@
+# Build outputs
+dist/
+.astro/
+node_modules/
+
+# Auto-generated
+.cache/
+coverage/
+
+# MCP screenshots
+.playwright-mcp/
+
+# Config files that don't need linting
+bun.lock
+*.min.js

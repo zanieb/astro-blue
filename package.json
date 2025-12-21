@@ -6,16 +6,38 @@
     "build": "astro build",
     "preview": "astro preview",
     "mcp:playwright": "mcp-server-playwright --isolated",
-    "mcp:puppeteer": "mcp-server-puppeteer"
+    "mcp:puppeteer": "mcp-server-puppeteer",
+    "check": "astro check",
+    "lint": "eslint . --max-warnings 0",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "prepare": "husky"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.6",
     "@modelcontextprotocol/server-puppeteer": "2025.5.12",
     "@playwright/mcp": "0.0.53",
-    "typescript": "^5.9.3"
+    "eslint": "^8.57.0",
+    "eslint-plugin-astro": "^1.5.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.7",
+    "prettier": "^3.4.2",
+    "prettier-plugin-astro": "^0.14.1",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.19.1"
   },
   "dependencies": {
     "@astrojs/starlight": "^0.37.1",
     "astro": "^5.16.6"
+  },
+  "lint-staged": {
+    "*.{js,mjs,ts,astro}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md,mdx,css}": [
+      "prettier --write"
+    ]
   }
 }

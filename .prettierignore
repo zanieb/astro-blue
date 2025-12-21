@@ -1,0 +1,19 @@
+# Build outputs
+dist/
+.astro/
+node_modules/
+
+# Lock files
+bun.lock
+package-lock.json
+yarn.lock
+
+# Auto-generated files
+.cache/
+coverage/
+
+# MCP screenshots (temporary files)
+.playwright-mcp/
+
+# Git
+.git/
