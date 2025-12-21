@@ -366,6 +366,7 @@ function getDisplayEntries(entry: SidebarGroup): SidebarEntry[] {
 	 * Initialize sidebar state on page load.
 	 * - Auto-expand sections containing the current page
 	 * - Restore user's explicit collapse state for other sections
+	 * - Scroll current item into view
 	 */
 	function initSidebarState(): void {
 		const collapsed = getCollapsedSections();
@@ -387,6 +388,15 @@ function getDisplayEntries(entry: SidebarGroup): SidebarEntry[] {
 		});
 
 		saveCollapsedSections(collapsed);
+
+		// Scroll current page item into view after a brief delay
+		// to ensure all state changes have been applied
+		requestAnimationFrame(() => {
+			const currentItem = document.querySelector('.sidebar-content [aria-current="page"]');
+			if (currentItem) {
+				currentItem.scrollIntoView({ block: 'nearest', behavior: 'instant' });
+			}
+		});
 	}
 
 	/**
