@@ -1146,32 +1146,30 @@ a:hover {
 
   /* Remove round button styling from search button - just show the icon */
   header.header site-search button[data-open-modal] {
+    all: unset;
     margin-right: 0.5rem;
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
     padding: 0.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
     height: 32px;
+    cursor: pointer;
   }
 
   /* Remove round button styling from hamburger menu button */
-  starlight-menu-button button {
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
+  header starlight-menu-button button {
+    all: unset;
     display: flex;
     align-items: center;
     justify-content: center;
     height: 32px;
+    cursor: pointer;
   }
 
   /* Make hamburger icon visible in dark mode */
-  starlight-menu-button button svg {
-    color: var(--sl-color-white) !important;
-    fill: currentColor !important;
+  header starlight-menu-button button svg {
+    color: var(--sl-color-white);
+    fill: currentColor;
   }
 }
 
