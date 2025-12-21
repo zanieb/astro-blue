@@ -716,16 +716,8 @@ test.describe('Visual Regression - Special UI Components', () => {
 });
 
 test.describe('Visual Regression - Search', () => {
-  // NOTE: Starlight search (Pagefind) requires a production build to function properly
-  //
-  // To run these tests with search working:
-  //   bun run test:visual:preview
-  //
-  // To update search screenshots:
-  //   bun run test:visual:preview:update
-  //
-  // In CI or for local testing, you can also set USE_PREVIEW=1:
-  //   USE_PREVIEW=1 bun run test:visual
+  // NOTE: These tests require production build (Pagefind only works after build)
+  // All test scripts now use USE_PREVIEW=1 by default, so search works automatically
 
   test('search modal - initial state - light mode', async ({ page }) => {
     await page.goto('/');

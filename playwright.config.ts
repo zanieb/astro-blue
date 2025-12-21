@@ -62,9 +62,8 @@ export default defineConfig({
     },
   ],
 
-  // Run dev server before tests
-  // Set USE_PREVIEW=1 to use production build (required for search to work with Pagefind)
-  // Example: USE_PREVIEW=1 bun run test:visual
+  // Run production build for tests (required for search/Pagefind to work)
+  // Scripts set USE_PREVIEW=1 by default
   webServer: process.env.USE_PREVIEW
     ? {
         command: 'bun run build && bun run preview',
