@@ -34,3 +34,19 @@ Style Astro Starlight to match Mintlify/PYX docs (https://docs.pyx.dev).
 See `DEVELOPMENT.md` for MCP browser tools (uses Chrome or Chromium).
 
 **Claude Code for Web:** Read `CLAUDE-WEB.md` for web-specific setup notes and known issues.
+
+## Before Committing
+
+Run linting and formatting checks before committing:
+
+```bash
+bun run lint        # Check for lint errors
+bun run format:check # Check formatting
+```
+
+To auto-fix issues:
+
+```bash
+bun run lint:fix    # Fix lint errors
+bun run format      # Fix formatting
+```
