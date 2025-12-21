@@ -110,7 +110,9 @@
    Typography
    =========================================== */
 html {
-  font-feature-settings: "kern" 1, "liga" 1;
+  font-feature-settings:
+    'kern' 1,
+    'liga' 1;
   /* Prevent scroll chaining to allow sidebar scroll on hover */
   overscroll-behavior: none;
 }
@@ -294,31 +296,31 @@ header.header > .header {
 }
 
 /* Active TOC link */
-.right-sidebar-panel a[aria-current="true"] {
+.right-sidebar-panel a[aria-current='true'] {
   color: var(--theme-text);
   font-weight: 500;
 }
 
 /* Top-level TOC items (h2 headings) - muted like child items */
-.right-sidebar-panel li[style*="--depth: 0"] > a {
+.right-sidebar-panel li[style*='--depth: 0'] > a {
   font-weight: 500;
   color: var(--theme-text-muted);
 }
 
-.right-sidebar-panel li[style*="--depth: 0"] > a:hover {
+.right-sidebar-panel li[style*='--depth: 0'] > a:hover {
   color: var(--theme-accent);
 }
 
 /* Nested TOC items (h3+ headings) - lighter weight, muted */
-.right-sidebar-panel li[style*="--depth: 1"] > a,
-.right-sidebar-panel li[style*="--depth: 2"] > a {
+.right-sidebar-panel li[style*='--depth: 1'] > a,
+.right-sidebar-panel li[style*='--depth: 2'] > a {
   font-weight: 400;
   font-size: 0.8125rem;
   color: var(--theme-text-muted);
 }
 
-.right-sidebar-panel li[style*="--depth: 1"] > a:hover,
-.right-sidebar-panel li[style*="--depth: 2"] > a:hover {
+.right-sidebar-panel li[style*='--depth: 1'] > a:hover,
+.right-sidebar-panel li[style*='--depth: 2'] > a:hover {
   color: var(--theme-text);
 }
 
@@ -342,7 +344,7 @@ header.header > .header {
 }
 
 .sl-markdown-content ul > li::before {
-  content: "";
+  content: '';
   position: absolute;
   left: 0.5rem; /* 8px from left edge */
   top: 0.6875rem; /* 11px - vertically centered with text */
@@ -362,20 +364,20 @@ header.header > .header {
 
 /* Tabs component - reset list styling to prevent bullets on tab items */
 .sl-markdown-content starlight-tabs ul,
-.sl-markdown-content [role="tablist"] {
+.sl-markdown-content [role='tablist'] {
   list-style: none;
   padding-left: 0;
   margin-left: 0;
 }
 
 .sl-markdown-content starlight-tabs ul > li,
-.sl-markdown-content [role="tablist"] > li {
+.sl-markdown-content [role='tablist'] > li {
   padding-left: 0;
   margin-bottom: 0;
 }
 
 .sl-markdown-content starlight-tabs ul > li::before,
-.sl-markdown-content [role="tablist"] > li::before {
+.sl-markdown-content [role='tablist'] > li::before {
   content: none;
   display: none;
 }
@@ -627,7 +629,10 @@ hr,
 a,
 button,
 summary {
-  transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
+  transition:
+    color 0.15s ease,
+    background-color 0.15s ease,
+    border-color 0.15s ease;
 }
 
 /* ===========================================
@@ -672,7 +677,7 @@ site-search button[data-open-modal] > span:first-of-type {
 }
 
 site-search button[data-open-modal] > span:first-of-type::after {
-  content: "Search...";
+  content: 'Search...';
   font-size: 0.875rem;
   color: var(--astral-gray-500); /* rgb(113, 112, 113) - matches Mintlify */
 }
@@ -777,7 +782,7 @@ a:hover {
 .sidebar-content summary::-webkit-details-marker,
 .sidebar-content summary::marker {
   display: none;
-  content: "";
+  content: '';
 }
 
 /* Group label text */
@@ -840,7 +845,9 @@ a:hover {
   width: 1rem;
   height: 1rem;
   opacity: 0.5;
-  transition: transform 0.2s ease, opacity 0.15s ease;
+  transition:
+    transform 0.2s ease,
+    opacity 0.15s ease;
 }
 
 .sidebar-content summary:hover .caret {
@@ -894,13 +901,13 @@ a:hover {
 }
 
 /* Selected item */
-.sidebar-content a[aria-current="page"] {
+.sidebar-content a[aria-current='page'] {
   color: var(--theme-accent);
   background: var(--theme-accent-bg);
   font-weight: 500;
 }
 
-.sidebar-content a[aria-current="page"]:hover {
+.sidebar-content a[aria-current='page']:hover {
   color: var(--theme-accent);
   background: var(--theme-accent-bg);
 }
@@ -969,8 +976,8 @@ a:hover {
 }
 
 /* Add the Previous/Next label back using ::after on link-title */
-.pagination-links a[rel="prev"] .link-title::after {
-  content: "Previous";
+.pagination-links a[rel='prev'] .link-title::after {
+  content: 'Previous';
   display: block;
   font-size: 0.75rem;
   font-weight: 400;
@@ -978,8 +985,8 @@ a:hover {
   margin-top: 0.125rem;
 }
 
-.pagination-links a[rel="next"] .link-title::after {
-  content: "Next";
+.pagination-links a[rel='next'] .link-title::after {
+  content: 'Next';
   display: block;
   font-size: 0.75rem;
   font-weight: 400;
@@ -999,12 +1006,12 @@ a:hover {
 }
 
 /* Previous link alignment */
-.pagination-links a[rel="prev"] {
+.pagination-links a[rel='prev'] {
   flex-direction: row;
 }
 
 /* Next link alignment */
-.pagination-links a[rel="next"] {
+.pagination-links a[rel='next'] {
   flex-direction: row-reverse;
   margin-left: auto;
 }
@@ -1027,11 +1034,15 @@ a:hover {
 
   /* Remove round button styling from search button - just show the icon */
   header.header site-search button[data-open-modal] {
-    margin-right: 1rem;
+    margin-right: 0.5rem;
     background: transparent !important;
     border: none !important;
     box-shadow: none !important;
     padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 32px;
   }
 
   /* Remove round button styling from hamburger menu button */
@@ -1039,6 +1050,10 @@ a:hover {
     background: transparent !important;
     border: none !important;
     box-shadow: none !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 32px;
   }
 
   /* Make hamburger icon visible in dark mode */
@@ -1052,37 +1067,37 @@ a:hover {
    Social Icons (Brand-appropriate colors)
    =========================================== */
 /* GitHub - black on light, white on dark */
-:root[data-theme='light'] .social-icons a[href*="github.com"] {
+:root[data-theme='light'] .social-icons a[href*='github.com'] {
   color: #000000;
 }
 
-:root[data-theme='light'] .social-icons a[href*="github.com"]:hover {
+:root[data-theme='light'] .social-icons a[href*='github.com']:hover {
   color: #333333;
 }
 
-:root[data-theme='dark'] .social-icons a[href*="github.com"] {
+:root[data-theme='dark'] .social-icons a[href*='github.com'] {
   color: #ffffff;
 }
 
-:root[data-theme='dark'] .social-icons a[href*="github.com"]:hover {
+:root[data-theme='dark'] .social-icons a[href*='github.com']:hover {
   color: #cccccc;
 }
 
 /* Discord - black on light, white on dark */
-:root[data-theme='light'] .social-icons a[href*="discord.com"] {
+:root[data-theme='light'] .social-icons a[href*='discord.com'] {
   color: #000000;
 }
 
-:root[data-theme='light'] .social-icons a[href*="discord.com"]:hover {
+:root[data-theme='light'] .social-icons a[href*='discord.com']:hover {
   color: #333333;
 }
 
-:root[data-theme='dark'] .social-icons a[href*="discord.com"] {
+:root[data-theme='dark'] .social-icons a[href*='discord.com'] {
   color: #ffffff;
 }
 
-:root[data-theme='dark'] .social-icons a[href*="discord.com"]:hover {
-  color: #5865F2;
+:root[data-theme='dark'] .social-icons a[href*='discord.com']:hover {
+  color: #5865f2;
 }
 
 /* ===========================================
