@@ -12,7 +12,7 @@ concurrency:
 
 jobs:
   typecheck:
-    name: 'typecheck | ubuntu'
+    name: 'typecheck'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -33,7 +33,7 @@ jobs:
         run: bun run check
 
   lint:
-    name: 'lint | ubuntu'
+    name: 'lint'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -54,7 +54,7 @@ jobs:
         run: bun run lint
 
   format:
-    name: 'format | ubuntu'
+    name: 'format'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -75,7 +75,7 @@ jobs:
         run: bun run format:check
 
   build:
-    name: 'build | ubuntu'
+    name: 'build'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -103,7 +103,7 @@ jobs:
           retention-days: 7
 
   visual-regression:
-    name: 'visual regression | ubuntu'
+    name: 'visual regression'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -137,7 +137,7 @@ jobs:
           retention-days: 7
 
   accessibility:
-    name: 'accessibility | ubuntu'
+    name: 'accessibility'
     runs-on: ubuntu-latest
     needs: build
     timeout-minutes: 15
