@@ -124,7 +124,7 @@ jobs:
         run: bunx playwright install chromium --with-deps
 
       - name: 'Run visual regression tests'
-        run: bun run test:visual
+        run: bunx playwright test
 
       - name: 'Upload test results'
         if: failure()
