@@ -5,7 +5,7 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "mcp:playwright": "mcp-server-playwright",
+    "mcp:playwright": "mcp-server-playwright --isolated",
     "mcp:puppeteer": "mcp-server-puppeteer"
   },
   "devDependencies": {

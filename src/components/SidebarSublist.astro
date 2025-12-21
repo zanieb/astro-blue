@@ -96,18 +96,14 @@ function hasCurrentPage(entry: SidebarGroup): boolean {
 }
 
 /**
- * Check if a section should be open.
- * A section should be open if:
- * 1. It contains the current page (including the index page)
- * 2. It's not marked as collapsed in the config
- * 3. The index page is the current page (auto-expand when navigating to section index)
+ * Check if a section should be open on initial server render.
+ * Default to open unless explicitly marked collapsed in config.
+ * Client-side JS will handle state persistence and auto-expansion.
  */
 function shouldBeOpen(entry: SidebarGroup): boolean {
-	// Always open if current page is in this section (including index)
-	if (hasCurrentPage(entry)) {
-		return true;
-	}
-	// Otherwise respect the collapsed setting
+	// Default open, unless explicitly collapsed in config
+	// Client-side JS will restore user's explicit collapse state
+	// and auto-expand sections containing the current page
 	return !entry.collapsed;
 }
 
