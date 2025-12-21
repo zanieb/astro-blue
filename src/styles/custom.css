@@ -882,15 +882,21 @@ aside.right-sidebar,
   background: var(--theme-bg-hover);
 }
 
-/* Active/current state for top-level group summaries */
+/* Active/current state for top-level group summaries - Mintlify style */
 .sidebar-content summary.is-current {
-  color: var(--theme-accent);
-  background: var(--theme-accent-bg);
+  color: var(--astral-primary);
+  background: rgba(38, 18, 48, 0.1);
+  text-shadow:
+    -0.2px 0 0 currentColor,
+    0.2px 0 0 currentColor;
 }
 
 .sidebar-content summary.is-current:hover {
-  color: var(--theme-accent);
-  background: var(--theme-accent-bg);
+  color: var(--astral-primary);
+  background: rgba(38, 18, 48, 0.1);
+  text-shadow:
+    -0.2px 0 0 currentColor,
+    0.2px 0 0 currentColor;
 }
 
 .sidebar-content summary.is-current .large {
@@ -939,15 +945,21 @@ aside.right-sidebar,
   background: var(--theme-bg-hover);
 }
 
-/* Active/current state for nested group summaries - same sizing as hover */
+/* Active/current state for nested group summaries - Mintlify style */
 .sidebar-content details details summary.is-current {
-  color: var(--theme-accent);
-  background: var(--theme-accent-bg);
+  color: var(--astral-primary);
+  background: rgba(38, 18, 48, 0.1);
+  text-shadow:
+    -0.2px 0 0 currentColor,
+    0.2px 0 0 currentColor;
 }
 
 .sidebar-content details details summary.is-current:hover {
-  color: var(--theme-accent);
-  background: var(--theme-accent-bg);
+  color: var(--astral-primary);
+  background: rgba(38, 18, 48, 0.1);
+  text-shadow:
+    -0.2px 0 0 currentColor,
+    0.2px 0 0 currentColor;
 }
 
 .sidebar-content details details summary.is-current .large {
@@ -1022,15 +1034,22 @@ nav.sidebar li {
   background: var(--theme-bg-hover);
 }
 
-/* Selected item */
+/* Selected item - Mintlify style with text-shadow for faux-bold (prevents layout shift) */
 .sidebar-content a[aria-current='page'] {
-  color: var(--theme-sidebar-link);
-  background: var(--theme-accent-bg);
+  color: var(--astral-primary);
+  background: rgba(38, 18, 48, 0.1);
+  /* Text shadow creates faux-bold effect without changing font-weight */
+  text-shadow:
+    -0.2px 0 0 currentColor,
+    0.2px 0 0 currentColor;
 }
 
 .sidebar-content a[aria-current='page']:hover {
-  color: var(--theme-sidebar-link);
-  background: var(--theme-accent-bg);
+  color: var(--astral-primary);
+  background: rgba(38, 18, 48, 0.1);
+  text-shadow:
+    -0.2px 0 0 currentColor,
+    0.2px 0 0 currentColor;
 }
 
 /* Remove Starlight's default top-level styling */
