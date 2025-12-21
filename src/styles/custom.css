@@ -1024,12 +1024,12 @@ nav.sidebar li {
 
 /* Selected item */
 .sidebar-content a[aria-current='page'] {
-  color: var(--theme-accent);
+  color: var(--theme-sidebar-link);
   background: var(--theme-accent-bg);
 }
 
 .sidebar-content a[aria-current='page']:hover {
-  color: var(--theme-accent);
+  color: var(--theme-sidebar-link);
   background: var(--theme-accent-bg);
 }
 
