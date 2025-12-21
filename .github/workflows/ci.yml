@@ -133,9 +133,22 @@ jobs:
       - name: 'Generate test report'
         if: always()
         run: |
+          # Generate markdown summary
           bun run scripts/generate-visual-report.ts --output visual-report.md
+
+          # Generate HTML report with embedded diff images
+          bun run scripts/generate-html-diff-report.ts visual-diffs.html
+
           # Write to GitHub Step Summary (click "Summary" in the workflow run)
           cat visual-report.md >> $GITHUB_STEP_SUMMARY
+
+          # Add link to HTML diff report if tests failed
+          if [ "${{ steps.visual-tests.outcome }}" = "failure" ]; then
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "---" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "📸 **[Download visual-diffs.html](../../actions/runs/${{ github.run_id }}#artifacts)** from artifacts to see side-by-side image comparisons" >> $GITHUB_STEP_SUMMARY
+          fi
 
       - name: 'Upload test results'
         if: steps.visual-tests.outcome == 'failure'
@@ -145,6 +158,7 @@ jobs:
           path: |
             test-results/
             playwright-report/
+            visual-diffs.html
           retention-days: 7
 
       - name: 'Fail if tests failed'
