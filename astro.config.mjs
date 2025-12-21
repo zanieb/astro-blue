@@ -48,8 +48,6 @@ export default defineConfig({
         {
           label: 'Concepts',
           items: [
-            { label: 'Lists', slug: 'concepts/lists' },
-            { label: 'TOC Demo', slug: 'concepts/toc-demo' },
             {
               label: 'Components',
               items: [
@@ -59,6 +57,23 @@ export default defineConfig({
                 { label: 'Cards', slug: 'concepts/cards' },
                 { label: 'Tabs', slug: 'concepts/tabs' },
                 { label: 'Steps', slug: 'concepts/steps' },
+              ],
+            },
+            {
+              label: 'Demos',
+              items: [
+                { label: 'On This Page', slug: 'concepts/on-this-page' },
+                { label: 'Lists', slug: 'concepts/lists' },
+                { label: 'Complex Lists', slug: 'concepts/complex-lists' },
+                { label: 'Links', slug: 'concepts/links' },
+                {
+                  label: 'Breadcrumbs',
+                  items: [
+                    { label: 'Overview', slug: 'concepts/breadcrumb-test' },
+                    { label: 'Child Page', slug: 'concepts/breadcrumb-test/child' },
+                    { label: 'Grandchild Page', slug: 'concepts/breadcrumb-test/child/grandchild' },
+                  ],
+                },
               ],
             },
           ],
