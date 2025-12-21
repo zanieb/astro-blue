@@ -11,20 +11,26 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 interface TestResult {
-  title: string;
-  fullTitle: string;
-  status: 'passed' | 'failed' | 'skipped' | 'timedOut';
-  duration: number;
+  status: 'expected' | 'unexpected' | 'skipped' | 'flaky';
   projectName: string;
-  attachments?: Array<{
-    name: string;
-    path?: string;
-    contentType: string;
+  results: Array<{
+    duration: number;
+    attachments?: Array<{
+      name: string;
+      path?: string;
+      contentType: string;
+    }>;
+    errors?: Array<{
+      message?: string;
+      stack?: string;
+    }>;
   }>;
-  errors?: Array<{
-    message?: string;
-    stack?: string;
-  }>;
+}
+
+interface TestSpec {
+  title: string;
+  ok: boolean;
+  tests: TestResult[];
 }
 
 interface TestSuite {
@@ -32,11 +38,6 @@ interface TestSuite {
   file: string;
   specs: TestSpec[];
   suites?: TestSuite[];
-}
-
-interface TestSpec {
-  title: string;
-  tests: TestResult[];
 }
 
 interface PlaywrightReport {
@@ -50,11 +51,44 @@ interface PlaywrightReport {
   };
 }
 
-function collectTests(suite: TestSuite): TestResult[] {
-  const tests: TestResult[] = [];
+interface NormalizedTest {
+  title: string;
+  status: 'passed' | 'failed' | 'skipped' | 'flaky';
+  duration: number;
+  projectName: string;
+  attachments?: Array<{
+    name: string;
+    path?: string;
+    contentType: string;
+  }>;
+  errors?: Array<{
+    message?: string;
+    stack?: string;
+  }>;
+}
+
+function normalizeTest(spec: TestSpec, test: TestResult): NormalizedTest {
+  // Get last result (final attempt after retries)
+  const lastResult = test.results[test.results.length - 1];
+
+  return {
+    title: spec.title,
+    status:
+      test.status === 'expected' ? 'passed' : test.status === 'unexpected' ? 'failed' : test.status,
+    duration: lastResult?.duration || 0,
+    projectName: test.projectName,
+    attachments: lastResult?.attachments,
+    errors: lastResult?.errors,
+  };
+}
+
+function collectTests(suite: TestSuite): NormalizedTest[] {
+  const tests: NormalizedTest[] = [];
 
   for (const spec of suite.specs || []) {
-    tests.push(...spec.tests);
+    for (const test of spec.tests) {
+      tests.push(normalizeTest(spec, test));
+    }
   }
 
   for (const childSuite of suite.suites || []) {
