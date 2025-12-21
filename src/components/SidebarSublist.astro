@@ -338,7 +338,10 @@ function getDisplayEntries(entry: SidebarGroup): SidebarEntry[] {
     try {
       const stored = sessionStorage.getItem(STORAGE_KEY);
       return stored ? new Set(JSON.parse(stored)) : new Set();
-    } catch {
+    } catch (error) {
+      if (import.meta.env.DEV) {
+        console.warn('Failed to load sidebar collapsed state:', error);
+      }
       return new Set();
     }
   }
@@ -349,8 +352,10 @@ function getDisplayEntries(entry: SidebarGroup): SidebarEntry[] {
   function saveCollapsedSections(sections: Set<string>): void {
     try {
       sessionStorage.setItem(STORAGE_KEY, JSON.stringify([...sections]));
-    } catch {
-      // Ignore storage errors
+    } catch (error) {
+      if (import.meta.env.DEV) {
+        console.warn('Failed to save sidebar collapsed state:', error);
+      }
     }
   }
 
@@ -362,8 +367,10 @@ function getDisplayEntries(entry: SidebarGroup): SidebarEntry[] {
     if (scrollContainer) {
       try {
         sessionStorage.setItem(SCROLL_KEY, String(scrollContainer.scrollTop));
-      } catch {
-        // Ignore storage errors
+      } catch (error) {
+        if (import.meta.env.DEV) {
+          console.warn('Failed to save sidebar scroll position:', error);
+        }
       }
     }
   }
@@ -379,8 +386,10 @@ function getDisplayEntries(entry: SidebarGroup): SidebarEntry[] {
         if (saved !== null) {
           scrollContainer.scrollTop = Number(saved);
         }
-      } catch {
-        // Ignore storage errors
+      } catch (error) {
+        if (import.meta.env.DEV) {
+          console.warn('Failed to restore sidebar scroll position:', error);
+        }
       }
     }
   }
