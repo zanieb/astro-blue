@@ -4,3 +4,4 @@ dist/
 .playwright-mcp/
 TODO
 TODO.archive
+.claude/settings.local.json
