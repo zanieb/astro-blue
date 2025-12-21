@@ -1,5 +1,5 @@
 ---
-import Icon from '../user-components/Icon.astro';
+import { Icon } from '@astrojs/starlight/components';
 import project from 'virtual:starlight/project-context';
 
 const pagefindTranslations = {
@@ -138,7 +138,11 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
       // Listen for `ctrl + k` and `cmd + k` keyboard shortcuts.
       window.addEventListener('keydown', (e) => {
         if ((e.metaKey === true || e.ctrlKey === true) && e.key === 'k') {
-          dialog.open ? closeModal() : openModal();
+          if (dialog.open) {
+            closeModal();
+          } else {
+            openModal();
+          }
           e.preventDefault();
         }
       });
@@ -146,7 +150,9 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
       let translations = {};
       try {
         translations = JSON.parse(this.dataset.translations || '{}');
-      } catch {}
+      } catch {
+        // Ignore JSON parse errors and use empty object
+      }
 
       const shouldStrip = this.dataset.stripTrailingSlash !== undefined;
       const stripTrailingSlash = (path: string) => path.replace(/(.)\/(#.*)?$/, '$1$2');
