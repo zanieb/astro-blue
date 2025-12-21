@@ -226,9 +226,14 @@ function generateReport(resultsPath: string): string {
 
 // Main execution
 const args = process.argv.slice(2);
-const resultsPath = args[0] || path.join(process.cwd(), 'test-results/results.json');
 const outputIndex = args.indexOf('--output');
 const outputPath = outputIndex !== -1 ? args[outputIndex + 1] : undefined;
+
+// Get results path from first non-flag argument or use default
+const positionalArgs = args.filter(
+  (arg, i) => !arg.startsWith('--') && (i === 0 || args[i - 1] !== '--output')
+);
+const resultsPath = positionalArgs[0] || path.join(process.cwd(), 'test-results/results.json');
 
 const report = generateReport(resultsPath);
 
