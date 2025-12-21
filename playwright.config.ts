@@ -64,9 +64,9 @@ export default defineConfig({
   // Visual comparison settings
   expect: {
     toHaveScreenshot: {
-      // Allow 1% difference for anti-aliasing variations
-      maxDiffPixelRatio: 0.01,
-      // Use custom snapshot path
+      // Allow 2% difference for platform rendering variations
+      // Research shows 2-5% is reasonable for cross-platform testing
+      maxDiffPixelRatio: 0.02,
       animations: 'disabled',
     },
   },

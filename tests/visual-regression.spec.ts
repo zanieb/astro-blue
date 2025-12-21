@@ -117,16 +117,20 @@ test.describe('Visual Regression - Concepts', () => {
 
 test.describe('Visual Regression - Reference', () => {
   test('reference page - light mode', async ({ page }) => {
-    await page.goto('/reference/configuration');
+    await page.goto('/reference/configuration', { waitUntil: 'networkidle' });
     await setTheme(page, 'light');
+    // Extra wait for code syntax highlighting to settle
+    await page.waitForTimeout(500);
     await expect(page).toHaveScreenshot('reference-light-desktop.png', {
       fullPage: true,
     });
   });
 
   test('reference page - dark mode', async ({ page }) => {
-    await page.goto('/reference/configuration');
+    await page.goto('/reference/configuration', { waitUntil: 'networkidle' });
     await setTheme(page, 'dark');
+    // Extra wait for code syntax highlighting to settle
+    await page.waitForTimeout(500);
     await expect(page).toHaveScreenshot('reference-dark-desktop.png', {
       fullPage: true,
     });
