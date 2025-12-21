@@ -3,8 +3,10 @@
  * Custom SidebarSublist component that makes group headings clickable links.
  *
  * If a group has an index page (first entry with data-index="true" attribute),
- * the group label becomes a clickable link to that page. The expand/collapse
- * chevron still works independently.
+ * the group label includes a link to that page. The expand/collapse toggle
+ * is separate from the navigation:
+ * - Clicking the chevron or summary area toggles expand/collapse (no navigation)
+ * - Clicking the label text navigates to the index page
  *
  * Groups without index pages are NOT clickable - they just expand/collapse.
  */
@@ -130,35 +132,26 @@ function getDisplayEntries(entry: SidebarGroup): SidebarEntry[] {
 						open={hasCurrentPage(entry) || !entry.collapsed}
 					>
 						<summary>
-							{getIndexPageLink(entry) ? (
-								<a
-									href={getIndexPageLink(entry)}
-									class="group-link"
-									aria-current={isIndexPageCurrent(entry) && 'page'}
-								>
-									<span class="group-label">
+							<span class="group-label">
+								{getIndexPageLink(entry) ? (
+									<a
+										href={getIndexPageLink(entry)}
+										class="group-link"
+										aria-current={isIndexPageCurrent(entry) && 'page'}
+									>
 										<span class="large">{entry.label}</span>
-										{entry.badge && (
-											<Badge
-												variant={entry.badge.variant}
-												class={entry.badge.class}
-												text={entry.badge.text}
-											/>
-										)}
-									</span>
-								</a>
-							) : (
-								<span class="group-label">
+									</a>
+								) : (
 									<span class="large">{entry.label}</span>
-									{entry.badge && (
-										<Badge
-											variant={entry.badge.variant}
-											class={entry.badge.class}
-											text={entry.badge.text}
-										/>
-									)}
-								</span>
-							)}
+								)}
+								{entry.badge && (
+									<Badge
+										variant={entry.badge.variant}
+										class={entry.badge.class}
+										text={entry.badge.text}
+									/>
+								)}
+							</span>
 							<Icon name="right-caret" class="caret" size="1.25rem" />
 						</summary>
 						<sl-sidebar-restore data-index={getRestoreIndex()}></sl-sidebar-restore>
@@ -212,10 +205,18 @@ function getDisplayEntries(entry: SidebarGroup): SidebarEntry[] {
 			display: none;
 		}
 
+		.group-label {
+			flex: 1;
+			display: flex;
+			align-items: center;
+		}
+
 		.group-link {
 			text-decoration: none;
 			color: inherit;
-			flex: 1;
+			display: inline;
+			padding: 0;
+			border-radius: 0;
 		}
 
 		.group-link:hover .large,
@@ -226,10 +227,6 @@ function getDisplayEntries(entry: SidebarGroup): SidebarEntry[] {
 		/* Highlight group label when index page is current */
 		.group-link[aria-current='page'] .large {
 			color: var(--sl-color-text-accent);
-		}
-
-		.group-label {
-			flex: 1;
 		}
 
 		.caret {
@@ -291,3 +288,25 @@ function getDisplayEntries(entry: SidebarGroup): SidebarEntry[] {
 		}
 	}
 </style>
+
+<script>
+	/**
+	 * Handle clicks on group links within summary elements.
+	 * When clicking the link text, we want to navigate (not toggle).
+	 * When clicking elsewhere on the summary, we want to toggle (not navigate).
+	 *
+	 * The stopPropagation prevents the click from reaching the summary element,
+	 * so the details won't toggle when clicking the link.
+	 */
+	document.addEventListener('click', (event) => {
+		const target = event.target as HTMLElement;
+		const link = target.closest('summary .group-link');
+
+		if (link) {
+			// Stop the click from bubbling up to the summary element
+			// This prevents the details from toggling when clicking the link
+			event.stopPropagation();
+			// The link will still navigate normally
+		}
+	});
+</script>
