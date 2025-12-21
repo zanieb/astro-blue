@@ -81,7 +81,7 @@ test.describe('Visual Regression - Getting Started', () => {
 
 test.describe('Visual Regression - Guides', () => {
   test('guides page - light mode', async ({ page }) => {
-    await page.goto('/guides/configuration');
+    await page.goto('/guides/customization');
     await setTheme(page, 'light');
     await expect(page).toHaveScreenshot('guides-light-desktop.png', {
       fullPage: true,
@@ -89,7 +89,7 @@ test.describe('Visual Regression - Guides', () => {
   });
 
   test('guides page - dark mode', async ({ page }) => {
-    await page.goto('/guides/configuration');
+    await page.goto('/guides/customization');
     await setTheme(page, 'dark');
     await expect(page).toHaveScreenshot('guides-dark-desktop.png', {
       fullPage: true,
@@ -99,7 +99,7 @@ test.describe('Visual Regression - Guides', () => {
 
 test.describe('Visual Regression - Concepts', () => {
   test('concepts page - light mode', async ({ page }) => {
-    await page.goto('/concepts/overview');
+    await page.goto('/concepts/components');
     await setTheme(page, 'light');
     await expect(page).toHaveScreenshot('concepts-light-desktop.png', {
       fullPage: true,
@@ -107,7 +107,7 @@ test.describe('Visual Regression - Concepts', () => {
   });
 
   test('concepts page - dark mode', async ({ page }) => {
-    await page.goto('/concepts/overview');
+    await page.goto('/concepts/components');
     await setTheme(page, 'dark');
     await expect(page).toHaveScreenshot('concepts-dark-desktop.png', {
       fullPage: true,
@@ -117,7 +117,7 @@ test.describe('Visual Regression - Concepts', () => {
 
 test.describe('Visual Regression - Reference', () => {
   test('reference page - light mode', async ({ page }) => {
-    await page.goto('/reference/api');
+    await page.goto('/reference/configuration');
     await setTheme(page, 'light');
     await expect(page).toHaveScreenshot('reference-light-desktop.png', {
       fullPage: true,
@@ -125,7 +125,7 @@ test.describe('Visual Regression - Reference', () => {
   });
 
   test('reference page - dark mode', async ({ page }) => {
-    await page.goto('/reference/api');
+    await page.goto('/reference/configuration');
     await setTheme(page, 'dark');
     await expect(page).toHaveScreenshot('reference-dark-desktop.png', {
       fullPage: true,
@@ -245,7 +245,7 @@ test.describe('Visual Regression - Interactive States', () => {
   });
 
   test('pagination - light mode', async ({ page }) => {
-    await page.goto('/getting-started/quick-start');
+    await page.goto('/getting-started/first-steps');
     await setTheme(page, 'light');
 
     // Scroll to pagination
@@ -256,7 +256,7 @@ test.describe('Visual Regression - Interactive States', () => {
   });
 
   test('pagination - dark mode', async ({ page }) => {
-    await page.goto('/getting-started/quick-start');
+    await page.goto('/getting-started/first-steps');
     await setTheme(page, 'dark');
 
     await page.locator('.pagination-links').scrollIntoViewIfNeeded();
