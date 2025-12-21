@@ -10,6 +10,7 @@ export default defineConfig({
         src: './src/assets/logo.svg',
       },
       components: {
+        Head: './src/components/Head.astro',
         ThemeSelect: './src/components/ThemeSelect.astro',
         PageTitle: './src/components/PageTitle.astro',
         SiteTitle: './src/components/SiteTitle.astro',

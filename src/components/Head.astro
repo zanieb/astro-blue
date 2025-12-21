@@ -1,0 +1,13 @@
+---
+/**
+ * Custom Head component that adds View Transitions support for smooth navigation.
+ * This enables client-side navigation that only swaps the content area,
+ * keeping the sidebar and header static for a seamless experience like MkDocs.
+ */
+import { ClientRouter } from 'astro:transitions';
+
+const { head } = Astro.locals.starlightRoute;
+---
+
+{head.map(({ tag: Tag, attrs, content }) => <Tag {...attrs} set:html={content} />)}
+<ClientRouter />
