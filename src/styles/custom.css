@@ -616,11 +616,11 @@ summary {
 }
 
 /* ===========================================
-   Search Bar (Mintlify style - wide, spanning available space)
+   Search Bar (Mintlify style - fixed width, centered)
    =========================================== */
-/* Make the search container expand to fill available header space */
+/* Match Mintlify's exact search bar width and styling */
 @media (min-width: 50rem) {
-  /* The container holding site-search - expand to fill space between logo and icons */
+  /* The container holding site-search - center it in header */
   header.header .header > .sl-flex:has(site-search) {
     flex: 1 1 auto;
     justify-content: center;
@@ -628,25 +628,27 @@ summary {
     margin: 0 2rem;
   }
 
-  /* Make the search button fill its container - matches Mintlify's wide search bar */
+  /* Search button - fixed width like Mintlify (424px) */
   site-search button[data-open-modal] {
-    width: 100%;
-    min-width: 0;
-    max-width: none;
+    width: 424px !important;
+    min-width: 424px;
+    max-width: 424px;
   }
 }
 
-/* Search bar height - reduce to match Mintlify (shorter/more compact) */
+/* Search bar base styling - match Mintlify exactly */
 site-search button[data-open-modal] {
-  height: 2rem; /* 32px - matches Mintlify's compact search bar */
-  padding-block: 0.25rem;
+  height: 36px; /* Mintlify's exact height */
+  padding: 0 12px 0 14px; /* Mintlify's exact padding */
   font-size: 0.875rem;
+  border-radius: 12px !important; /* Mintlify uses 12px */
+  border: none !important; /* Mintlify has no visible border */
+  box-shadow: none !important;
 }
 
 /* Search bar placeholder text - lighter gray like Mintlify */
 site-search button[data-open-modal] > span:first-of-type {
-  color: var(--astral-gray-400); /* Lighter gray for placeholder */
-  opacity: 0.7;
+  color: var(--astral-gray-500); /* rgb(113, 112, 113) - matches Mintlify */
 }
 
 /* Hide the default "Search" text and show "Search..." via CSS */
@@ -657,13 +659,25 @@ site-search button[data-open-modal] > span:first-of-type {
 site-search button[data-open-modal] > span:first-of-type::after {
   content: "Search...";
   font-size: 0.875rem;
-  color: var(--astral-gray-400);
+  color: var(--astral-gray-500); /* rgb(113, 112, 113) - matches Mintlify */
 }
 
-/* Keyboard shortcut badge - smaller to match reduced height */
+/* Cmd+K keyboard shortcut - Mintlify style (NO gray background) */
 site-search button[data-open-modal] kbd {
-  font-size: 0.6875rem;
-  padding: 0.125rem 0.25rem;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--astral-gray-500); /* rgb(113, 112, 113) - matches Mintlify */
+}
+
+/* The wrapper span around kbd elements - also transparent */
+site-search button[data-open-modal] > span:last-of-type {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
 }
 
 /* Pagefind modal styling */
