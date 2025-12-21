@@ -4,6 +4,8 @@ Web environments have limited capabilities compared to local Claude Code.
 
 ## Setup
 
+Dependencies must be installed before running build commands:
+
 ```bash
 PUPPETEER_SKIP_DOWNLOAD=true bun install
 ```
