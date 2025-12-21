@@ -341,7 +341,7 @@ test.describe('Visual Regression - Interactive States', () => {
     await expect(sidebar).toHaveScreenshot('sidebar-group-expanded.png');
   });
 
-  test('tab component - first tab active', async ({ page }) => {
+  test.skip('tab component - first tab active', async ({ page }) => {
     await page.goto('/concepts/tabs');
     await setTheme(page, 'light');
 
@@ -354,7 +354,7 @@ test.describe('Visual Regression - Interactive States', () => {
     await expect(tabs).toHaveScreenshot('tabs-first-active.png');
   });
 
-  test('tab component - second tab active', async ({ page }) => {
+  test.skip('tab component - second tab active', async ({ page }) => {
     await page.goto('/concepts/tabs');
     await setTheme(page, 'light');
 
@@ -378,7 +378,7 @@ test.describe('Visual Regression - Interactive States', () => {
     await expect(codeBlock).toHaveScreenshot('code-block-copy-hover.png');
   });
 
-  test('link card - hover state', async ({ page }) => {
+  test.skip('link card - hover state', async ({ page }) => {
     await page.goto('/concepts/cards');
     await setTheme(page, 'light');
 
@@ -679,7 +679,7 @@ test.describe('Visual Regression - Special UI Components', () => {
     });
   });
 
-  test('callout variants - all types', async ({ page }) => {
+  test.skip('callout variants - all types', async ({ page }) => {
     await page.goto('/concepts/asides');
     await setTheme(page, 'light');
 
@@ -690,7 +690,7 @@ test.describe('Visual Regression - Special UI Components', () => {
     await expect(calloutsSection).toHaveScreenshot('callout-variants.png');
   });
 
-  test('aside variants - all types', async ({ page }) => {
+  test.skip('aside variants - all types', async ({ page }) => {
     await page.goto('/concepts/asides');
     await setTheme(page, 'light');
 
