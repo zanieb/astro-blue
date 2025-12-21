@@ -142,6 +142,8 @@ function getDisplayEntries(entry: SidebarGroup): SidebarEntry[] {
 				) : (
 					<details
 						open={shouldBeOpen(entry)}
+						data-sidebar-section={entry.label}
+						data-has-current={hasCurrentPage(entry) ? 'true' : undefined}
 					>
 						<summary class:list={[{ 'is-current': isIndexPageCurrent(entry) }]}>
 							{getIndexPageLink(entry) ? (
@@ -335,15 +337,83 @@ function getDisplayEntries(entry: SidebarGroup): SidebarEntry[] {
 </style>
 
 <script>
+	const STORAGE_KEY = 'sidebar-collapsed-sections';
+
+	/**
+	 * Get the set of explicitly collapsed section names from sessionStorage.
+	 */
+	function getCollapsedSections(): Set<string> {
+		try {
+			const stored = sessionStorage.getItem(STORAGE_KEY);
+			return stored ? new Set(JSON.parse(stored)) : new Set();
+		} catch {
+			return new Set();
+		}
+	}
+
+	/**
+	 * Save the set of collapsed section names to sessionStorage.
+	 */
+	function saveCollapsedSections(sections: Set<string>): void {
+		try {
+			sessionStorage.setItem(STORAGE_KEY, JSON.stringify([...sections]));
+		} catch {
+			// Ignore storage errors
+		}
+	}
+
+	/**
+	 * Initialize sidebar state on page load.
+	 * - Auto-expand sections containing the current page
+	 * - Restore user's explicit collapse state for other sections
+	 */
+	function initSidebarState(): void {
+		const collapsed = getCollapsedSections();
+		const sections = document.querySelectorAll<HTMLDetailsElement>('details[data-sidebar-section]');
+
+		sections.forEach((details) => {
+			const sectionName = details.dataset.sidebarSection;
+			const hasCurrent = details.dataset.hasCurrent === 'true';
+
+			if (hasCurrent) {
+				// Always expand sections containing the current page
+				details.open = true;
+				// Remove from collapsed set since we're auto-expanding
+				if (sectionName) collapsed.delete(sectionName);
+			} else if (sectionName && collapsed.has(sectionName)) {
+				// Restore collapsed state for sections not containing current page
+				details.open = false;
+			}
+		});
+
+		saveCollapsedSections(collapsed);
+	}
+
+	/**
+	 * Handle toggle events to persist user's explicit collapse/expand actions.
+	 */
+	function handleToggle(event: Event): void {
+		const details = event.target as HTMLDetailsElement;
+		const sectionName = details.dataset?.sidebarSection;
+		if (!sectionName) return;
+
+		const collapsed = getCollapsedSections();
+
+		if (details.open) {
+			collapsed.delete(sectionName);
+		} else {
+			collapsed.add(sectionName);
+		}
+
+		saveCollapsedSections(collapsed);
+	}
+
 	/**
 	 * Handle clicks on group links within summary elements.
 	 * When clicking the link text, we want to navigate (not toggle).
 	 * When clicking elsewhere on the summary, we want to toggle (not navigate).
-	 *
-	 * The stopPropagation prevents the click from reaching the summary element,
-	 * so the details won't toggle when clicking the link.
 	 */
-	document.addEventListener('click', (event) => {
+	function handleLinkClick(event: MouseEvent): void {
 		const target = event.target as HTMLElement;
 		const link = target.closest('summary .group-link');
 
@@ -353,5 +423,28 @@ function getDisplayEntries(entry: SidebarGroup): SidebarEntry[] {
 			event.stopPropagation();
 			// The link will still navigate normally
 		}
-	});
+	}
+
+	// Initialize on DOMContentLoaded and after View Transitions
+	function setup(): void {
+		initSidebarState();
+
+		// Listen for toggle events on all sidebar sections
+		document.querySelectorAll<HTMLDetailsElement>('details[data-sidebar-section]').forEach((details) => {
+			details.addEventListener('toggle', handleToggle);
+		});
+	}
+
+	// Run on initial load
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', setup);
+	} else {
+		setup();
+	}
+
+	// Re-run after View Transitions swap content
+	document.addEventListener('astro:after-swap', setup);
+
+	// Handle link clicks (this can stay as a persistent listener)
+	document.addEventListener('click', handleLinkClick);
 </script>
