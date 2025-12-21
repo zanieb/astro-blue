@@ -33,4 +33,6 @@ Style Astro Starlight to match Mintlify/PYX docs (https://docs.pyx.dev).
 
 ## Setup
 
+**Package manager:** Use `bun` for all dependency management (not npm).
+
 See `DEVELOPMENT.md` for dev server and MCP browser tools (uses Chrome or Chromium).
