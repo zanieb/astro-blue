@@ -10,23 +10,32 @@
  * <Callout type="danger">This is dangerous!</Callout>
  */
 
+import InfoIcon from '../icons/InfoIcon.astro';
+import TipIcon from '../icons/TipIcon.astro';
+import WarningIcon from '../icons/WarningIcon.astro';
+import DangerIcon from '../icons/DangerIcon.astro';
+
 export interface Props {
   type?: 'note' | 'tip' | 'warning' | 'danger';
 }
 
 const { type = 'note' } = Astro.props;
 
-// Icon SVGs for each type
-const icons = {
-  note: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>`,
-  tip: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4"/><path d="m6.34 6.34 2.83 2.83"/><path d="M2 12h4"/><path d="m17.66 6.34-2.83 2.83"/><path d="M22 12h-4"/><path d="m6.34 17.66 2.83-2.83"/><path d="M12 18v4"/><path d="m17.66 17.66-2.83-2.83"/></svg>`,
-  warning: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>`,
-  danger: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>`,
+// Map types to icon components
+const iconComponents = {
+  note: InfoIcon,
+  tip: TipIcon,
+  warning: WarningIcon,
+  danger: DangerIcon,
 };
+
+const IconComponent = iconComponents[type];
 ---
 
 <div class:list={['callout', `callout--${type}`]}>
-  <span class="callout-icon" set:html={icons[type]} />
+  <span class="callout-icon">
+    <IconComponent />
+  </span>
   <div class="callout-content">
     <slot />
   </div>
