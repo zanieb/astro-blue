@@ -210,15 +210,7 @@ function generateReport(resultsPath: string): string {
     lines.push('');
     lines.push('### 🔄 Updating Baselines');
     lines.push('');
-    lines.push('If the visual changes are **intentional**, you can update baselines in two ways:');
-    lines.push('');
-    lines.push('**Option 1: Comment command** (easiest)');
-    lines.push('');
-    lines.push(
-      'Comment `/update-snapshots` on this PR to automatically update and commit new baselines.'
-    );
-    lines.push('');
-    lines.push('**Option 2: Local update**');
+    lines.push('If the visual changes are **intentional**, update the baselines locally:');
     lines.push('');
     lines.push('```bash');
     lines.push('bun run test:visual:update');
