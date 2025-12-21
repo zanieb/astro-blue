@@ -757,6 +757,21 @@ a:hover {
   color: var(--theme-sidebar-link-hover);
 }
 
+/* Active/current state for top-level group summaries */
+.sidebar-content summary.is-current {
+  color: var(--theme-accent);
+  background: var(--theme-accent-bg);
+}
+
+.sidebar-content summary.is-current:hover {
+  color: var(--theme-accent);
+  background: var(--theme-accent-bg);
+}
+
+.sidebar-content summary.is-current .large {
+  color: inherit;
+}
+
 /* Hide default marker */
 .sidebar-content summary::-webkit-details-marker,
 .sidebar-content summary::marker {
@@ -790,6 +805,21 @@ a:hover {
 .sidebar-content details details summary:hover {
   color: var(--theme-sidebar-link-hover);
   background: var(--theme-bg-hover);
+}
+
+/* Active/current state for nested group summaries - same sizing as hover */
+.sidebar-content details details summary.is-current {
+  color: var(--theme-accent);
+  background: var(--theme-accent-bg);
+}
+
+.sidebar-content details details summary.is-current:hover {
+  color: var(--theme-accent);
+  background: var(--theme-accent-bg);
+}
+
+.sidebar-content details details summary.is-current .large {
+  color: inherit;
 }
 
 .sidebar-content details details .group-label .large {
