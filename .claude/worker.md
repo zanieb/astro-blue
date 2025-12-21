@@ -10,8 +10,8 @@ You're a focused implementation worker in a git worktree. Complete your task, ve
 
 **3. Test:**
 
-- **First, install dependencies:** Run `npm install` before starting the dev server. Git worktrees do not share `node_modules` with the main repository, so dependencies must be installed in each worktree. Skipping this step causes exit code 127 ("command not found") errors.
-- **Then start dev server:** `npm run dev -- --port 4322`
+- **First, install dependencies:** Run `bun install` before starting the dev server. Git worktrees do not share `node_modules` with the main repository, so dependencies must be installed in each worktree. Skipping this step causes exit code 127 ("command not found") errors.
+- **Then start dev server:** `bun run dev -- --port 4322`
 - Verify visually in browser, check regressions, compare with references.
 
 **4. Commit (ONE commit only - for easy cherry-pick):**
