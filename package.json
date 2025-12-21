@@ -15,10 +15,12 @@
     "test:visual": "playwright test",
     "test:visual:update": "playwright test --update-snapshots",
     "test:visual:ui": "playwright test --ui",
-    "test:visual:report": "playwright show-report"
+    "test:visual:report": "playwright show-report",
+    "test:a11y": "lhci autorun"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.6",
+    "@lhci/cli": "^0.15.1",
     "@modelcontextprotocol/server-puppeteer": "2025.5.12",
     "@playwright/mcp": "0.0.53",
     "@playwright/test": "^1.57.0",

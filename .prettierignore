@@ -11,6 +11,7 @@ yarn.lock
 # Auto-generated files
 .cache/
 coverage/
+.lighthouseci/
 
 # MCP screenshots (temporary files)
 .playwright-mcp/

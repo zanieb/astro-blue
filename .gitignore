@@ -10,3 +10,6 @@ TODO.archive
 test-results/
 playwright-report/
 playwright/.cache/
+
+# Lighthouse CI results
+.lighthouseci/
