@@ -258,12 +258,15 @@ header.header > .header {
     display: block;
     min-width: 14rem;
     margin-left: 4rem;
-    /* Align TOC right edge with header right edge (2rem from viewport) */
-    right: 2rem;
   }
 }
 
 /* Right sidebar TOC - smaller font to match Mintlify */
+.right-sidebar-panel {
+  /* Align TOC right edge with header right edge (2rem from viewport) */
+  padding-right: 2rem;
+}
+
 .right-sidebar-panel h2 {
   font-size: 0.75rem;
   text-transform: uppercase;
