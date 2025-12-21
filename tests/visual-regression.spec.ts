@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect, type Page } from '@playwright/test';
 
 /**
  * Visual Regression Tests
@@ -18,7 +18,7 @@ import { test, expect } from '@playwright/test';
  */
 
 // Helper to set theme
-async function setTheme(page: any, theme: 'light' | 'dark') {
+async function setTheme(page: Page, theme: 'light' | 'dark') {
   await page.evaluate((selectedTheme: string) => {
     document.documentElement.dataset.theme = selectedTheme;
     localStorage.setItem('starlight-theme', selectedTheme);
