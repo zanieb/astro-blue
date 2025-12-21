@@ -11,28 +11,7 @@
  * Groups without index pages are NOT clickable - they just expand/collapse.
  */
 import { Icon, Badge } from '@astrojs/starlight/components';
-
-// Define sidebar types locally since they're not exported
-type BadgeVariant = 'note' | 'tip' | 'danger' | 'default' | 'success' | 'caution';
-
-interface SidebarLink {
-  type: 'link';
-  label: string;
-  href: string;
-  isCurrent: boolean;
-  badge: { variant?: BadgeVariant; class?: string; text: string } | undefined;
-  attrs: Record<string, unknown>;
-}
-
-interface SidebarGroup {
-  type: 'group';
-  label: string;
-  entries: SidebarEntry[];
-  collapsed: boolean;
-  badge: { variant?: BadgeVariant; class?: string; text: string } | undefined;
-}
-
-type SidebarEntry = SidebarLink | SidebarGroup;
+import type { SidebarLink, SidebarGroup, SidebarEntry } from '../types/sidebar';
 
 interface Props {
   sublist: SidebarEntry[];
