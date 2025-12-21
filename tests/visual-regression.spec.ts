@@ -25,7 +25,7 @@ async function setTheme(page: Page, theme: 'light' | 'dark') {
     localStorage.setItem('starlight-theme', selectedTheme);
   }, theme);
   // Wait for theme to apply
-  await page.waitForTimeout(500);
+  await page.waitForTimeout(100);
 }
 
 test.describe('Visual Regression - Homepage', () => {
