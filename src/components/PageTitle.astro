@@ -32,7 +32,7 @@ const isHomepage = breadcrumbItems.length === 0;
     ) : (
       <nav class="breadcrumbs" aria-label="Breadcrumb">
         <ol>
-          {breadcrumbItems.map((item, index) => (
+          {breadcrumbItems.map((item) => (
             <li>
               <a href={item.href}>{item.label}</a>
               <span class="separator">&gt;</span>
