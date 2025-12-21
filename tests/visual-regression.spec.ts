@@ -341,32 +341,6 @@ test.describe('Visual Regression - Interactive States', () => {
     await expect(sidebar).toHaveScreenshot('sidebar-group-expanded.png');
   });
 
-  test.skip('tab component - first tab active', async ({ page }) => {
-    await page.goto('/concepts/tabs');
-    await setTheme(page, 'light');
-
-    // Click first tab to ensure it's active
-    const firstTabGroup = page.locator('.tablist').first();
-    await firstTabGroup.locator('[role="tab"]').first().click();
-    await page.waitForTimeout(200);
-
-    const tabs = page.locator('.tabs').first();
-    await expect(tabs).toHaveScreenshot('tabs-first-active.png');
-  });
-
-  test.skip('tab component - second tab active', async ({ page }) => {
-    await page.goto('/concepts/tabs');
-    await setTheme(page, 'light');
-
-    // Click second tab
-    const firstTabGroup = page.locator('.tablist').first();
-    await firstTabGroup.locator('[role="tab"]').nth(1).click();
-    await page.waitForTimeout(200);
-
-    const tabs = page.locator('.tabs').first();
-    await expect(tabs).toHaveScreenshot('tabs-second-active.png');
-  });
-
   test('code block - copy button hover', async ({ page }) => {
     await page.goto('/getting-started/installation');
     await setTheme(page, 'light');
@@ -376,16 +350,6 @@ test.describe('Visual Regression - Interactive States', () => {
     await copyButton.hover();
 
     await expect(codeBlock).toHaveScreenshot('code-block-copy-hover.png');
-  });
-
-  test.skip('link card - hover state', async ({ page }) => {
-    await page.goto('/concepts/cards');
-    await setTheme(page, 'light');
-
-    const linkCard = page.locator('.card.link-card').first();
-    await linkCard.hover();
-
-    await expect(linkCard).toHaveScreenshot('link-card-hover.png');
   });
 });
 
@@ -677,30 +641,6 @@ test.describe('Visual Regression - Special UI Components', () => {
     await expect(page).toHaveScreenshot('mobile-menu-open-dark.png', {
       fullPage: true,
     });
-  });
-
-  test.skip('callout variants - all types', async ({ page }) => {
-    await page.goto('/concepts/asides');
-    await setTheme(page, 'light');
-
-    await page.setViewportSize({ width: 1920, height: 1080 });
-
-    // Screenshot the callout section
-    const calloutsSection = page.locator('text=Callout (Mintlify Style)').locator('..');
-    await expect(calloutsSection).toHaveScreenshot('callout-variants.png');
-  });
-
-  test.skip('aside variants - all types', async ({ page }) => {
-    await page.goto('/concepts/asides');
-    await setTheme(page, 'light');
-
-    await page.setViewportSize({ width: 1920, height: 1080 });
-
-    // Scroll to standard aside section
-    await page.locator('text=Standard Aside').scrollIntoViewIfNeeded();
-
-    const asidesSection = page.locator('text=Standard Aside').locator('..');
-    await expect(asidesSection).toHaveScreenshot('aside-variants.png');
   });
 
   test('card grid layout', async ({ page }) => {
