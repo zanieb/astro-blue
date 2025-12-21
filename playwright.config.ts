@@ -30,6 +30,7 @@ export default defineConfig({
   },
 
   // Configure projects for different viewports
+  // Using only Chromium for both desktop and mobile to avoid installing multiple browsers
   projects: [
     {
       name: 'desktop-chromium',
@@ -41,8 +42,10 @@ export default defineConfig({
     {
       name: 'mobile-chromium',
       use: {
-        ...devices['iPhone 12'],
+        ...devices['Desktop Chrome'], // Use Chrome with mobile viewport
         viewport: { width: 375, height: 667 },
+        isMobile: true,
+        hasTouch: true,
       },
     },
   ],

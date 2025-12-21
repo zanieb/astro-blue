@@ -193,19 +193,27 @@ test.describe('Visual Regression - UI Components', () => {
     await expect(searchButton).toHaveScreenshot('search-button-dark.png');
   });
 
-  test('theme toggle - light mode', async ({ page }) => {
+  test('theme toggle - light mode', async ({ page }, testInfo) => {
+    // Skip on mobile since theme toggle is in hamburger menu
+    test.skip(testInfo.project.name === 'mobile-chromium', 'Theme toggle not visible on mobile');
+
     await page.goto('/');
     await setTheme(page, 'light');
 
-    const themeToggle = page.locator('starlight-theme-select button');
+    // Select the theme toggle in the header (not the mobile menu)
+    const themeToggle = page.locator('header starlight-theme-select button').first();
     await expect(themeToggle).toHaveScreenshot('theme-toggle-light.png');
   });
 
-  test('theme toggle - dark mode', async ({ page }) => {
+  test('theme toggle - dark mode', async ({ page }, testInfo) => {
+    // Skip on mobile since theme toggle is in hamburger menu
+    test.skip(testInfo.project.name === 'mobile-chromium', 'Theme toggle not visible on mobile');
+
     await page.goto('/');
     await setTheme(page, 'dark');
 
-    const themeToggle = page.locator('starlight-theme-select button');
+    // Select the theme toggle in the header (not the mobile menu)
+    const themeToggle = page.locator('header starlight-theme-select button').first();
     await expect(themeToggle).toHaveScreenshot('theme-toggle-dark.png');
   });
 });
