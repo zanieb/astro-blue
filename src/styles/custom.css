@@ -261,6 +261,13 @@ header.header > .header {
   }
 }
 
+/* Right sidebar - fix positioning to align with header */
+.right-sidebar {
+  /* Override Starlight's fixed positioning to align right edge with header */
+  right: 0 !important;
+  width: auto !important;
+}
+
 /* Right sidebar TOC - smaller font to match Mintlify */
 .right-sidebar-panel {
   /* Align TOC right edge with header right edge (2rem from viewport) */
