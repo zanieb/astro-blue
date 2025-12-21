@@ -262,7 +262,7 @@ header.header > .header {
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--theme-text-muted);
+  color: var(--theme-text);
   margin-bottom: 0.75rem;
 }
 
