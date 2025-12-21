@@ -18,6 +18,9 @@ export default defineConfig({
 
   reporter: 'html',
 
+  // Use platform-agnostic snapshot paths (removes -darwin, -linux suffix)
+  snapshotPathTemplate: '{testDir}/__screenshots__/{testFilePath}/{arg}-{projectName}{ext}',
+
   use: {
     // Base URL for the dev server
     baseURL: 'http://localhost:4321',
