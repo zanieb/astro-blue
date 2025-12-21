@@ -657,7 +657,7 @@ site-search button[data-open-modal] {
   padding: 0 12px 0 14px; /* Mintlify's exact padding */
   font-size: 0.875rem;
   border-radius: 12px !important; /* Mintlify uses 12px */
-  border: none !important; /* Mintlify has no visible border */
+  border: 1px solid var(--theme-border) !important; /* Subtle border like Mintlify */
   box-shadow: none !important;
 }
 
