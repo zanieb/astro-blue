@@ -3,6 +3,7 @@ import starlight from '@astrojs/starlight';
 import starlightLinksValidator from 'starlight-links-validator';
 
 export default defineConfig({
+  site: 'https://astro-blue.example.com',
   integrations: [
     starlight({
       title: 'Astro Blue',
