@@ -5,3 +5,8 @@ dist/
 TODO
 TODO.archive
 .claude/settings.local.json
+
+# Playwright test results
+test-results/
+playwright-report/
+playwright/.cache/

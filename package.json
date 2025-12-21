@@ -11,12 +11,17 @@
     "lint": "eslint . --max-warnings 0",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "test:visual": "playwright test",
+    "test:visual:update": "playwright test --update-snapshots",
+    "test:visual:ui": "playwright test --ui",
+    "test:visual:report": "playwright show-report"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.6",
     "@modelcontextprotocol/server-puppeteer": "2025.5.12",
     "@playwright/mcp": "0.0.53",
+    "@playwright/test": "^1.57.0",
     "eslint": "^8.57.0",
     "eslint-plugin-astro": "^1.5.0",
     "prettier": "^3.4.2",
