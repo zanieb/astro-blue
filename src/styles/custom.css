@@ -687,6 +687,8 @@ site-search button[data-open-modal] > span:first-of-type::after {
 
 /* Cmd+K keyboard shortcut - Mintlify style (NO gray background) */
 header site-search button[data-open-modal] kbd {
+  /* Reduce initial modal height - smaller before results load (PYX style) */
+  max-height: 60vh;
   background: transparent;
   border: none;
   box-shadow: none;
