@@ -445,16 +445,33 @@ function getDisplayEntries(entry: SidebarGroup): SidebarEntry[] {
    * Handle clicks on group links within summary elements.
    * When clicking the link text, we want to navigate (not toggle).
    * When clicking elsewhere on the summary, we want to toggle (not navigate).
+   *
+   * Note: stopPropagation() alone doesn't prevent the native <summary> toggle
+   * behavior. We must use preventDefault() and manually trigger navigation.
    */
   function handleLinkClick(event: MouseEvent): void {
     const target = event.target as HTMLElement;
-    const link = target.closest('summary .group-link');
+    const link = target.closest('summary .group-link') as HTMLAnchorElement | null;
 
     if (link) {
-      // Stop the click from bubbling up to the summary element
-      // This prevents the details from toggling when clicking the link
+      // Prevent the native summary toggle behavior
+      event.preventDefault();
+      // Stop bubbling just in case
       event.stopPropagation();
-      // The link will still navigate normally
+
+      // Get the href and navigate manually
+      const href = link.getAttribute('href');
+      if (href) {
+        // Use Astro's View Transitions if available, otherwise standard navigation
+        if (
+          'navigate' in window &&
+          typeof (window as { navigate?: unknown }).navigate === 'function'
+        ) {
+          (window as { navigate: (url: string) => void }).navigate(href);
+        } else {
+          window.location.href = href;
+        }
+      }
     }
   }
 
