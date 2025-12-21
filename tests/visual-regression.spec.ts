@@ -210,6 +210,16 @@ test.describe('Visual Regression - UI Components', () => {
     });
   });
 
+  test('search button - mobile', async ({ page }, testInfo) => {
+    test.skip(testInfo.project.name !== 'mobile-chromium', 'Mobile-specific test');
+
+    await page.goto('/');
+    await setTheme(page, 'light');
+
+    const searchButton = page.locator('site-search button[data-open-modal]');
+    await expect(searchButton).toHaveScreenshot('search-button-mobile.png');
+  });
+
   test('theme toggle - light mode', async ({ page }, testInfo) => {
     // Skip on mobile since theme toggle is in hamburger menu
     test.skip(testInfo.project.name === 'mobile-chromium', 'Theme toggle not visible on mobile');
@@ -702,5 +712,227 @@ test.describe('Visual Regression - Special UI Components', () => {
     // Screenshot card grid
     const cardGrid = page.locator('.card-grid').first();
     await expect(cardGrid).toHaveScreenshot('card-grid-layout.png');
+  });
+});
+
+test.describe('Visual Regression - Search', () => {
+  // NOTE: Starlight search (Pagefind) requires a production build to function properly
+  //
+  // To run these tests with search working:
+  //   bun run test:visual:preview
+  //
+  // To update search screenshots:
+  //   bun run test:visual:preview:update
+  //
+  // In CI or for local testing, you can also set USE_PREVIEW=1:
+  //   USE_PREVIEW=1 bun run test:visual
+
+  test('search modal - initial state - light mode', async ({ page }) => {
+    await page.goto('/');
+    await setTheme(page, 'light');
+
+    await page.setViewportSize({ width: 1920, height: 1080 });
+
+    // Open search modal
+    const searchButton = page.locator('site-search button[data-open-modal]');
+    await searchButton.click();
+    await page.waitForTimeout(300);
+
+    // Screenshot the modal
+    await expect(page).toHaveScreenshot('search-modal-initial-light.png');
+  });
+
+  test('search modal - initial state - dark mode', async ({ page }) => {
+    await page.goto('/');
+    await setTheme(page, 'dark');
+
+    await page.setViewportSize({ width: 1920, height: 1080 });
+
+    // Open search modal
+    const searchButton = page.locator('site-search button[data-open-modal]');
+    await searchButton.click();
+    await page.waitForTimeout(300);
+
+    await expect(page).toHaveScreenshot('search-modal-initial-dark.png');
+  });
+
+  test('search modal - with query text - light mode', async ({ page }) => {
+    await page.goto('/');
+    await setTheme(page, 'light');
+
+    await page.setViewportSize({ width: 1920, height: 1080 });
+
+    // Open search and type query
+    const searchButton = page.locator('site-search button[data-open-modal]');
+    await searchButton.click();
+    await page.waitForTimeout(300);
+
+    // Find search input and type
+    const searchInput = page.locator('input[type="search"], input[placeholder*="Search"]').first();
+    await searchInput.fill('installation');
+    await page.waitForTimeout(500); // Wait for results to load
+
+    await expect(page).toHaveScreenshot('search-modal-with-query-light.png');
+  });
+
+  test('search modal - with query text - dark mode', async ({ page }) => {
+    await page.goto('/');
+    await setTheme(page, 'dark');
+
+    await page.setViewportSize({ width: 1920, height: 1080 });
+
+    // Open search and type query
+    const searchButton = page.locator('site-search button[data-open-modal]');
+    await searchButton.click();
+    await page.waitForTimeout(300);
+
+    const searchInput = page.locator('input[type="search"], input[placeholder*="Search"]').first();
+    await searchInput.fill('installation');
+    await page.waitForTimeout(500);
+
+    await expect(page).toHaveScreenshot('search-modal-with-query-dark.png');
+  });
+
+  test('search modal - with results - light mode', async ({ page }) => {
+    await page.goto('/');
+    await setTheme(page, 'light');
+
+    await page.setViewportSize({ width: 1920, height: 1080 });
+
+    // Open search and search for common term
+    const searchButton = page.locator('site-search button[data-open-modal]');
+    await searchButton.click();
+    await page.waitForTimeout(300);
+
+    const searchInput = page.locator('input[type="search"], input[placeholder*="Search"]').first();
+    await searchInput.fill('getting started');
+    await page.waitForTimeout(800); // Wait for results
+
+    await expect(page).toHaveScreenshot('search-modal-results-light.png');
+  });
+
+  test('search modal - with results - dark mode', async ({ page }) => {
+    await page.goto('/');
+    await setTheme(page, 'dark');
+
+    await page.setViewportSize({ width: 1920, height: 1080 });
+
+    const searchButton = page.locator('site-search button[data-open-modal]');
+    await searchButton.click();
+    await page.waitForTimeout(300);
+
+    const searchInput = page.locator('input[type="search"], input[placeholder*="Search"]').first();
+    await searchInput.fill('getting started');
+    await page.waitForTimeout(800);
+
+    await expect(page).toHaveScreenshot('search-modal-results-dark.png');
+  });
+
+  test('search modal - no results state', async ({ page }) => {
+    await page.goto('/');
+    await setTheme(page, 'light');
+
+    await page.setViewportSize({ width: 1920, height: 1080 });
+
+    // Open search and search for nonsense
+    const searchButton = page.locator('site-search button[data-open-modal]');
+    await searchButton.click();
+    await page.waitForTimeout(300);
+
+    const searchInput = page.locator('input[type="search"], input[placeholder*="Search"]').first();
+    await searchInput.fill('xyzqwertynoresults123');
+    await page.waitForTimeout(800);
+
+    await expect(page).toHaveScreenshot('search-modal-no-results.png');
+  });
+
+  test('search modal - mobile - light mode', async ({ page }, testInfo) => {
+    test.skip(testInfo.project.name !== 'mobile-chromium', 'Mobile-specific test');
+
+    await page.goto('/');
+    await setTheme(page, 'light');
+
+    // Open search modal
+    const searchButton = page.locator('site-search button[data-open-modal]');
+    await searchButton.click();
+    await page.waitForTimeout(300);
+
+    await expect(page).toHaveScreenshot('search-modal-mobile-light.png', {
+      fullPage: true,
+    });
+  });
+
+  test('search modal - mobile - dark mode', async ({ page }, testInfo) => {
+    test.skip(testInfo.project.name !== 'mobile-chromium', 'Mobile-specific test');
+
+    await page.goto('/');
+    await setTheme(page, 'dark');
+
+    const searchButton = page.locator('site-search button[data-open-modal]');
+    await searchButton.click();
+    await page.waitForTimeout(300);
+
+    await expect(page).toHaveScreenshot('search-modal-mobile-dark.png', {
+      fullPage: true,
+    });
+  });
+
+  test('search modal - mobile with results', async ({ page }, testInfo) => {
+    test.skip(testInfo.project.name !== 'mobile-chromium', 'Mobile-specific test');
+
+    await page.goto('/');
+    await setTheme(page, 'light');
+
+    const searchButton = page.locator('site-search button[data-open-modal]');
+    await searchButton.click();
+    await page.waitForTimeout(300);
+
+    const searchInput = page.locator('input[type="search"], input[placeholder*="Search"]').first();
+    await searchInput.fill('components');
+    await page.waitForTimeout(800);
+
+    await expect(page).toHaveScreenshot('search-modal-mobile-results.png', {
+      fullPage: true,
+    });
+  });
+
+  test('search input - focused state', async ({ page }) => {
+    await page.goto('/');
+    await setTheme(page, 'light');
+
+    await page.setViewportSize({ width: 1920, height: 1080 });
+
+    // Open search and focus input
+    const searchButton = page.locator('site-search button[data-open-modal]');
+    await searchButton.click();
+    await page.waitForTimeout(300);
+
+    const searchInput = page.locator('input[type="search"], input[placeholder*="Search"]').first();
+    await searchInput.focus();
+
+    // Screenshot just the search input area
+    const searchDialog = page.locator('dialog[open], [role="dialog"]').first();
+    await expect(searchDialog).toHaveScreenshot('search-input-focused.png');
+  });
+
+  test('search bar - header integration - light mode', async ({ page }) => {
+    await page.goto('/');
+    await setTheme(page, 'light');
+
+    await page.setViewportSize({ width: 1920, height: 1080 });
+
+    // Screenshot the entire header to show search bar integration
+    const header = page.locator('header').first();
+    await expect(header).toHaveScreenshot('search-header-integration-light.png');
+  });
+
+  test('search bar - header integration - dark mode', async ({ page }) => {
+    await page.goto('/');
+    await setTheme(page, 'dark');
+
+    await page.setViewportSize({ width: 1920, height: 1080 });
+
+    const header = page.locator('header').first();
+    await expect(header).toHaveScreenshot('search-header-integration-dark.png');
   });
 });

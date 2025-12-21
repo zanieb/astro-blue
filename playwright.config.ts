@@ -63,12 +63,21 @@ export default defineConfig({
   ],
 
   // Run dev server before tests
-  webServer: {
-    command: 'bun run dev',
-    url: 'http://localhost:4321',
-    reuseExistingServer: !process.env.CI,
-    timeout: 120000,
-  },
+  // Set USE_PREVIEW=1 to use production build (required for search to work with Pagefind)
+  // Example: USE_PREVIEW=1 bun run test:visual
+  webServer: process.env.USE_PREVIEW
+    ? {
+        command: 'bun run build && bun run preview',
+        url: 'http://localhost:4321',
+        reuseExistingServer: !process.env.CI,
+        timeout: 120000,
+      }
+    : {
+        command: 'bun run dev',
+        url: 'http://localhost:4321',
+        reuseExistingServer: !process.env.CI,
+        timeout: 120000,
+      },
 
   // Visual comparison settings
   expect: {
