@@ -857,16 +857,16 @@ a:hover {
   border-left: none !important;
 }
 
-/* Child items inside groups - minimal indent from parent heading */
+/* Child items inside groups - NO indent from parent heading (matches PYX/Mintlify) */
 .sidebar-content details > ul {
   margin-top: 0.25rem;
-  margin-left: 0.5rem;
+  margin-left: 0;
   padding-left: 0;
 }
 
-/* Nested groups - additional indent */
+/* Nested groups (2nd level) - add indent */
 .sidebar-content details details > ul {
-  margin-left: 0.5rem;
+  margin-left: 0.75rem;
   padding-left: 0;
 }
 
