@@ -37,6 +37,61 @@ import Callout from '../../../components/Callout.astro';
 <Callout type="danger">This is dangerous!</Callout>
 ```
 
+## Multi-Line Callouts
+
+Callouts can contain multiple paragraphs and rich content for longer explanations:
+
+<Callout>
+  This is the first paragraph of a multi-line callout. It provides an introduction to the topic at hand.
+
+  The second paragraph goes into more detail about the subject matter. You can include as many paragraphs as needed to fully explain the concept.
+
+  Finally, a third paragraph wraps up the explanation with any additional context or next steps.
+</Callout>
+
+<Callout type="tip">
+  **Pro tip:** When building documentation sites, consider your audience carefully.
+
+  Different users have different needs. Beginners need step-by-step guidance, while experienced users prefer quick reference material. Structure your docs to serve both.
+
+  Use headings, callouts, and code examples to break up long sections and make content scannable.
+</Callout>
+
+<Callout type="warning">
+  **Important:** Before making changes to production, always back up your data.
+
+  This includes database exports, configuration files, and any user-generated content. Store backups in a secure, off-site location.
+
+  Test your restoration process regularly to ensure backups are valid and complete.
+</Callout>
+
+<Callout type="danger">
+  **Critical warning:** This operation will permanently delete all data.
+
+  Once executed, there is no way to recover the deleted information. This action affects all users and cannot be reversed.
+
+  Before proceeding:
+  - Ensure you have a complete backup
+  - Notify all affected users
+  - Confirm you have the necessary permissions
+  - Double-check that you're operating on the correct environment
+</Callout>
+
+### Callouts with Lists and Code
+
+<Callout type="tip">
+  To get started, follow these steps:
+
+  1. Install the required dependencies
+  2. Configure your environment
+  3. Run the development server
+
+  Example command:
+  ```bash
+  npm run dev
+  ```
+</Callout>
+
 ## Standard Aside
 
 The built-in Starlight `Aside` component includes a title label.

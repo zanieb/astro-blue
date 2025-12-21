@@ -1,0 +1,206 @@
+---
+title: Complex Nested Lists
+description: Demo of complex content inside nested list items including code blocks and callouts.
+---
+
+import Callout from '../../../components/Callout.astro';
+import { Aside } from '@astrojs/starlight/components';
+
+This page demonstrates how complex content renders inside nested list items. This is useful for testing whether code blocks, callouts, and other rich content work correctly within list structures.
+
+## Code Blocks in List Items
+
+Lists can contain inline code and full code blocks:
+
+- Install the dependencies:
+
+  ```bash
+  npm install @astrojs/starlight
+  ```
+
+- Configure your project:
+
+  ```js
+  // astro.config.mjs
+  import starlight from '@astrojs/starlight';
+
+  export default defineConfig({
+    integrations: [starlight({ title: 'My Docs' })],
+  });
+  ```
+
+- Start the development server:
+
+  ```bash
+  npm run dev
+  ```
+
+## Nested Lists with Code Blocks
+
+Multiple levels of nesting with code:
+
+1. First step - set up your environment
+   - Install Node.js (v18 or higher)
+   - Install your preferred package manager:
+     ```bash
+     npm install -g pnpm
+     ```
+   - Verify installation:
+     ```bash
+     pnpm --version
+     ```
+
+2. Second step - create your project
+   - Run the create command:
+     ```bash
+     pnpm create astro@latest --template starlight
+     ```
+   - Navigate to the project directory:
+     ```bash
+     cd my-docs
+     ```
+
+3. Third step - customize your theme
+   - Edit the configuration file
+   - Add your custom CSS
+
+## Callouts in List Items
+
+Lists can include callout components for highlighting important information:
+
+- Basic setup is straightforward
+
+  <Callout>
+    Make sure you have the latest version of Node.js installed before proceeding.
+  </Callout>
+
+- Configure authentication
+
+  <Callout type="warning">
+    Never commit API keys or secrets to version control.
+  </Callout>
+
+- Deploy your application
+
+  <Callout type="tip">
+    Use environment variables for configuration that varies between environments.
+  </Callout>
+
+## Asides in List Items
+
+Using the standard Aside component in lists:
+
+1. Read the documentation first
+
+   <Aside>
+     The official documentation is available at docs.astro.build
+   </Aside>
+
+2. Be careful with breaking changes
+
+   <Aside type="caution">
+     Always check the changelog before upgrading major versions.
+   </Aside>
+
+3. Test thoroughly before deploying
+
+   <Aside type="danger">
+     Production deployments should always go through staging first.
+   </Aside>
+
+## Mixed Complex Content
+
+Combining multiple content types in deeply nested lists:
+
+- **Getting Started**
+  - Prerequisites
+    - Node.js v18+
+    - A code editor like VS Code
+
+      <Callout type="tip">
+        VS Code has excellent Astro extension support.
+      </Callout>
+
+  - Installation steps:
+    1. Clone the repository:
+       ```bash
+       git clone https://github.com/example/docs.git
+       ```
+    2. Install dependencies:
+       ```bash
+       npm install
+       ```
+    3. Start developing:
+       ```bash
+       npm run dev
+       ```
+
+- **Configuration**
+  - Basic settings in `astro.config.mjs`
+  - Theme customization in `src/styles/`
+
+    <Callout type="warning">
+      Custom styles may override theme defaults. Test thoroughly.
+    </Callout>
+
+## Tables in List Items
+
+Lists can also contain tables:
+
+- Supported languages:
+
+  | Language | Extension | Highlighting |
+  |----------|-----------|--------------|
+  | JavaScript | `.js` | Yes |
+  | TypeScript | `.ts` | Yes |
+  | Python | `.py` | Yes |
+  | Rust | `.rs` | Yes |
+
+- File structure overview:
+
+  | Directory | Purpose |
+  |-----------|---------|
+  | `src/content/` | Documentation content |
+  | `src/components/` | Custom components |
+  | `public/` | Static assets |
+
+## Blockquotes in List Items
+
+Lists can include blockquotes:
+
+- User testimonials:
+
+  > "This documentation theme is incredibly easy to use and looks great!"
+  >
+  > — Happy Developer
+
+- From the official docs:
+
+  > Astro is a web framework for content-driven websites.
+
+## Long-Form Content in Lists
+
+Sometimes list items need to contain longer explanations:
+
+1. **Understanding the build process**
+
+   When you run `npm run build`, Astro performs several steps. First, it compiles all your Markdown and MDX files into static HTML. Then, it processes your CSS and bundles any client-side JavaScript. Finally, it generates a sitemap and optimizes images.
+
+   The entire process is designed to produce the smallest possible output while maintaining excellent performance scores.
+
+2. **Configuring for production**
+
+   Production builds require additional configuration. You need to set the correct `site` URL in your Astro config, enable any production-only features like analytics, and ensure environment variables are properly set.
+
+   <Callout type="warning">
+     Remember to test your production build locally using `npm run preview` before deploying.
+   </Callout>
+
+3. **Deployment options**
+
+   Astro sites can be deployed to virtually any static hosting provider. Popular options include Vercel, Netlify, Cloudflare Pages, and GitHub Pages. Each has its own configuration requirements.
+
+   ```bash
+   # Example: Deploy to Vercel
+   npx vercel
+   ```
