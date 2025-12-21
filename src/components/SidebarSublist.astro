@@ -389,12 +389,23 @@ function getDisplayEntries(entry: SidebarGroup): SidebarEntry[] {
 
 		saveCollapsedSections(collapsed);
 
-		// Scroll current page item into view after a brief delay
-		// to ensure all state changes have been applied
+		// Scroll current page item into view only if it's not already visible
 		requestAnimationFrame(() => {
 			const currentItem = document.querySelector('.sidebar-content [aria-current="page"]');
 			if (currentItem) {
-				currentItem.scrollIntoView({ block: 'nearest', behavior: 'instant' });
+				const sidebar = currentItem.closest('.sidebar-content');
+				if (sidebar) {
+					const sidebarRect = sidebar.getBoundingClientRect();
+					const itemRect = currentItem.getBoundingClientRect();
+
+					// Check if item is outside the visible area of the sidebar
+					const isAbove = itemRect.bottom < sidebarRect.top;
+					const isBelow = itemRect.top > sidebarRect.bottom;
+
+					if (isAbove || isBelow) {
+						currentItem.scrollIntoView({ block: 'center', behavior: 'instant' });
+					}
+				}
 			}
 		});
 	}
