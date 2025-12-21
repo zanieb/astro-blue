@@ -1,5 +1,11 @@
 {
   "permissions": {
-    "allow": ["Bash(cat:*)", "WebSearch", "WebFetch(domain:github.com)", "Bash(bun --version:*)"]
+    "allow": [
+      "Bash(cat:*)",
+      "WebSearch",
+      "WebFetch(domain:github.com)",
+      "Bash(bun --version:*)",
+      "Bash(gh run list:*)"
+    ]
   }
 }
