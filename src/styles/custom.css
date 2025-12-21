@@ -1026,7 +1026,6 @@ nav.sidebar li {
 .sidebar-content a[aria-current='page'] {
   color: var(--theme-accent);
   background: var(--theme-accent-bg);
-  font-weight: 500;
 }
 
 .sidebar-content a[aria-current='page']:hover {
