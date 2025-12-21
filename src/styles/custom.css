@@ -1033,3 +1033,20 @@ a:hover {
 :root[data-theme='dark'] .social-icons a[href*="discord.com"]:hover {
   color: #5865F2;
 }
+
+/* ===========================================
+   Instant View Transitions (Mintlify/PYX style)
+   =========================================== */
+/* Make view transitions instant - no visible animation */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0s !important;
+  animation-delay: 0s !important;
+}
+
+/* Also disable any other view transition animations */
+::view-transition-group(*),
+::view-transition-image-pair(*) {
+  animation-duration: 0s !important;
+  animation-delay: 0s !important;
+}
