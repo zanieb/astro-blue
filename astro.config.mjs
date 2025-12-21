@@ -1,5 +1,6 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
+import starlightLinksValidator from 'starlight-links-validator';
 
 export default defineConfig({
   integrations: [
@@ -16,6 +17,7 @@ export default defineConfig({
         SiteTitle: './src/components/SiteTitle.astro',
         Sidebar: './src/components/Sidebar.astro',
       },
+      plugins: [starlightLinksValidator()],
       social: [
         { icon: 'github', label: 'GitHub', href: 'https://github.com/example/astro-blue' },
         { icon: 'discord', label: 'Discord', href: 'https://discord.com/invite/astral-sh' },
