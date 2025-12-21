@@ -130,6 +130,11 @@ html {
   line-height: 1.75;
 }
 
+/* Reduce top margin on first content element (Mintlify style - tight spacing after title) */
+.sl-markdown-content > *:first-child {
+  margin-top: 0;
+}
+
 /* List spacing - more generous */
 .sl-markdown-content ul,
 .sl-markdown-content ol:not(.sl-steps) {
