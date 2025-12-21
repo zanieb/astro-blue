@@ -12,8 +12,8 @@
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "test:visual": "playwright test",
-    "test:visual:update": "playwright test --update-snapshots",
+    "test:visual": "./dev/run-visual-tests.sh",
+    "test:visual:update": "./dev/update-snapshots.sh",
     "test:visual:ui": "playwright test --ui",
     "test:visual:report": "playwright show-report",
     "test:a11y": "lhci autorun"
