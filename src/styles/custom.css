@@ -1010,11 +1010,8 @@ a:hover {
 }
 
 /* ===========================================
-   Mobile Header Fix - Search button z-index
+   Mobile Header Fix - Search button and hamburger styling
    =========================================== */
-/* On mobile, the hamburger menu button has z-index: 10 and position: fixed,
-   which causes it to overlap and cover the search button.
-   Give the search button container proper positioning and z-index to stay visible. */
 @media (max-width: 49.9999rem) {
   /* Ensure the search button container in header has higher z-index than mobile menu */
   header.header .sl-flex:has(site-search) {
@@ -1028,9 +1025,26 @@ a:hover {
     z-index: 15;
   }
 
-  /* Add right margin to search button to prevent overlap with hamburger menu */
+  /* Remove round button styling from search button - just show the icon */
   header.header site-search button[data-open-modal] {
-    margin-right: 2.5rem;
+    margin-right: 1rem;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0.5rem;
+  }
+
+  /* Remove round button styling from hamburger menu button */
+  starlight-menu-button button {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Make hamburger icon visible in dark mode */
+  starlight-menu-button button svg {
+    color: var(--sl-color-white) !important;
+    fill: currentColor !important;
   }
 }
 
