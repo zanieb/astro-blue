@@ -11,3 +11,31 @@ const { head } = Astro.locals.starlightRoute;
 
 {head.map(({ tag: Tag, attrs, content }) => <Tag {...attrs} set:html={content} />)}
 <ClientRouter />
+
+{/* Fix: Initialize PagefindUI after View Transitions navigation (fixes #12) */}
+<script>
+  import { pagefindUserConfig } from 'virtual:starlight/pagefind-config';
+
+  document.addEventListener('astro:page-load', () => {
+    if (import.meta.env.DEV) return;
+    // Skip if already initialized
+    if (document.querySelector('.pagefind-ui__search-input')) return;
+
+    const searchContainer = document.getElementById('starlight__search');
+    if (!searchContainer) return;
+
+    const onIdle = window.requestIdleCallback || ((cb: () => void) => setTimeout(cb, 1));
+    onIdle(async () => {
+      // @ts-expect-error — Missing types for @pagefind/default-ui package.
+      const { PagefindUI } = await import('@pagefind/default-ui');
+      new PagefindUI({
+        ...pagefindUserConfig,
+        element: '#starlight__search',
+        baseUrl: import.meta.env.BASE_URL,
+        bundlePath: import.meta.env.BASE_URL.replace(/\/$/, '') + '/pagefind/',
+        showImages: false,
+        showSubResults: true,
+      });
+    });
+  });
+</script>
