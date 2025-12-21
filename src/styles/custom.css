@@ -259,6 +259,11 @@ header.header > .header {
     min-width: 14rem;
     margin-left: 4rem;
   }
+
+  /* Align TOC right padding with header right padding (2rem) */
+  .right-sidebar-panel {
+    padding-right: 2rem;
+  }
 }
 
 /* Right sidebar TOC - smaller font to match Mintlify */
@@ -708,6 +713,8 @@ header site-search button[data-open-modal] > span:last-of-type {
 /* Pagefind modal styling */
 .pagefind-ui {
   --pagefind-ui-border-radius: 0.5rem;
+  /* Reduce initial modal height - smaller before results load (PYX style) */
+  max-height: 60vh;
 }
 
 /* Search dialog background - white in light mode, dark in dark mode */
