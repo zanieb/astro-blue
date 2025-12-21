@@ -11,15 +11,17 @@ const { siteTitle, siteTitleHref } = Astro.locals.starlightRoute;
 ---
 
 <a href={siteTitleHref} class="site-title">
-  {config.logo && logos.dark && (
-    <img
-      src={logos.dark.src}
-      width={logos.dark.width}
-      height={logos.dark.height}
-      alt={config.logo.alt || ''}
-      class="site-logo"
-    />
-  )}
+  {
+    config.logo && logos.dark && (
+      <img
+        src={logos.dark.src}
+        width={logos.dark.width}
+        height={logos.dark.height}
+        alt={config.logo.alt || ''}
+        class="site-logo"
+      />
+    )
+  }
   <span class="title-wrapper">
     <span class="title-name">{siteTitle}</span>
     <span class="title-suffix">Documentation</span>

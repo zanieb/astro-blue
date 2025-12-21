@@ -10,31 +10,15 @@ Use tabs to organize content into multiple panels that users can switch between.
 ## Basic Tabs
 
 <Tabs>
-  <TabItem label="npm">
-    ```bash
-    npm install @astrojs/starlight
-    ```
-  </TabItem>
-  <TabItem label="pnpm">
-    ```bash
-    pnpm add @astrojs/starlight
-    ```
-  </TabItem>
-  <TabItem label="bun">
-    ```bash
-    bun add @astrojs/starlight
-    ```
-  </TabItem>
+  <TabItem label="npm">```bash npm install @astrojs/starlight ```</TabItem>
+  <TabItem label="pnpm">```bash pnpm add @astrojs/starlight ```</TabItem>
+  <TabItem label="bun">```bash bun add @astrojs/starlight ```</TabItem>
 </Tabs>
 
 ```mdx
 <Tabs>
-  <TabItem label="npm">
-    Content for npm tab
-  </TabItem>
-  <TabItem label="pnpm">
-    Content for pnpm tab
-  </TabItem>
+  <TabItem label="npm">Content for npm tab</TabItem>
+  <TabItem label="pnpm">Content for pnpm tab</TabItem>
 </Tabs>
 ```
 
@@ -79,13 +63,13 @@ Selecting a tab here will also switch the tab below:
 
 ### Tabs
 
-| Property | Type | Description |
-|----------|------|-------------|
+| Property  | Type     | Description                                                                                         |
+| --------- | -------- | --------------------------------------------------------------------------------------------------- |
 | `syncKey` | `string` | Optional key to synchronize multiple tab groups. Tabs with the same `syncKey` will switch together. |
 
 ### TabItem
 
-| Property | Type | Description |
-|----------|------|-------------|
-| `label` | `string` | **Required.** The text displayed on the tab. |
-| `icon` | `string` | Optional icon name from [Starlight icons](https://starlight.astro.build/reference/icons/). |
+| Property | Type     | Description                                                                                |
+| -------- | -------- | ------------------------------------------------------------------------------------------ |
+| `label`  | `string` | **Required.** The text displayed on the tab.                                               |
+| `icon`   | `string` | Optional icon name from [Starlight icons](https://starlight.astro.build/reference/icons/). |

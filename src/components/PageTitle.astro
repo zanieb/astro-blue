@@ -13,7 +13,10 @@ const parts = (id || '').split('/');
 
 // Build breadcrumb items with links
 const breadcrumbItems = parts.slice(0, -1).map((part, index) => {
-  const label = part.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+  const label = part
+    .split('-')
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
   const href = '/' + parts.slice(0, index + 1).join('/') + '/';
   return { label, href };
 });
@@ -23,20 +26,22 @@ const isHomepage = breadcrumbItems.length === 0;
 ---
 
 <div class="page-title-wrapper">
-  {isHomepage ? (
-    <div class="supertitle">Astro Blue</div>
-  ) : (
-    <nav class="breadcrumbs" aria-label="Breadcrumb">
-      <ol>
-        {breadcrumbItems.map((item, index) => (
-          <li>
-            <a href={item.href}>{item.label}</a>
-            <span class="separator">&gt;</span>
-          </li>
-        ))}
-      </ol>
-    </nav>
-  )}
+  {
+    isHomepage ? (
+      <div class="supertitle">Astro Blue</div>
+    ) : (
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <ol>
+          {breadcrumbItems.map((item, index) => (
+            <li>
+              <a href={item.href}>{item.label}</a>
+              <span class="separator">&gt;</span>
+            </li>
+          ))}
+        </ol>
+      </nav>
+    )
+  }
   <h1 id="_top">{title}</h1>
   <div class="title-rule"></div>
 </div>

@@ -15,15 +15,11 @@ export default defineConfig({
   integrations: [
     starlight({
       title: 'My Docs',
-      social: [
-        { icon: 'github', label: 'GitHub', href: 'https://github.com/...' },
-      ],
+      social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/...' }],
       sidebar: [
         {
           label: 'Getting Started',
-          items: [
-            { label: 'Installation', slug: 'getting-started/installation' },
-          ],
+          items: [{ label: 'Installation', slug: 'getting-started/installation' }],
         },
       ],
       customCss: ['./src/styles/custom.css'],
@@ -41,7 +37,7 @@ starlight({
   logo: {
     src: './src/assets/logo.svg',
   },
-})
+});
 ```
 
 ## Social Links
@@ -51,7 +47,7 @@ social: [
   { icon: 'github', label: 'GitHub', href: '...' },
   { icon: 'discord', label: 'Discord', href: '...' },
   { icon: 'x.com', label: 'Twitter', href: '...' },
-]
+];
 ```
 
 ## Custom CSS

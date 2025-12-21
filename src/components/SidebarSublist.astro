@@ -14,27 +14,27 @@ import { Icon, Badge } from '@astrojs/starlight/components';
 
 // Define sidebar types locally since they're not exported
 interface SidebarLink {
-	type: 'link';
-	label: string;
-	href: string;
-	isCurrent: boolean;
-	badge: { variant?: string; class?: string; text: string } | undefined;
-	attrs: Record<string, unknown>;
+  type: 'link';
+  label: string;
+  href: string;
+  isCurrent: boolean;
+  badge: { variant?: string; class?: string; text: string } | undefined;
+  attrs: Record<string, unknown>;
 }
 
 interface SidebarGroup {
-	type: 'group';
-	label: string;
-	entries: SidebarEntry[];
-	collapsed: boolean;
-	badge: { variant?: string; class?: string; text: string } | undefined;
+  type: 'group';
+  label: string;
+  entries: SidebarEntry[];
+  collapsed: boolean;
+  badge: { variant?: string; class?: string; text: string } | undefined;
 }
 
 type SidebarEntry = SidebarLink | SidebarGroup;
 
 interface Props {
-	sublist: SidebarEntry[];
-	nested?: boolean;
+  sublist: SidebarEntry[];
+  nested?: boolean;
 }
 
 const { sublist, nested } = Astro.props;
@@ -43,16 +43,16 @@ const { sublist, nested } = Astro.props;
  * Flatten a sidebar tree into a list of links.
  */
 function flattenSidebar(sidebar: SidebarEntry[]): SidebarLink[] {
-	return sidebar.flatMap((entry) =>
-		entry.type === 'group' ? flattenSidebar(entry.entries) : entry
-	);
+  return sidebar.flatMap((entry) =>
+    entry.type === 'group' ? flattenSidebar(entry.entries) : entry
+  );
 }
 
 /**
  * Check if an entry is marked as an index page.
  */
 function isIndexEntry(entry: SidebarEntry): boolean {
-	return entry.type === 'link' && entry.attrs['data-index'] === 'true';
+  return entry.type === 'link' && entry.attrs['data-index'] === 'true';
 }
 
 /**
@@ -60,29 +60,29 @@ function isIndexEntry(entry: SidebarEntry): boolean {
  * Returns the href of the first entry if it has data-index="true".
  */
 function getIndexPageLink(entry: SidebarGroup): string | undefined {
-	const firstEntry = entry.entries[0];
-	if (firstEntry && isIndexEntry(firstEntry)) {
-		return firstEntry.href;
-	}
-	return undefined;
+  const firstEntry = entry.entries[0];
+  if (firstEntry && isIndexEntry(firstEntry)) {
+    return firstEntry.href;
+  }
+  return undefined;
 }
 
 /**
  * Check if the index page is the current page.
  */
 function isIndexPageCurrent(entry: SidebarGroup): boolean {
-	const firstEntry = entry.entries[0];
-	if (firstEntry && isIndexEntry(firstEntry)) {
-		return (firstEntry as SidebarLink).isCurrent;
-	}
-	return false;
+  const firstEntry = entry.entries[0];
+  if (firstEntry && isIndexEntry(firstEntry)) {
+    return (firstEntry as SidebarLink).isCurrent;
+  }
+  return false;
 }
 
 /**
  * Check if any entry in the group is the current page.
  */
 function hasCurrentPage(entry: SidebarGroup): boolean {
-	return flattenSidebar(entry.entries).some((i) => i.isCurrent);
+  return flattenSidebar(entry.entries).some((i) => i.isCurrent);
 }
 
 /**
@@ -91,410 +91,413 @@ function hasCurrentPage(entry: SidebarGroup): boolean {
  * Client-side JS will handle state persistence and auto-expansion.
  */
 function shouldBeOpen(entry: SidebarGroup): boolean {
-	// Default open, unless explicitly collapsed in config
-	// Client-side JS will restore user's explicit collapse state
-	// and auto-expand sections containing the current page
-	return !entry.collapsed;
+  // Default open, unless explicitly collapsed in config
+  // Client-side JS will restore user's explicit collapse state
+  // and auto-expand sections containing the current page
+  return !entry.collapsed;
 }
 
 /**
  * Get entries to display, excluding the index page (since heading links to it).
  */
 function getDisplayEntries(entry: SidebarGroup): SidebarEntry[] {
-	const firstEntry = entry.entries[0];
-	if (firstEntry && isIndexEntry(firstEntry)) {
-		return entry.entries.slice(1);
-	}
-	return entry.entries;
+  const firstEntry = entry.entries[0];
+  if (firstEntry && isIndexEntry(firstEntry)) {
+    return entry.entries.slice(1);
+  }
+  return entry.entries;
 }
 ---
 
 <ul class:list={{ 'top-level': !nested }}>
-	{
-		sublist.map((entry) => (
-			<li>
-				{entry.type === 'link' ? (
-					<a
-						href={entry.href}
-						aria-current={entry.isCurrent && 'page'}
-						class:list={[{ large: !nested }, entry.attrs.class]}
-						{...entry.attrs}
-					>
-						<span>{entry.label}</span>
-						{entry.badge && (
-							<Badge
-								variant={entry.badge.variant}
-								class={entry.badge.class}
-								text={entry.badge.text}
-							/>
-						)}
-					</a>
-				) : (
-					<details
-						open={shouldBeOpen(entry)}
-						data-sidebar-section={entry.label}
-						data-has-current={hasCurrentPage(entry) ? 'true' : undefined}
-					>
-						<summary class:list={[{ 'is-current': isIndexPageCurrent(entry) }]}>
-							{getIndexPageLink(entry) ? (
-								<a
-									href={getIndexPageLink(entry)}
-									class="group-link"
-									aria-current={isIndexPageCurrent(entry) && 'page'}
-								>
-									<span class="group-label">
-										<span class="large">{entry.label}</span>
-										{entry.badge && (
-											<Badge
-												variant={entry.badge.variant}
-												class={entry.badge.class}
-												text={entry.badge.text}
-											/>
-										)}
-									</span>
-								</a>
-							) : (
-								<span class="group-label">
-									<span class="large">{entry.label}</span>
-									{entry.badge && (
-										<Badge
-											variant={entry.badge.variant}
-											class={entry.badge.class}
-											text={entry.badge.text}
-										/>
-									)}
-								</span>
-							)}
-							<Icon name="right-caret" class="caret" size="1.25rem" />
-						</summary>
-						<Astro.self sublist={getDisplayEntries(entry)} nested />
-					</details>
-				)}
-			</li>
-		))
-	}
+  {
+    sublist.map((entry) => (
+      <li>
+        {entry.type === 'link' ? (
+          <a
+            href={entry.href}
+            aria-current={entry.isCurrent && 'page'}
+            class:list={[{ large: !nested }, entry.attrs.class]}
+            {...entry.attrs}
+          >
+            <span>{entry.label}</span>
+            {entry.badge && (
+              <Badge
+                variant={entry.badge.variant}
+                class={entry.badge.class}
+                text={entry.badge.text}
+              />
+            )}
+          </a>
+        ) : (
+          <details
+            open={shouldBeOpen(entry)}
+            data-sidebar-section={entry.label}
+            data-has-current={hasCurrentPage(entry) ? 'true' : undefined}
+          >
+            <summary class:list={[{ 'is-current': isIndexPageCurrent(entry) }]}>
+              {getIndexPageLink(entry) ? (
+                <a
+                  href={getIndexPageLink(entry)}
+                  class="group-link"
+                  aria-current={isIndexPageCurrent(entry) && 'page'}
+                >
+                  <span class="group-label">
+                    <span class="large">{entry.label}</span>
+                    {entry.badge && (
+                      <Badge
+                        variant={entry.badge.variant}
+                        class={entry.badge.class}
+                        text={entry.badge.text}
+                      />
+                    )}
+                  </span>
+                </a>
+              ) : (
+                <span class="group-label">
+                  <span class="large">{entry.label}</span>
+                  {entry.badge && (
+                    <Badge
+                      variant={entry.badge.variant}
+                      class={entry.badge.class}
+                      text={entry.badge.text}
+                    />
+                  )}
+                </span>
+              )}
+              <Icon name="right-caret" class="caret" size="1.25rem" />
+            </summary>
+            <Astro.self sublist={getDisplayEntries(entry)} nested />
+          </details>
+        )}
+      </li>
+    ))
+  }
 </ul>
 
 <style>
-	@layer starlight.core {
-		ul {
-			--sl-sidebar-item-padding-inline: 0.5rem;
-			list-style: none;
-			padding: 0;
-		}
+  @layer starlight.core {
+    ul {
+      --sl-sidebar-item-padding-inline: 0.5rem;
+      list-style: none;
+      padding: 0;
+    }
 
-		li {
-			overflow-wrap: anywhere;
-		}
+    li {
+      overflow-wrap: anywhere;
+    }
 
-		ul ul li {
-			margin-inline-start: var(--sl-sidebar-item-padding-inline);
-			border-inline-start: 1px solid var(--sl-color-hairline-light);
-			padding-inline-start: var(--sl-sidebar-item-padding-inline);
-		}
+    ul ul li {
+      margin-inline-start: var(--sl-sidebar-item-padding-inline);
+      border-inline-start: 1px solid var(--sl-color-hairline-light);
+      padding-inline-start: var(--sl-sidebar-item-padding-inline);
+    }
 
-		.large {
-			font-size: var(--sl-text-lg);
-			font-weight: 600;
-			color: var(--sl-color-white);
-		}
+    .large {
+      font-size: var(--sl-text-lg);
+      font-weight: 600;
+      color: var(--sl-color-white);
+    }
 
-		.top-level > li + li {
-			margin-top: 0.75rem;
-		}
+    .top-level > li + li {
+      margin-top: 0.75rem;
+    }
 
-		summary {
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
-			padding: 0.2em var(--sl-sidebar-item-padding-inline);
-			line-height: 1.4;
-			cursor: pointer;
-			user-select: none;
-			border-radius: 0.25rem;
-		}
-		summary::marker,
-		summary::-webkit-details-marker {
-			display: none;
-		}
+    summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.2em var(--sl-sidebar-item-padding-inline);
+      line-height: 1.4;
+      cursor: pointer;
+      user-select: none;
+      border-radius: 0.25rem;
+    }
+    summary::marker,
+    summary::-webkit-details-marker {
+      display: none;
+    }
 
-		/* Hover highlight for ALL summaries - full row including caret */
-		summary:hover {
-			background-color: var(--sl-color-gray-6);
-		}
+    /* Hover highlight for ALL summaries - full row including caret */
+    summary:hover {
+      background-color: var(--sl-color-gray-6);
+    }
 
-		/* Highlight entire summary when section index is current */
-		summary.is-current {
-			background-color: var(--sl-color-gray-6);
-		}
+    /* Highlight entire summary when section index is current */
+    summary.is-current {
+      background-color: var(--sl-color-gray-6);
+    }
 
-		summary.is-current .large {
-			color: var(--sl-color-white);
-			font-weight: 600;
-		}
+    summary.is-current .large {
+      color: var(--sl-color-white);
+      font-weight: 600;
+    }
 
-		summary.is-current .caret {
-			color: var(--sl-color-gray-3);
-		}
+    summary.is-current .caret {
+      color: var(--sl-color-gray-3);
+    }
 
-		.group-label {
-			flex: 1;
-			display: flex;
-			align-items: center;
-		}
+    .group-label {
+      flex: 1;
+      display: flex;
+      align-items: center;
+    }
 
-		.group-link {
-			text-decoration: none;
-			color: inherit;
-			display: flex;
-			flex: 1;
-			padding: 0 !important;
-			margin: 0;
-			border-radius: 0;
-			line-height: inherit;
-		}
+    .group-link {
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex: 1;
+      padding: 0 !important;
+      margin: 0;
+      border-radius: 0;
+      line-height: inherit;
+    }
 
-		.group-link:hover .large,
-		.group-link:focus .large {
-			color: var(--sl-color-text-accent);
-		}
+    .group-link:hover .large,
+    .group-link:focus .large {
+      color: var(--sl-color-text-accent);
+    }
 
-		/* Don't change color on hover when current */
-		summary.is-current .group-link:hover .large,
-		summary.is-current .group-link:focus .large {
-			color: var(--sl-color-white);
-		}
+    /* Don't change color on hover when current */
+    summary.is-current .group-link:hover .large,
+    summary.is-current .group-link:focus .large {
+      color: var(--sl-color-white);
+    }
 
-		.caret {
-			transition: transform 0.2s ease-in-out;
-			flex-shrink: 0;
-		}
-		:global([dir='rtl']) .caret {
-			transform: rotateZ(180deg);
-		}
-		[open] > summary .caret {
-			transform: rotateZ(90deg);
-		}
+    .caret {
+      transition: transform 0.2s ease-in-out;
+      flex-shrink: 0;
+    }
+    :global([dir='rtl']) .caret {
+      transform: rotateZ(180deg);
+    }
+    [open] > summary .caret {
+      transform: rotateZ(90deg);
+    }
 
-		a {
-			display: block;
-			border-radius: 0.25rem;
-			text-decoration: none;
-			color: var(--sl-color-gray-2);
-			padding: 0.3em var(--sl-sidebar-item-padding-inline);
-			line-height: 1.4;
-		}
+    a {
+      display: block;
+      border-radius: 0.25rem;
+      text-decoration: none;
+      color: var(--sl-color-gray-2);
+      padding: 0.3em var(--sl-sidebar-item-padding-inline);
+      line-height: 1.4;
+    }
 
-		a:hover,
-		a:focus {
-			color: var(--sl-color-white);
-		}
+    a:hover,
+    a:focus {
+      color: var(--sl-color-white);
+    }
 
-		[aria-current='page'],
-		[aria-current='page']:hover,
-		[aria-current='page']:focus {
-			font-weight: 600;
-			color: var(--sl-color-white);
-			background-color: var(--sl-color-gray-6);
-		}
+    [aria-current='page'],
+    [aria-current='page']:hover,
+    [aria-current='page']:focus {
+      font-weight: 600;
+      color: var(--sl-color-white);
+      background-color: var(--sl-color-gray-6);
+    }
 
-		/* Override for group links - don't apply the regular link highlight */
-		summary .group-link[aria-current='page'],
-		summary .group-link[aria-current='page']:hover,
-		summary .group-link[aria-current='page']:focus {
-			background-color: transparent;
-			color: inherit;
-		}
+    /* Override for group links - don't apply the regular link highlight */
+    summary .group-link[aria-current='page'],
+    summary .group-link[aria-current='page']:hover,
+    summary .group-link[aria-current='page']:focus {
+      background-color: transparent;
+      color: inherit;
+    }
 
-		a > *:not(:last-child),
-		.group-label > *:not(:last-child) {
-			margin-inline-end: 0.25em;
-		}
+    a > *:not(:last-child),
+    .group-label > *:not(:last-child) {
+      margin-inline-end: 0.25em;
+    }
 
-		@media (min-width: 50rem) {
-			.top-level > li + li {
-				margin-top: 0.5rem;
-			}
-			.large {
-				font-size: var(--sl-text-base);
-			}
-			a {
-				font-size: var(--sl-text-sm);
-			}
-		}
-	}
+    @media (min-width: 50rem) {
+      .top-level > li + li {
+        margin-top: 0.5rem;
+      }
+      .large {
+        font-size: var(--sl-text-base);
+      }
+      a {
+        font-size: var(--sl-text-sm);
+      }
+    }
+  }
 </style>
 
 <script>
-	const STORAGE_KEY = 'sidebar-collapsed-sections';
-	const SCROLL_KEY = 'sidebar-scroll-position';
+  const STORAGE_KEY = 'sidebar-collapsed-sections';
+  const SCROLL_KEY = 'sidebar-scroll-position';
 
-	/**
-	 * Get the set of explicitly collapsed section names from sessionStorage.
-	 */
-	function getCollapsedSections(): Set<string> {
-		try {
-			const stored = sessionStorage.getItem(STORAGE_KEY);
-			return stored ? new Set(JSON.parse(stored)) : new Set();
-		} catch {
-			return new Set();
-		}
-	}
+  /**
+   * Get the set of explicitly collapsed section names from sessionStorage.
+   */
+  function getCollapsedSections(): Set<string> {
+    try {
+      const stored = sessionStorage.getItem(STORAGE_KEY);
+      return stored ? new Set(JSON.parse(stored)) : new Set();
+    } catch {
+      return new Set();
+    }
+  }
 
-	/**
-	 * Save the set of collapsed section names to sessionStorage.
-	 */
-	function saveCollapsedSections(sections: Set<string>): void {
-		try {
-			sessionStorage.setItem(STORAGE_KEY, JSON.stringify([...sections]));
-		} catch {
-			// Ignore storage errors
-		}
-	}
+  /**
+   * Save the set of collapsed section names to sessionStorage.
+   */
+  function saveCollapsedSections(sections: Set<string>): void {
+    try {
+      sessionStorage.setItem(STORAGE_KEY, JSON.stringify([...sections]));
+    } catch {
+      // Ignore storage errors
+    }
+  }
 
-	/**
-	 * Save sidebar scroll position before navigation.
-	 */
-	function saveScrollPosition(): void {
-		const scrollContainer = document.querySelector('.sidebar-pane');
-		if (scrollContainer) {
-			try {
-				sessionStorage.setItem(SCROLL_KEY, String(scrollContainer.scrollTop));
-			} catch {
-				// Ignore storage errors
-			}
-		}
-	}
+  /**
+   * Save sidebar scroll position before navigation.
+   */
+  function saveScrollPosition(): void {
+    const scrollContainer = document.querySelector('.sidebar-pane');
+    if (scrollContainer) {
+      try {
+        sessionStorage.setItem(SCROLL_KEY, String(scrollContainer.scrollTop));
+      } catch {
+        // Ignore storage errors
+      }
+    }
+  }
 
-	/**
-	 * Restore sidebar scroll position after navigation.
-	 */
-	function restoreScrollPosition(): void {
-		const scrollContainer = document.querySelector('.sidebar-pane');
-		if (scrollContainer) {
-			try {
-				const saved = sessionStorage.getItem(SCROLL_KEY);
-				if (saved !== null) {
-					scrollContainer.scrollTop = Number(saved);
-				}
-			} catch {
-				// Ignore storage errors
-			}
-		}
-	}
+  /**
+   * Restore sidebar scroll position after navigation.
+   */
+  function restoreScrollPosition(): void {
+    const scrollContainer = document.querySelector('.sidebar-pane');
+    if (scrollContainer) {
+      try {
+        const saved = sessionStorage.getItem(SCROLL_KEY);
+        if (saved !== null) {
+          scrollContainer.scrollTop = Number(saved);
+        }
+      } catch {
+        // Ignore storage errors
+      }
+    }
+  }
 
-	/**
-	 * Initialize sidebar state on page load.
-	 * - Auto-expand sections containing the current page
-	 * - Restore user's explicit collapse state for other sections
-	 * - Scroll current item into view
-	 */
-	function initSidebarState(): void {
-		const collapsed = getCollapsedSections();
-		const sections = document.querySelectorAll<HTMLDetailsElement>('details[data-sidebar-section]');
+  /**
+   * Initialize sidebar state on page load.
+   * - Auto-expand sections containing the current page
+   * - Restore user's explicit collapse state for other sections
+   * - Scroll current item into view
+   */
+  function initSidebarState(): void {
+    const collapsed = getCollapsedSections();
+    const sections = document.querySelectorAll<HTMLDetailsElement>('details[data-sidebar-section]');
 
-		sections.forEach((details) => {
-			const sectionName = details.dataset.sidebarSection;
-			const hasCurrent = details.dataset.hasCurrent === 'true';
+    sections.forEach((details) => {
+      const sectionName = details.dataset.sidebarSection;
+      const hasCurrent = details.dataset.hasCurrent === 'true';
 
-			if (hasCurrent) {
-				// Always expand sections containing the current page
-				details.open = true;
-				// Remove from collapsed set since we're auto-expanding
-				if (sectionName) collapsed.delete(sectionName);
-			} else if (sectionName && collapsed.has(sectionName)) {
-				// Restore collapsed state for sections not containing current page
-				details.open = false;
-			}
-		});
+      if (hasCurrent) {
+        // Always expand sections containing the current page
+        details.open = true;
+        // Remove from collapsed set since we're auto-expanding
+        if (sectionName) collapsed.delete(sectionName);
+      } else if (sectionName && collapsed.has(sectionName)) {
+        // Restore collapsed state for sections not containing current page
+        details.open = false;
+      }
+    });
 
-		saveCollapsedSections(collapsed);
+    saveCollapsedSections(collapsed);
 
-		// Scroll current page item into view only if it's not already visible
-		requestAnimationFrame(() => {
-			const currentItem = document.querySelector('.sidebar-content [aria-current="page"]');
-			if (currentItem) {
-				// The actual scroll container is .sidebar-pane, not .sidebar-content
-				const scrollContainer = document.querySelector('.sidebar-pane');
-				if (scrollContainer) {
-					const containerRect = scrollContainer.getBoundingClientRect();
-					const itemRect = currentItem.getBoundingClientRect();
+    // Scroll current page item into view only if it's not already visible
+    requestAnimationFrame(() => {
+      const currentItem = document.querySelector('.sidebar-content [aria-current="page"]');
+      if (currentItem) {
+        // The actual scroll container is .sidebar-pane, not .sidebar-content
+        const scrollContainer = document.querySelector('.sidebar-pane');
+        if (scrollContainer) {
+          const containerRect = scrollContainer.getBoundingClientRect();
+          const itemRect = currentItem.getBoundingClientRect();
 
-					// Check if item is outside the visible area of the scroll container
-					const isAbove = itemRect.bottom < containerRect.top;
-					const isBelow = itemRect.top > containerRect.bottom;
+          // Check if item is outside the visible area of the scroll container
+          const isAbove = itemRect.bottom < containerRect.top;
+          const isBelow = itemRect.top > containerRect.bottom;
 
-					if (isAbove || isBelow) {
-						currentItem.scrollIntoView({ block: 'center', behavior: 'instant' });
-					}
-				}
-			}
-		});
-	}
+          if (isAbove || isBelow) {
+            currentItem.scrollIntoView({ block: 'center', behavior: 'instant' });
+          }
+        }
+      }
+    });
+  }
 
-	/**
-	 * Handle toggle events to persist user's explicit collapse/expand actions.
-	 */
-	function handleToggle(event: Event): void {
-		const details = event.target as HTMLDetailsElement;
-		const sectionName = details.dataset?.sidebarSection;
-		if (!sectionName) return;
+  /**
+   * Handle toggle events to persist user's explicit collapse/expand actions.
+   */
+  function handleToggle(event: Event): void {
+    const details = event.target as HTMLDetailsElement;
+    const sectionName = details.dataset?.sidebarSection;
+    if (!sectionName) return;
 
-		const collapsed = getCollapsedSections();
+    const collapsed = getCollapsedSections();
 
-		if (details.open) {
-			collapsed.delete(sectionName);
-		} else {
-			collapsed.add(sectionName);
-		}
+    if (details.open) {
+      collapsed.delete(sectionName);
+    } else {
+      collapsed.add(sectionName);
+    }
 
-		saveCollapsedSections(collapsed);
-	}
+    saveCollapsedSections(collapsed);
+  }
 
-	/**
-	 * Handle clicks on group links within summary elements.
-	 * When clicking the link text, we want to navigate (not toggle).
-	 * When clicking elsewhere on the summary, we want to toggle (not navigate).
-	 */
-	function handleLinkClick(event: MouseEvent): void {
-		const target = event.target as HTMLElement;
-		const link = target.closest('summary .group-link');
+  /**
+   * Handle clicks on group links within summary elements.
+   * When clicking the link text, we want to navigate (not toggle).
+   * When clicking elsewhere on the summary, we want to toggle (not navigate).
+   */
+  function handleLinkClick(event: MouseEvent): void {
+    const target = event.target as HTMLElement;
+    const link = target.closest('summary .group-link');
 
-		if (link) {
-			// Stop the click from bubbling up to the summary element
-			// This prevents the details from toggling when clicking the link
-			event.stopPropagation();
-			// The link will still navigate normally
-		}
-	}
+    if (link) {
+      // Stop the click from bubbling up to the summary element
+      // This prevents the details from toggling when clicking the link
+      event.stopPropagation();
+      // The link will still navigate normally
+    }
+  }
 
-	// Initialize on DOMContentLoaded and after View Transitions
-	function setup(): void {
-		initSidebarState();
+  // Initialize on DOMContentLoaded and after View Transitions
+  function setup(): void {
+    initSidebarState();
 
-		// Listen for toggle events on all sidebar sections
-		document.querySelectorAll<HTMLDetailsElement>('details[data-sidebar-section]').forEach((details) => {
-			details.addEventListener('toggle', handleToggle);
-		});
-	}
+    // Listen for toggle events on all sidebar sections
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+    document
+      .querySelectorAll<HTMLDetailsElement>('details[data-sidebar-section]')
+      .forEach((details) => {
+        details.addEventListener('toggle', handleToggle);
+      });
+  }
 
-	// Run on initial load
-	if (document.readyState === 'loading') {
-		document.addEventListener('DOMContentLoaded', setup);
-	} else {
-		setup();
-	}
+  // Run on initial load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setup);
+  } else {
+    setup();
+  }
 
-	// Save scroll position before View Transitions swap
-	document.addEventListener('astro:before-swap', saveScrollPosition);
+  // Save scroll position before View Transitions swap
+  document.addEventListener('astro:before-swap', saveScrollPosition);
 
-	// Re-run after View Transitions swap content
-	document.addEventListener('astro:after-swap', () => {
-		// Restore scroll position first, then run setup
-		restoreScrollPosition();
-		setup();
-	});
+  // Re-run after View Transitions swap content
+  document.addEventListener('astro:after-swap', () => {
+    // Restore scroll position first, then run setup
+    restoreScrollPosition();
+    setup();
+  });
 
-	// Handle link clicks (this can stay as a persistent listener)
-	document.addEventListener('click', handleLinkClick);
+  // Handle link clicks (this can stay as a persistent listener)
+  document.addEventListener('click', handleLinkClick);
 </script>

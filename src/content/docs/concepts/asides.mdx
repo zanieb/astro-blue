@@ -12,21 +12,13 @@ Asides (also called admonitions or callouts) highlight important information. We
 
 The `Callout` component provides a clean, minimal style with just an icon and content - no title text.
 
-<Callout>
-  This is a note. It provides additional context that might be helpful.
-</Callout>
+<Callout>This is a note. It provides additional context that might be helpful.</Callout>
 
-<Callout type="tip">
-  Pro tip: Use keyboard shortcuts to navigate faster.
-</Callout>
+<Callout type="tip">Pro tip: Use keyboard shortcuts to navigate faster.</Callout>
 
-<Callout type="warning">
-  Be careful when modifying configuration files.
-</Callout>
+<Callout type="warning">Be careful when modifying configuration files.</Callout>
 
-<Callout type="danger">
-  This action cannot be undone. Make sure you have a backup.
-</Callout>
+<Callout type="danger">This action cannot be undone. Make sure you have a backup.</Callout>
 
 ```mdx
 import Callout from '../../../components/Callout.astro';
@@ -44,52 +36,58 @@ Callouts can contain multiple paragraphs and rich content for longer explanation
 <Callout>
   This is the first paragraph of a multi-line callout. It provides an introduction to the topic at hand.
 
-  The second paragraph goes into more detail about the subject matter. You can include as many paragraphs as needed to fully explain the concept.
+The second paragraph goes into more detail about the subject matter. You can include as many paragraphs as needed to fully explain the concept.
 
-  Finally, a third paragraph wraps up the explanation with any additional context or next steps.
+Finally, a third paragraph wraps up the explanation with any additional context or next steps.
+
 </Callout>
 
 <Callout type="tip">
   **Pro tip:** When building documentation sites, consider your audience carefully.
 
-  Different users have different needs. Beginners need step-by-step guidance, while experienced users prefer quick reference material. Structure your docs to serve both.
+Different users have different needs. Beginners need step-by-step guidance, while experienced users prefer quick reference material. Structure your docs to serve both.
 
-  Use headings, callouts, and code examples to break up long sections and make content scannable.
+Use headings, callouts, and code examples to break up long sections and make content scannable.
+
 </Callout>
 
 <Callout type="warning">
   **Important:** Before making changes to production, always back up your data.
 
-  This includes database exports, configuration files, and any user-generated content. Store backups in a secure, off-site location.
+This includes database exports, configuration files, and any user-generated content. Store backups in a secure, off-site location.
 
-  Test your restoration process regularly to ensure backups are valid and complete.
+Test your restoration process regularly to ensure backups are valid and complete.
+
 </Callout>
 
 <Callout type="danger">
   **Critical warning:** This operation will permanently delete all data.
 
-  Once executed, there is no way to recover the deleted information. This action affects all users and cannot be reversed.
+Once executed, there is no way to recover the deleted information. This action affects all users and cannot be reversed.
 
-  Before proceeding:
-  - Ensure you have a complete backup
-  - Notify all affected users
-  - Confirm you have the necessary permissions
-  - Double-check that you're operating on the correct environment
-</Callout>
+Before proceeding:
+
+- Ensure you have a complete backup
+- Notify all affected users
+- Confirm you have the necessary permissions
+- Double-check that you're operating on the correct environment
+  </Callout>
 
 ### Callouts with Lists and Code
 
 <Callout type="tip">
   To get started, follow these steps:
 
-  1. Install the required dependencies
-  2. Configure your environment
-  3. Run the development server
+1. Install the required dependencies
+2. Configure your environment
+3. Run the development server
 
-  Example command:
-  ```bash
-  npm run dev
-  ```
+Example command:
+
+```bash
+npm run dev
+```
+
 </Callout>
 
 ## Standard Aside
@@ -100,56 +98,40 @@ The built-in Starlight `Aside` component includes a title label.
 
 Use for general supplementary information.
 
-<Aside>
-  This is a note. It provides additional context that might be helpful.
-</Aside>
+<Aside>This is a note. It provides additional context that might be helpful.</Aside>
 
 ```mdx
-<Aside>
-  This is a note.
-</Aside>
+<Aside>This is a note.</Aside>
 ```
 
 ### Tip
 
 Use for helpful suggestions and best practices.
 
-<Aside type="tip">
-  Pro tip: Use keyboard shortcuts to navigate faster.
-</Aside>
+<Aside type="tip">Pro tip: Use keyboard shortcuts to navigate faster.</Aside>
 
 ```mdx
-<Aside type="tip">
-  Pro tip: Use keyboard shortcuts.
-</Aside>
+<Aside type="tip">Pro tip: Use keyboard shortcuts.</Aside>
 ```
 
 ### Caution
 
 Use for warnings about potential issues.
 
-<Aside type="caution">
-  Be careful when modifying configuration files.
-</Aside>
+<Aside type="caution">Be careful when modifying configuration files.</Aside>
 
 ```mdx
-<Aside type="caution">
-  Be careful when modifying configuration files.
-</Aside>
+<Aside type="caution">Be careful when modifying configuration files.</Aside>
 ```
 
 ### Danger
 
 Use for critical warnings about destructive actions.
 
-<Aside type="danger">
-  This action cannot be undone. Make sure you have a backup.
-</Aside>
+<Aside type="danger">This action cannot be undone. Make sure you have a backup.</Aside>
 
 ```mdx
-<Aside type="danger">
-  This action cannot be undone.
-</Aside>
+<Aside type="danger">This action cannot be undone.</Aside>
 ```
 
 ## Custom Titles

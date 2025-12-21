@@ -5,19 +5,23 @@
 ## Delegation Workflow
 
 **1. Create worktree & spawn worker:**
+
 ```bash
 git worktree add ../astro-blue-<task> -b fix/<task>
 ```
+
 Use Task tool with: task description, worktree path, port (4322+), failed approaches if any.
 
 **2. Monitor:** Use `TaskOutput(block=false)`. Spawn workers in parallel - don't wait.
 
 **3. Cherry-pick when complete (no merge commits):**
+
 ```bash
 git cherry-pick fix/<task>
 git worktree remove ../astro-blue-<task> --force
 git branch -D fix/<task>
 ```
+
 Verify visually on port 4321, update TODO to `[done]` with note.
 
 **4. If rejected:** Mark TODO `[rejected]` with what failed. Re-delegate with failed approaches listed.
@@ -27,6 +31,7 @@ Verify visually on port 4321, update TODO to `[done]` with note.
 ## Coordination Guidelines
 
 **Your responsibilities:**
+
 - Git operations (worktrees, merges, branches)
 - TODO file updates
 - Track progress, provide feedback, communicate status

@@ -24,7 +24,7 @@ MCP servers are configured in `.mcp.json`:
     "playwright": {
       "command": "bun",
       "args": ["run", "mcp:playwright"],
-      "env": {"BROWSER": "chromium"}
+      "env": { "BROWSER": "chromium" }
     }
   }
 }
@@ -45,6 +45,7 @@ The site runs at http://localhost:4321
 Working on matching Mintlify styling. See `MINTLIFY_DIFFERENCES.md` for remaining items.
 
 Key files:
+
 - `src/styles/custom.css` - Main theme styling
 - `src/components/` - Custom Starlight component overrides
 - `astro.config.mjs` - Sidebar and Starlight configuration
