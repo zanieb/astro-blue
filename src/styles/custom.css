@@ -258,11 +258,8 @@ header.header > .header {
     display: block;
     min-width: 14rem;
     margin-left: 4rem;
-  }
-
-  /* Align TOC right padding with header right padding (2rem) */
-  .right-sidebar-panel {
-    padding-right: 2rem;
+    /* Align TOC right edge with header right edge (2rem from viewport) */
+    right: 2rem;
   }
 }
 
