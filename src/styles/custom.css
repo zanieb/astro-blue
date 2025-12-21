@@ -270,7 +270,8 @@ header.header > .header {
 
 /* Right sidebar TOC - smaller font to match Mintlify */
 .right-sidebar-panel {
-  /* Align TOC right edge with header right edge (2rem from viewport) */
+  /* Align TOC content with header right edge by adding left padding */
+  padding-left: 2rem;
   padding-right: 2rem;
 }
 
