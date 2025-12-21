@@ -744,7 +744,7 @@ a:hover {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.5rem 0.5rem 0.5rem 0.375rem;
+  padding: 0.25rem 0.5rem 0.25rem 0.375rem;
   font-size: 0.9375rem;
   font-weight: 600;
   color: var(--theme-sidebar-header);
@@ -800,7 +800,7 @@ a:hover {
   text-transform: none;
   letter-spacing: normal;
   color: var(--theme-sidebar-link);
-  padding: 0.375rem 0.5rem 0.375rem 0.375rem;
+  padding: 0.25rem 0.5rem 0.25rem 0.375rem;
 }
 
 .sidebar-content details details summary:hover {
