@@ -125,6 +125,8 @@ jobs:
 
       - name: 'Run visual regression tests'
         run: bunx playwright test
+        env:
+          USE_PREVIEW: 1
 
       - name: 'Upload test results'
         if: failure()
