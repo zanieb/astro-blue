@@ -23,6 +23,7 @@ export default defineConfig({
         {
           label: 'Getting Started',
           items: [
+            { label: 'Overview', slug: 'getting-started', attrs: { 'data-index': 'true' } },
             { label: 'Installation', slug: 'getting-started/installation' },
             { label: 'First Steps', slug: 'getting-started/first-steps' },
             { label: 'Configuration', slug: 'getting-started/configuration' },
@@ -32,6 +33,7 @@ export default defineConfig({
         {
           label: 'Guides',
           items: [
+            { label: 'Overview', slug: 'guides', attrs: { 'data-index': 'true' } },
             { label: 'Customization', slug: 'guides/customization' },
             { label: 'Colors', slug: 'guides/colors' },
             { label: 'Sidebar', slug: 'guides/sidebar' },
@@ -49,6 +51,7 @@ export default defineConfig({
         {
           label: 'Concepts',
           items: [
+            { label: 'Overview', slug: 'concepts', attrs: { 'data-index': 'true' } },
             {
               label: 'Components',
               items: [
@@ -82,6 +85,7 @@ export default defineConfig({
         {
           label: 'Reference',
           items: [
+            { label: 'Overview', slug: 'reference', attrs: { 'data-index': 'true' } },
             { label: 'Configuration', slug: 'reference/configuration' },
             { label: 'CSS Variables', slug: 'reference/css-variables' },
             { label: 'Frontmatter', slug: 'reference/frontmatter' },
