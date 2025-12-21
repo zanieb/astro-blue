@@ -4,12 +4,6 @@
 
 Style Astro Starlight to match Mintlify/PYX docs (https://docs.pyx.dev).
 
-## Workflows
-
-**Main agent (coordinator):** See `.claude/main.md` for delegation workflow and cherry-pick process.
-
-**Worker agents (implementers):** See `.claude/worker.md` for implementation workflow, testing, and commits.
-
 ## Verifying Changes
 
 **Visual verification:**
