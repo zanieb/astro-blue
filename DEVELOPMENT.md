@@ -6,11 +6,13 @@ This project uses MCP servers for browser automation during development.
 
 ### Setup
 
-The Playwright MCP requires Chromium (not Chrome). Install with:
+The Playwright MCP works with either Chrome or Chromium. Install Chromium with:
 
 ```bash
 bunx playwright install chromium
 ```
+
+Or use Chrome if already installed.
 
 ### Configuration
 
@@ -27,6 +29,8 @@ MCP servers are configured in `.mcp.json`:
   }
 }
 ```
+
+Note: The `BROWSER` env var can be set to `"chromium"` or `"chrome"` depending on your installation.
 
 ### Running the Dev Server
 

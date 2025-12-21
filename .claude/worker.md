@@ -8,7 +8,10 @@ You're a focused implementation worker in a git worktree. Complete your task, ve
 
 **2. Implement:** Minimal focused changes. Follow existing patterns. Edit > create new files.
 
-**3. Test:** Start dev server with your assigned port (`npm run dev -- --port 4322`). Verify visually in browser, check regressions, compare with references.
+**3. Test:**
+   - **First, install dependencies:** Run `npm install` before starting the dev server. Git worktrees do not share `node_modules` with the main repository, so dependencies must be installed in each worktree. Skipping this step causes exit code 127 ("command not found") errors.
+   - **Then start dev server:** `npm run dev -- --port 4322`
+   - Verify visually in browser, check regressions, compare with references.
 
 **4. Commit (ONE commit only - for easy cherry-pick):**
 ```bash
@@ -21,6 +24,7 @@ git commit -m "fix(<scope>): <description>
 Co-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>"
 ```
 **IMPORTANT:** Make exactly ONE commit with all your changes. Main agent will cherry-pick it.
+If you need to add more changes, use `git commit --amend` to keep it as one commit.
 
 **5. Complete:** Stop dev server, summarize changes and location.
 

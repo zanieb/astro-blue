@@ -787,6 +787,12 @@ a:hover {
   gap: 0.5rem;
 }
 
+/* Group link inside summary - must have no padding to match non-link groups */
+.sidebar-content .group-link {
+  padding: 0 !important;
+  margin: 0;
+}
+
 /* Override Starlight's .large class on group labels */
 .sidebar-content .group-label .large {
   font-size: 0.9375rem;
