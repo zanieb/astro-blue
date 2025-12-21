@@ -148,15 +148,17 @@ html {
 }
 
 /* Steps component reset - ensure Starlight Steps styles work correctly */
-.sl-markdown-content .sl-steps {
-  list-style: none !important;
-  padding-left: 0 !important;
-  padding-inline-start: 0 !important;
+.sl-markdown-content ol.sl-steps,
+.sl-markdown-content ul.sl-steps {
+  list-style: none;
+  padding-left: 0;
+  padding-inline-start: 0;
 }
 
-.sl-markdown-content .sl-steps > li {
+.sl-markdown-content ol.sl-steps > li,
+.sl-markdown-content ul.sl-steps > li {
   margin-bottom: 0;
-  padding-left: calc(var(--bullet-size, 1.75rem) + 1rem) !important;
+  padding-left: calc(var(--bullet-size, 1.75rem) + 1rem);
 }
 
 /* Page title - no underline (Mintlify style) */
@@ -181,8 +183,9 @@ h1#_top,
 /* Sidebar uses position:fixed, so needs explicit left value */
 /* Only apply on desktop when sidebar is visible */
 @media (min-width: 50rem) {
-  .sidebar-pane {
-    left: 2rem !important;
+  aside.sidebar-pane,
+  .sidebar .sidebar-pane {
+    left: 2rem;
   }
 }
 
@@ -224,8 +227,9 @@ h1#_top,
 /* Default sidebar width is 300px (18.75rem), so total = 2rem + 18.75rem = 20.75rem */
 /* Only apply on desktop when sidebar is visible */
 @media (min-width: 50rem) {
-  .main-frame {
-    padding-left: calc(2rem + var(--sl-sidebar-width, 18.75rem)) !important;
+  .page .main-frame,
+  main.main-frame {
+    padding-left: calc(2rem + var(--sl-sidebar-width, 18.75rem));
   }
 }
 
@@ -400,31 +404,35 @@ header.header > .header {
 }
 
 /* Breadcrumb reset - prevent global ol styling from applying */
-.breadcrumbs ol {
-  display: flex !important;
-  flex-wrap: nowrap !important;
-  list-style: none !important;
-  list-style-type: none !important;
-  padding-left: 0 !important;
-  margin: 0 !important;
-  gap: 0 !important;
-  white-space: nowrap !important;
+.breadcrumbs ol,
+nav.breadcrumbs ol {
+  display: flex;
+  flex-wrap: nowrap;
+  list-style: none;
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+  gap: 0;
+  white-space: nowrap;
 }
 
-.breadcrumbs ol > li {
-  display: inline-flex !important;
-  align-items: center !important;
-  padding-left: 0 !important;
-  margin-bottom: 0 !important;
+.breadcrumbs ol > li,
+nav.breadcrumbs ol > li {
+  display: inline-flex;
+  align-items: center;
+  padding-left: 0;
+  margin-bottom: 0;
 }
 
 /* Breadcrumb link styling - muted gray, not accent colors */
-.breadcrumbs a {
-  color: var(--theme-text-muted) !important;
+.breadcrumbs a,
+nav.breadcrumbs a {
+  color: var(--theme-text-muted);
 }
 
-.breadcrumbs a:hover {
-  color: var(--theme-text) !important;
+.breadcrumbs a:hover,
+nav.breadcrumbs a:hover {
+  color: var(--theme-text);
 }
 
 /* ===========================================
@@ -436,13 +444,14 @@ pre {
 }
 
 /* Hide code block headers by default - no window chrome, no tabs */
-.expressive-code .frame .header {
-  display: none !important;
+.expressive-code .frame .header,
+.expressive-code .frame:not(.has-title) .header {
+  display: none;
 }
 
 /* Show header for titled code blocks */
 .expressive-code .frame.has-title .header {
-  display: block !important;
+  display: block;
   padding: 0.5rem 1rem;
   font-size: 0.8125rem;
   font-weight: 500;
@@ -478,58 +487,52 @@ pre {
 
 /* Copy button styling - Mintlify style (always visible, clean icon, no border) */
 .expressive-code .copy {
-  opacity: 1 !important;
+  opacity: 1;
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;
 }
 
 .expressive-code .copy button {
-  opacity: 1 !important;
+  all: unset;
+  opacity: 1;
   border-radius: 0.25rem;
   padding: 0.25rem;
   width: 1.5rem;
   height: 1.5rem;
-  background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-  outline: none !important;
   cursor: pointer;
   transition: opacity 0.15s ease;
+  display: block;
 }
 
-.expressive-code .copy button:hover {
-  background: transparent !important;
-}
-
-/* Hide the default expressive-code icon (::after pseudo-element) */
+/* Hide the default expressive-code icon (::before/::after pseudo-elements) */
 .expressive-code .copy button::before,
 .expressive-code .copy button::after {
-  display: none !important;
-  content: none !important;
+  display: none;
+  content: none;
 }
 
 /* The div inside uses CSS mask for the icon - its background becomes the icon color */
 .expressive-code .copy button div {
   width: 1rem;
   height: 1rem;
-  opacity: 1 !important;
-  position: static !important;
-  background: var(--theme-text-muted) !important;
+  opacity: 1;
+  position: static;
+  background: var(--theme-text-muted);
   transition: background 0.15s ease;
   /* Clipboard/copy icon SVG as mask - filled version for proper masking */
-  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='currentColor'%3E%3Cpath d='M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z'/%3E%3C/svg%3E") !important;
-  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='currentColor'%3E%3Cpath d='M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z'/%3E%3C/svg%3E") !important;
-  -webkit-mask-size: contain !important;
-  mask-size: contain !important;
-  -webkit-mask-repeat: no-repeat !important;
-  mask-repeat: no-repeat !important;
-  -webkit-mask-position: center !important;
-  mask-position: center !important;
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='currentColor'%3E%3Cpath d='M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='currentColor'%3E%3Cpath d='M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z'/%3E%3C/svg%3E");
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
 }
 
 .expressive-code .copy button:hover div {
-  background: var(--theme-text) !important;
+  background: var(--theme-text);
 }
 
 /* ===========================================
@@ -649,21 +652,21 @@ summary {
   }
 
   /* Search button - fixed width like Mintlify (424px) */
-  site-search button[data-open-modal] {
-    width: 424px !important;
+  header site-search button[data-open-modal] {
+    width: 424px;
     min-width: 424px;
     max-width: 424px;
   }
 }
 
 /* Search bar base styling - match Mintlify exactly */
-site-search button[data-open-modal] {
+header site-search button[data-open-modal] {
   height: 36px; /* Mintlify's exact height */
   padding: 0 12px 0 14px; /* Mintlify's exact padding */
   font-size: 0.875rem;
-  border-radius: 12px !important; /* Mintlify uses 12px */
-  border: 1px solid var(--theme-border) !important; /* Subtle border like Mintlify */
-  box-shadow: none !important;
+  border-radius: 12px; /* Mintlify uses 12px */
+  border: 1px solid var(--theme-border); /* Subtle border like Mintlify */
+  box-shadow: none;
 }
 
 /* Search bar placeholder text - lighter gray like Mintlify */
@@ -683,21 +686,21 @@ site-search button[data-open-modal] > span:first-of-type::after {
 }
 
 /* Cmd+K keyboard shortcut - Mintlify style (NO gray background) */
-site-search button[data-open-modal] kbd {
-  background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-  padding: 0 !important;
+header site-search button[data-open-modal] kbd {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
   font-size: 12px;
   font-weight: 600;
   color: var(--astral-gray-500); /* rgb(113, 112, 113) - matches Mintlify */
 }
 
 /* The wrapper span around kbd elements - also transparent */
-site-search button[data-open-modal] > span:last-of-type {
-  background: transparent !important;
-  border: none !important;
-  padding: 0 !important;
+header site-search button[data-open-modal] > span:last-of-type {
+  background: transparent;
+  border: none;
+  padding: 0;
 }
 
 /* Pagefind modal styling */
@@ -706,22 +709,17 @@ site-search button[data-open-modal] > span:last-of-type {
 }
 
 /* Search dialog background - white in light mode, dark in dark mode */
-:root[data-theme='light'] dialog[aria-label='Search'] {
-  background-color: white !important;
+dialog[aria-label='Search'][aria-label='Search'] {
+  background-color: white;
 }
 
-:root[data-theme='dark'] dialog[aria-label='Search'] {
-  background-color: var(--sl-color-black) !important;
+:root[data-theme='dark'] dialog[aria-label='Search'][aria-label='Search'] {
+  background-color: var(--sl-color-black);
 }
 
 /* Search results styling - match PYX/Mintlify */
 .pagefind-ui__result {
   border: none;
-  margin-bottom: 0.5rem;
-}
-
-/* Result container */
-.pagefind-ui__result {
   margin-bottom: 1rem;
 }
 
@@ -744,105 +742,80 @@ site-search button[data-open-modal] > span:last-of-type {
   border-radius: 0.375rem;
   transition: background-color 0.15s ease;
   margin-bottom: 0.25rem;
-  display: block !important;
+  display: block;
   position: relative;
 }
 
 /* Title within nested section - force block display */
 .pagefind-ui__result-nested .pagefind-ui__result-title {
   margin: 0 0 0.25rem 0;
-  display: block !important;
+  display: block;
 }
 
 /* Excerpt within nested section - force block display */
 .pagefind-ui__result-nested .pagefind-ui__result-excerpt {
   margin: 0;
-  display: block !important;
+  display: block;
 }
 
-/* Light mode - clean white background */
-:root[data-theme='light'] .pagefind-ui__result-link {
-  color: var(--theme-text) !important;
-  text-decoration: none !important;
-  outline: none !important;
+/* Result links - shared styles for both themes */
+.pagefind-ui__result-link {
+  color: var(--theme-text);
+  text-decoration: none;
+  outline: none;
 }
 
-:root[data-theme='light'] .pagefind-ui__result-link:focus {
-  outline: none !important;
-  box-shadow: none !important;
+.pagefind-ui__result-link:focus {
+  outline: none;
+  box-shadow: none;
 }
 
-:root[data-theme='light'] .pagefind-ui__result-link:focus-visible {
-  outline: 2px solid var(--theme-accent) !important;
-  outline-offset: 2px !important;
+.pagefind-ui__result-link:focus-visible {
+  outline: 2px solid var(--theme-accent);
+  outline-offset: 2px;
 }
 
+/* Light mode specific styles */
 :root[data-theme='light'] .pagefind-ui__result-title {
-  background: transparent !important;
+  background: transparent;
 }
 
 :root[data-theme='light'] .pagefind-ui__result-excerpt {
-  color: var(--theme-text-muted) !important;
+  color: var(--theme-text-muted);
 }
 
-/* Light mode hover - subtle gray background on top-level title */
-:root[data-theme='light'] .pagefind-ui__result-inner > .pagefind-ui__result-title:hover {
-  background: var(--theme-bg-hover) !important;
-}
-
-/* Light mode hover - subtle gray background on nested sections */
+:root[data-theme='light'] .pagefind-ui__result-inner > .pagefind-ui__result-title:hover,
 :root[data-theme='light'] .pagefind-ui__result-nested:hover {
-  background: var(--theme-bg-hover) !important;
+  background: var(--theme-bg-hover);
 }
 
-/* Dark mode search results */
-:root[data-theme='dark'] .pagefind-ui__result-link {
-  color: var(--theme-text) !important;
-  text-decoration: none !important;
-  outline: none !important;
-}
-
-:root[data-theme='dark'] .pagefind-ui__result-link:focus {
-  outline: none !important;
-  box-shadow: none !important;
-}
-
-:root[data-theme='dark'] .pagefind-ui__result-link:focus-visible {
-  outline: 2px solid var(--theme-accent) !important;
-  outline-offset: 2px !important;
-}
-
-/* Dark mode hover - subtle background on top-level title */
-:root[data-theme='dark'] .pagefind-ui__result-inner > .pagefind-ui__result-title:hover {
-  background: var(--theme-bg-hover) !important;
-}
-
-/* Dark mode hover - subtle background on nested sections */
+/* Dark mode hover - subtle background */
+:root[data-theme='dark'] .pagefind-ui__result-inner > .pagefind-ui__result-title:hover,
 :root[data-theme='dark'] .pagefind-ui__result-nested:hover {
-  background: var(--theme-bg-hover) !important;
+  background: var(--theme-bg-hover);
 }
 
 /* Remove any default yellow outlines from Pagefind */
 .pagefind-ui * {
-  outline-color: transparent !important;
+  outline-color: transparent;
 }
 
 .pagefind-ui *:focus:not(:focus-visible) {
-  outline: none !important;
+  outline: none;
 }
 
-/* Search result mark/highlight - match theme, apply to all marks */
+/* Search result mark/highlight - match theme */
 :root[data-theme='light'] .pagefind-ui mark {
-  color: var(--theme-text) !important;
-  background: rgba(99, 64, 172, 0.12) !important;
+  color: var(--theme-text);
+  background: rgba(99, 64, 172, 0.12);
   font-weight: 500;
   border-radius: 0.125rem;
   padding: 0 0.125rem;
 }
 
 :root[data-theme='dark'] .pagefind-ui mark {
-  color: var(--theme-accent) !important;
-  background: rgba(215, 255, 100, 0.12) !important;
+  color: var(--theme-accent);
+  background: rgba(215, 255, 100, 0.12);
   font-weight: 500;
   border-radius: 0.125rem;
   padding: 0 0.125rem;
@@ -860,14 +833,17 @@ a:hover {
    =========================================== */
 
 /* Sidebar panel - no border (Mintlify style uses whitespace separation) */
-.sidebar,
-.sidebar-pane {
-  border-right: none !important;
+aside.sidebar,
+aside.sidebar-pane,
+nav.sidebar,
+.sidebar.sidebar {
+  border-right: none;
 }
 
 /* Right sidebar - no left border */
-.right-sidebar {
-  border-left: none !important;
+aside.right-sidebar,
+.right-sidebar.right-sidebar {
+  border-left: none;
 }
 
 /* Sidebar container - minimal left padding for Mintlify-style tight alignment */
@@ -936,8 +912,9 @@ a:hover {
 }
 
 /* Group link inside summary - must have no padding to match non-link groups */
-.sidebar-content .group-link {
-  padding: 0 !important;
+.sidebar-content summary .group-link,
+.sidebar-content .group-label .group-link {
+  padding: 0;
   margin: 0;
 }
 
@@ -1003,8 +980,10 @@ a:hover {
 
 /* Remove all vertical bars from sidebar */
 .sidebar-content ul,
-.sidebar-content li {
-  border-left: none !important;
+.sidebar-content li,
+nav.sidebar ul,
+nav.sidebar li {
+  border-left: none;
 }
 
 /* Child items inside groups - NO indent from parent heading (matches PYX/Mintlify) */
@@ -1079,22 +1058,18 @@ a:hover {
 }
 
 .pagination-links a {
+  all: unset;
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0;
-  border: none !important;
-  background: none !important;
-  box-shadow: none !important;
-  text-decoration: none;
   color: var(--theme-text-muted);
   font-size: 0.875rem;
   transition: color 0.15s ease;
+  cursor: pointer;
 }
 
 .pagination-links a:hover {
   color: var(--theme-text);
-  background: none !important;
 }
 
 /* Hide the br element */
@@ -1177,32 +1152,30 @@ a:hover {
 
   /* Remove round button styling from search button - just show the icon */
   header.header site-search button[data-open-modal] {
+    all: unset;
     margin-right: 0.5rem;
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
     padding: 0.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
     height: 32px;
+    cursor: pointer;
   }
 
   /* Remove round button styling from hamburger menu button */
-  starlight-menu-button button {
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
+  header starlight-menu-button button {
+    all: unset;
     display: flex;
     align-items: center;
     justify-content: center;
     height: 32px;
+    cursor: pointer;
   }
 
   /* Make hamburger icon visible in dark mode */
-  starlight-menu-button button svg {
-    color: var(--sl-color-white) !important;
-    fill: currentColor !important;
+  header starlight-menu-button button svg {
+    color: var(--sl-color-white);
+    fill: currentColor;
   }
 }
 
@@ -1249,13 +1222,11 @@ a:hover {
 /* Make view transitions instant - no visible animation */
 ::view-transition-old(root),
 ::view-transition-new(root) {
-  animation-duration: 0s !important;
-  animation-delay: 0s !important;
+  animation: none;
 }
 
 /* Also disable any other view transition animations */
 ::view-transition-group(*),
 ::view-transition-image-pair(*) {
-  animation-duration: 0s !important;
-  animation-delay: 0s !important;
+  animation: none;
 }
