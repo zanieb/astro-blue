@@ -1,4 +1,5 @@
-import { test, expect, type Page } from '@playwright/test';
+import { test, type Page } from '@playwright/test';
+import { argosScreenshot } from '@argos-ci/playwright';
 
 /**
  * Visual Regression Tests
@@ -31,7 +32,7 @@ test.describe('Visual Regression - Homepage', () => {
   test('homepage - light mode - desktop', async ({ page }) => {
     await page.goto('/');
     await setTheme(page, 'light');
-    await expect(page).toHaveScreenshot('homepage-light-desktop.png', {
+    await argosScreenshot(page, 'homepage-light-desktop', {
       fullPage: true,
     });
   });
@@ -39,7 +40,7 @@ test.describe('Visual Regression - Homepage', () => {
   test('homepage - dark mode - desktop', async ({ page }) => {
     await page.goto('/');
     await setTheme(page, 'dark');
-    await expect(page).toHaveScreenshot('homepage-dark-desktop.png', {
+    await argosScreenshot(page, 'homepage-dark-desktop', {
       fullPage: true,
     });
   });
@@ -47,7 +48,7 @@ test.describe('Visual Regression - Homepage', () => {
   test('homepage - light mode - mobile', async ({ page }) => {
     await page.goto('/');
     await setTheme(page, 'light');
-    await expect(page).toHaveScreenshot('homepage-light-mobile.png', {
+    await argosScreenshot(page, 'homepage-light-mobile', {
       fullPage: true,
     });
   });
@@ -55,7 +56,7 @@ test.describe('Visual Regression - Homepage', () => {
   test('homepage - dark mode - mobile', async ({ page }) => {
     await page.goto('/');
     await setTheme(page, 'dark');
-    await expect(page).toHaveScreenshot('homepage-dark-mobile.png', {
+    await argosScreenshot(page, 'homepage-dark-mobile', {
       fullPage: true,
     });
   });
@@ -65,7 +66,7 @@ test.describe('Visual Regression - Getting Started', () => {
   test('installation page - light mode', async ({ page }) => {
     await page.goto('/getting-started/installation');
     await setTheme(page, 'light');
-    await expect(page).toHaveScreenshot('installation-light-desktop.png', {
+    await argosScreenshot(page, 'installation-light-desktop', {
       fullPage: true,
     });
   });
@@ -73,7 +74,7 @@ test.describe('Visual Regression - Getting Started', () => {
   test('installation page - dark mode', async ({ page }) => {
     await page.goto('/getting-started/installation');
     await setTheme(page, 'dark');
-    await expect(page).toHaveScreenshot('installation-dark-desktop.png', {
+    await argosScreenshot(page, 'installation-dark-desktop', {
       fullPage: true,
     });
   });
@@ -83,7 +84,7 @@ test.describe('Visual Regression - Guides', () => {
   test('guides page - light mode', async ({ page }) => {
     await page.goto('/guides/customization');
     await setTheme(page, 'light');
-    await expect(page).toHaveScreenshot('guides-light-desktop.png', {
+    await argosScreenshot(page, 'guides-light-desktop', {
       fullPage: true,
     });
   });
@@ -91,7 +92,7 @@ test.describe('Visual Regression - Guides', () => {
   test('guides page - dark mode', async ({ page }) => {
     await page.goto('/guides/customization');
     await setTheme(page, 'dark');
-    await expect(page).toHaveScreenshot('guides-dark-desktop.png', {
+    await argosScreenshot(page, 'guides-dark-desktop', {
       fullPage: true,
     });
   });
@@ -101,7 +102,7 @@ test.describe('Visual Regression - Concepts', () => {
   test('concepts page - light mode', async ({ page }) => {
     await page.goto('/concepts/components');
     await setTheme(page, 'light');
-    await expect(page).toHaveScreenshot('concepts-light-desktop.png', {
+    await argosScreenshot(page, 'concepts-light-desktop', {
       fullPage: true,
     });
   });
@@ -109,7 +110,7 @@ test.describe('Visual Regression - Concepts', () => {
   test('concepts page - dark mode', async ({ page }) => {
     await page.goto('/concepts/components');
     await setTheme(page, 'dark');
-    await expect(page).toHaveScreenshot('concepts-dark-desktop.png', {
+    await argosScreenshot(page, 'concepts-dark-desktop', {
       fullPage: true,
     });
   });
@@ -121,7 +122,7 @@ test.describe('Visual Regression - Reference', () => {
     await setTheme(page, 'light');
     // Extra wait for code syntax highlighting to settle
     await page.waitForTimeout(500);
-    await expect(page).toHaveScreenshot('reference-light-desktop.png', {
+    await argosScreenshot(page, 'reference-light-desktop', {
       fullPage: true,
     });
   });
@@ -131,7 +132,7 @@ test.describe('Visual Regression - Reference', () => {
     await setTheme(page, 'dark');
     // Extra wait for code syntax highlighting to settle
     await page.waitForTimeout(500);
-    await expect(page).toHaveScreenshot('reference-dark-desktop.png', {
+    await argosScreenshot(page, 'reference-dark-desktop', {
       fullPage: true,
     });
   });
@@ -147,7 +148,9 @@ test.describe('Visual Regression - UI Components', () => {
 
     // Screenshot just the sidebar area
     const sidebar = page.locator('.sidebar-pane');
-    await expect(sidebar).toHaveScreenshot('sidebar-expanded-light.png');
+    await argosScreenshot(page, 'sidebar-expanded-light', {
+      element: sidebar,
+    });
   });
 
   test('sidebar - expanded state - dark mode', async ({ page }) => {
@@ -157,7 +160,9 @@ test.describe('Visual Regression - UI Components', () => {
     await page.setViewportSize({ width: 1920, height: 1080 });
 
     const sidebar = page.locator('.sidebar-pane');
-    await expect(sidebar).toHaveScreenshot('sidebar-expanded-dark.png');
+    await argosScreenshot(page, 'sidebar-expanded-dark', {
+      element: sidebar,
+    });
   });
 
   test('code block with copy button - light mode', async ({ page }) => {
@@ -166,7 +171,9 @@ test.describe('Visual Regression - UI Components', () => {
 
     // Find first code block
     const codeBlock = page.locator('.expressive-code').first();
-    await expect(codeBlock).toHaveScreenshot('code-block-light.png');
+    await argosScreenshot(page, 'code-block-light', {
+      element: codeBlock,
+    });
   });
 
   test('code block with copy button - dark mode', async ({ page }) => {
@@ -174,7 +181,9 @@ test.describe('Visual Regression - UI Components', () => {
     await setTheme(page, 'dark');
 
     const codeBlock = page.locator('.expressive-code').first();
-    await expect(codeBlock).toHaveScreenshot('code-block-dark.png');
+    await argosScreenshot(page, 'code-block-dark', {
+      element: codeBlock,
+    });
   });
 
   test('search button - light mode', async ({ page }) => {
@@ -184,7 +193,9 @@ test.describe('Visual Regression - UI Components', () => {
     await page.setViewportSize({ width: 1920, height: 1080 });
 
     const searchButton = page.locator('site-search button[data-open-modal]');
-    await expect(searchButton).toHaveScreenshot('search-button-light.png');
+    await argosScreenshot(page, 'search-button-light', {
+      element: searchButton,
+    });
   });
 
   test('search button - dark mode', async ({ page }) => {
@@ -194,7 +205,9 @@ test.describe('Visual Regression - UI Components', () => {
     await page.setViewportSize({ width: 1920, height: 1080 });
 
     const searchButton = page.locator('site-search button[data-open-modal]');
-    await expect(searchButton).toHaveScreenshot('search-button-dark.png');
+    await argosScreenshot(page, 'search-button-dark', {
+      element: searchButton,
+    });
   });
 
   test('theme toggle - light mode', async ({ page }, testInfo) => {
@@ -206,7 +219,9 @@ test.describe('Visual Regression - UI Components', () => {
 
     // Select the theme toggle in the header (not the mobile menu)
     const themeToggle = page.locator('header starlight-theme-select button').first();
-    await expect(themeToggle).toHaveScreenshot('theme-toggle-light.png');
+    await argosScreenshot(page, 'theme-toggle-light', {
+      element: themeToggle,
+    });
   });
 
   test('theme toggle - dark mode', async ({ page }, testInfo) => {
@@ -218,7 +233,9 @@ test.describe('Visual Regression - UI Components', () => {
 
     // Select the theme toggle in the header (not the mobile menu)
     const themeToggle = page.locator('header starlight-theme-select button').first();
-    await expect(themeToggle).toHaveScreenshot('theme-toggle-dark.png');
+    await argosScreenshot(page, 'theme-toggle-dark', {
+      element: themeToggle,
+    });
   });
 });
 
@@ -234,7 +251,9 @@ test.describe('Visual Regression - Interactive States', () => {
     await firstLink.hover();
 
     const sidebar = page.locator('.sidebar-pane');
-    await expect(sidebar).toHaveScreenshot('sidebar-link-hover.png');
+    await argosScreenshot(page, 'sidebar-link-hover', {
+      element: sidebar,
+    });
   });
 
   test('sidebar link - active/current state', async ({ page }) => {
@@ -245,7 +264,9 @@ test.describe('Visual Regression - Interactive States', () => {
 
     // Screenshot sidebar to capture active state
     const sidebar = page.locator('.sidebar-pane');
-    await expect(sidebar).toHaveScreenshot('sidebar-link-active.png');
+    await argosScreenshot(page, 'sidebar-link-active', {
+      element: sidebar,
+    });
   });
 
   test('pagination - light mode', async ({ page }) => {
@@ -256,7 +277,9 @@ test.describe('Visual Regression - Interactive States', () => {
     await page.locator('.pagination-links').scrollIntoViewIfNeeded();
 
     const pagination = page.locator('.pagination-links');
-    await expect(pagination).toHaveScreenshot('pagination-light.png');
+    await argosScreenshot(page, 'pagination-light', {
+      element: pagination,
+    });
   });
 
   test('pagination - dark mode', async ({ page }) => {
@@ -266,6 +289,8 @@ test.describe('Visual Regression - Interactive States', () => {
     await page.locator('.pagination-links').scrollIntoViewIfNeeded();
 
     const pagination = page.locator('.pagination-links');
-    await expect(pagination).toHaveScreenshot('pagination-dark.png');
+    await argosScreenshot(page, 'pagination-dark', {
+      element: pagination,
+    });
   });
 });

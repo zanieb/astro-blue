@@ -16,7 +16,16 @@ export default defineConfig({
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : undefined,
 
-  reporter: 'html',
+  reporter: [
+    process.env.CI ? ['dot'] : ['list'],
+    ['html'],
+    [
+      '@argos-ci/playwright/reporter',
+      {
+        uploadToArgos: !!process.env.CI,
+      },
+    ],
+  ],
 
   // Use platform-agnostic snapshot paths (removes -darwin, -linux suffix)
   snapshotPathTemplate: '{testDir}/__screenshots__/{testFilePath}/{arg}-{projectName}{ext}',
