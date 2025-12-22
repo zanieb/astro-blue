@@ -261,7 +261,20 @@ header.header > .header {
   }
 }
 
+/* Right sidebar - fix positioning to align with header */
+.right-sidebar {
+  /* Override Starlight's fixed positioning to align right edge with header */
+  right: 0 !important;
+  width: auto !important;
+}
+
 /* Right sidebar TOC - smaller font to match Mintlify */
+.right-sidebar-panel {
+  /* Align TOC content with header right edge by adding left padding */
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
 .right-sidebar-panel h2 {
   font-size: 0.75rem;
   text-transform: uppercase;
@@ -708,6 +721,8 @@ header site-search button[data-open-modal] > span:last-of-type {
 /* Pagefind modal styling */
 .pagefind-ui {
   --pagefind-ui-border-radius: 0.5rem;
+  /* Reduce initial modal height - smaller before results load (PYX style) */
+  max-height: 60vh;
 }
 
 /* Search dialog background - white in light mode, dark in dark mode */
