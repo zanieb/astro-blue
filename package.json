@@ -19,6 +19,7 @@
     "test:a11y": "lhci autorun"
   },
   "devDependencies": {
+    "@argos-ci/playwright": "^6.3.8",
     "@astrojs/check": "^0.9.6",
     "@lhci/cli": "^0.15.1",
     "@modelcontextprotocol/server-puppeteer": "2025.5.12",
