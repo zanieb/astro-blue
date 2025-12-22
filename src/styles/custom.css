@@ -721,17 +721,25 @@ header site-search button[data-open-modal] > span:last-of-type {
 /* Pagefind modal styling */
 .pagefind-ui {
   --pagefind-ui-border-radius: 0.5rem;
-  /* Reduce initial modal height - smaller before results load (PYX style) */
-  max-height: 60vh;
 }
 
 /* Search dialog background - white in light mode, dark in dark mode */
 dialog[aria-label='Search'][aria-label='Search'] {
   background-color: white;
+  /* Force dialog to shrink-wrap its content - compact initial state like PYX */
+  height: fit-content !important;
+  max-height: 85vh !important;
+  min-height: 0 !important;
 }
 
 :root[data-theme='dark'] dialog[aria-label='Search'][aria-label='Search'] {
   background-color: var(--sl-color-black);
+}
+
+/* Constrain dialog wrapper to fit content initially - compact like PYX */
+dialog[aria-label='Search'] .dialog-frame {
+  max-height: fit-content;
+  min-height: auto;
 }
 
 /* Search results styling - match PYX/Mintlify */
