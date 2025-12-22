@@ -18,6 +18,17 @@ import { argosScreenshot } from '@argos-ci/playwright';
  * bun run test:visual
  */
 
+// Helper to hide Astro dev toolbar (can appear in some builds)
+async function hideAstroToolbar(page: Page) {
+  await page.evaluate(() => {
+    // Hide the Astro dev toolbar if it exists
+    const toolbar = document.querySelector('astro-dev-toolbar');
+    if (toolbar) {
+      (toolbar as HTMLElement).style.display = 'none';
+    }
+  });
+}
+
 // Helper to set theme
 async function setTheme(page: Page, theme: 'light' | 'dark') {
   await page.evaluate((selectedTheme: string) => {
@@ -26,6 +37,8 @@ async function setTheme(page: Page, theme: 'light' | 'dark') {
   }, theme);
   // Wait for theme to apply
   await page.waitForTimeout(100);
+  // Hide Astro toolbar after theme is set
+  await hideAstroToolbar(page);
 }
 
 test.describe('Visual Regression - Homepage', () => {
@@ -57,82 +70,6 @@ test.describe('Visual Regression - Homepage', () => {
     await page.goto('/');
     await setTheme(page, 'dark');
     await argosScreenshot(page, 'homepage-dark-mobile', {
-      fullPage: true,
-    });
-  });
-});
-
-test.describe('Visual Regression - Getting Started', () => {
-  test('installation page - light mode', async ({ page }) => {
-    await page.goto('/getting-started/installation');
-    await setTheme(page, 'light');
-    await argosScreenshot(page, 'installation-light-desktop', {
-      fullPage: true,
-    });
-  });
-
-  test('installation page - dark mode', async ({ page }) => {
-    await page.goto('/getting-started/installation');
-    await setTheme(page, 'dark');
-    await argosScreenshot(page, 'installation-dark-desktop', {
-      fullPage: true,
-    });
-  });
-});
-
-test.describe('Visual Regression - Guides', () => {
-  test('guides page - light mode', async ({ page }) => {
-    await page.goto('/guides/customization');
-    await setTheme(page, 'light');
-    await argosScreenshot(page, 'guides-light-desktop', {
-      fullPage: true,
-    });
-  });
-
-  test('guides page - dark mode', async ({ page }) => {
-    await page.goto('/guides/customization');
-    await setTheme(page, 'dark');
-    await argosScreenshot(page, 'guides-dark-desktop', {
-      fullPage: true,
-    });
-  });
-});
-
-test.describe('Visual Regression - Concepts', () => {
-  test('concepts page - light mode', async ({ page }) => {
-    await page.goto('/concepts/components');
-    await setTheme(page, 'light');
-    await argosScreenshot(page, 'concepts-light-desktop', {
-      fullPage: true,
-    });
-  });
-
-  test('concepts page - dark mode', async ({ page }) => {
-    await page.goto('/concepts/components');
-    await setTheme(page, 'dark');
-    await argosScreenshot(page, 'concepts-dark-desktop', {
-      fullPage: true,
-    });
-  });
-});
-
-test.describe('Visual Regression - Reference', () => {
-  test('reference page - light mode', async ({ page }) => {
-    await page.goto('/reference/configuration', { waitUntil: 'networkidle' });
-    await setTheme(page, 'light');
-    // Extra wait for code syntax highlighting to settle
-    await page.waitForTimeout(500);
-    await argosScreenshot(page, 'reference-light-desktop', {
-      fullPage: true,
-    });
-  });
-
-  test('reference page - dark mode', async ({ page }) => {
-    await page.goto('/reference/configuration', { waitUntil: 'networkidle' });
-    await setTheme(page, 'dark');
-    // Extra wait for code syntax highlighting to settle
-    await page.waitForTimeout(500);
-    await argosScreenshot(page, 'reference-dark-desktop', {
       fullPage: true,
     });
   });
@@ -361,200 +298,213 @@ test.describe('Visual Regression - Interactive States', () => {
   });
 });
 
-test.describe('Visual Regression - Component Pages', () => {
-  test('asides page - light mode - desktop', async ({ page }) => {
-    await page.goto('/concepts/asides');
+test.describe('Visual Regression - Component Tests', () => {
+  // Aside Components
+  test('aside - note variant - light', async ({ page }) => {
+    await page.goto('/test-components/asides');
     await setTheme(page, 'light');
-    await argosScreenshot(page, 'asides-light-desktop', {
-      fullPage: true,
+    const aside = page.locator('.starlight-aside').filter({ hasText: 'note aside' }).first();
+    await argosScreenshot(page, 'aside-note-light', {
+      element: aside,
     });
   });
 
-  test('asides page - dark mode - desktop', async ({ page }) => {
-    await page.goto('/concepts/asides');
+  test('aside - note variant - dark', async ({ page }) => {
+    await page.goto('/test-components/asides');
     await setTheme(page, 'dark');
-    await argosScreenshot(page, 'asides-dark-desktop', {
-      fullPage: true,
+    const aside = page.locator('.starlight-aside').filter({ hasText: 'note aside' }).first();
+    await argosScreenshot(page, 'aside-note-dark', {
+      element: aside,
     });
   });
 
-  test('asides page - light mode - mobile', async ({ page }) => {
-    await page.goto('/concepts/asides');
+  test('aside - tip variant - light', async ({ page }) => {
+    await page.goto('/test-components/asides');
     await setTheme(page, 'light');
-    await argosScreenshot(page, 'asides-light-mobile', {
-      fullPage: true,
+    const aside = page.locator('.starlight-aside').filter({ hasText: 'tip aside' }).first();
+    await argosScreenshot(page, 'aside-tip-light', {
+      element: aside,
     });
   });
 
-  test('asides page - dark mode - mobile', async ({ page }) => {
-    await page.goto('/concepts/asides');
+  test('aside - tip variant - dark', async ({ page }) => {
+    await page.goto('/test-components/asides');
     await setTheme(page, 'dark');
-    await argosScreenshot(page, 'asides-dark-mobile', {
-      fullPage: true,
+    const aside = page.locator('.starlight-aside').filter({ hasText: 'tip aside' }).first();
+    await argosScreenshot(page, 'aside-tip-dark', {
+      element: aside,
     });
   });
 
-  test('cards page - light mode - desktop', async ({ page }) => {
-    await page.goto('/concepts/cards');
+  test('aside - caution variant - light', async ({ page }) => {
+    await page.goto('/test-components/asides');
     await setTheme(page, 'light');
-    await argosScreenshot(page, 'cards-light-desktop', {
-      fullPage: true,
+    const aside = page.locator('.starlight-aside').filter({ hasText: 'caution aside' }).first();
+    await argosScreenshot(page, 'aside-caution-light', {
+      element: aside,
     });
   });
 
-  test('cards page - dark mode - desktop', async ({ page }) => {
-    await page.goto('/concepts/cards');
+  test('aside - caution variant - dark', async ({ page }) => {
+    await page.goto('/test-components/asides');
     await setTheme(page, 'dark');
-    await argosScreenshot(page, 'cards-dark-desktop', {
-      fullPage: true,
+    const aside = page.locator('.starlight-aside').filter({ hasText: 'caution aside' }).first();
+    await argosScreenshot(page, 'aside-caution-dark', {
+      element: aside,
     });
   });
 
-  test('cards page - light mode - mobile', async ({ page }) => {
-    await page.goto('/concepts/cards');
+  test('aside - danger variant - light', async ({ page }) => {
+    await page.goto('/test-components/asides');
     await setTheme(page, 'light');
-    await argosScreenshot(page, 'cards-light-mobile', {
-      fullPage: true,
+    const aside = page.locator('.starlight-aside').filter({ hasText: 'danger aside' }).first();
+    await argosScreenshot(page, 'aside-danger-light', {
+      element: aside,
     });
   });
 
-  test('cards page - dark mode - mobile', async ({ page }) => {
-    await page.goto('/concepts/cards');
+  test('aside - danger variant - dark', async ({ page }) => {
+    await page.goto('/test-components/asides');
     await setTheme(page, 'dark');
-    await argosScreenshot(page, 'cards-dark-mobile', {
-      fullPage: true,
+    const aside = page.locator('.starlight-aside').filter({ hasText: 'danger aside' }).first();
+    await argosScreenshot(page, 'aside-danger-dark', {
+      element: aside,
     });
   });
 
-  test('tabs page - light mode - desktop', async ({ page }) => {
-    await page.goto('/concepts/tabs');
+  // Card Components
+  test('card - single card - light', async ({ page }) => {
+    await page.goto('/test-components/cards');
     await setTheme(page, 'light');
-    await argosScreenshot(page, 'tabs-light-desktop', {
-      fullPage: true,
+    const card = page.locator('.card').filter({ hasText: 'Test Card' }).first();
+    await argosScreenshot(page, 'card-single-light', {
+      element: card,
     });
   });
 
-  test('tabs page - dark mode - desktop', async ({ page }) => {
-    await page.goto('/concepts/tabs');
+  test('card - single card - dark', async ({ page }) => {
+    await page.goto('/test-components/cards');
     await setTheme(page, 'dark');
-    await argosScreenshot(page, 'tabs-dark-desktop', {
-      fullPage: true,
+    const card = page.locator('.card').filter({ hasText: 'Test Card' }).first();
+    await argosScreenshot(page, 'card-single-dark', {
+      element: card,
     });
   });
 
-  test('tabs page - light mode - mobile', async ({ page }) => {
-    await page.goto('/concepts/tabs');
+  test('card - grid layout - light', async ({ page }) => {
+    await page.goto('/test-components/cards');
     await setTheme(page, 'light');
-    await argosScreenshot(page, 'tabs-light-mobile', {
-      fullPage: true,
+    const cardGrid = page.locator('.card-grid').first();
+    await argosScreenshot(page, 'card-grid-light', {
+      element: cardGrid,
     });
   });
 
-  test('tabs page - dark mode - mobile', async ({ page }) => {
-    await page.goto('/concepts/tabs');
+  test('card - grid layout - dark', async ({ page }) => {
+    await page.goto('/test-components/cards');
     await setTheme(page, 'dark');
-    await argosScreenshot(page, 'tabs-dark-mobile', {
-      fullPage: true,
+    const cardGrid = page.locator('.card-grid').first();
+    await argosScreenshot(page, 'card-grid-dark', {
+      element: cardGrid,
     });
   });
 
-  test('steps page - light mode - desktop', async ({ page }) => {
-    await page.goto('/concepts/steps');
+  // Tab Components
+  test('tabs - component - light', async ({ page }) => {
+    await page.goto('/test-components/tabs');
     await setTheme(page, 'light');
-    await argosScreenshot(page, 'steps-light-desktop', {
-      fullPage: true,
+    const tabs = page.locator('starlight-tabs').first();
+    await argosScreenshot(page, 'tabs-light', {
+      element: tabs,
     });
   });
 
-  test('steps page - dark mode - desktop', async ({ page }) => {
-    await page.goto('/concepts/steps');
+  test('tabs - component - dark', async ({ page }) => {
+    await page.goto('/test-components/tabs');
     await setTheme(page, 'dark');
-    await argosScreenshot(page, 'steps-dark-desktop', {
-      fullPage: true,
+    const tabs = page.locator('starlight-tabs').first();
+    await argosScreenshot(page, 'tabs-dark', {
+      element: tabs,
     });
   });
 
-  test('steps page - light mode - mobile', async ({ page }) => {
-    await page.goto('/concepts/steps');
+  // Steps Component
+  test('steps - component - light', async ({ page }) => {
+    await page.goto('/test-components/steps');
     await setTheme(page, 'light');
-    await argosScreenshot(page, 'steps-light-mobile', {
-      fullPage: true,
+    const steps = page.locator('.sl-steps').first();
+    await argosScreenshot(page, 'steps-light', {
+      element: steps,
     });
   });
 
-  test('steps page - dark mode - mobile', async ({ page }) => {
-    await page.goto('/concepts/steps');
+  test('steps - component - dark', async ({ page }) => {
+    await page.goto('/test-components/steps');
     await setTheme(page, 'dark');
-    await argosScreenshot(page, 'steps-dark-mobile', {
-      fullPage: true,
+    const steps = page.locator('.sl-steps').first();
+    await argosScreenshot(page, 'steps-dark', {
+      element: steps,
     });
   });
 
-  test('code-blocks page - light mode - desktop', async ({ page }) => {
-    await page.goto('/concepts/code-blocks', { waitUntil: 'networkidle' });
+  // Code Block Components
+  test('code-block - javascript - light', async ({ page }) => {
+    await page.goto('/test-components/code-blocks', { waitUntil: 'networkidle' });
+    await setTheme(page, 'light');
+    await page.waitForTimeout(500); // Wait for syntax highlighting
+    const codeBlock = page.locator('.expressive-code').first();
+    await argosScreenshot(page, 'code-block-js-light', {
+      element: codeBlock,
+    });
+  });
+
+  test('code-block - javascript - dark', async ({ page }) => {
+    await page.goto('/test-components/code-blocks', { waitUntil: 'networkidle' });
+    await setTheme(page, 'dark');
+    await page.waitForTimeout(500);
+    const codeBlock = page.locator('.expressive-code').first();
+    await argosScreenshot(page, 'code-block-js-dark', {
+      element: codeBlock,
+    });
+  });
+
+  test('code-block - with title - light', async ({ page }) => {
+    await page.goto('/test-components/code-blocks', { waitUntil: 'networkidle' });
     await setTheme(page, 'light');
     await page.waitForTimeout(500);
-    await argosScreenshot(page, 'code-blocks-light-desktop', {
-      fullPage: true,
+    const codeBlock = page.locator('.expressive-code').nth(1);
+    await argosScreenshot(page, 'code-block-title-light', {
+      element: codeBlock,
     });
   });
 
-  test('code-blocks page - dark mode - desktop', async ({ page }) => {
-    await page.goto('/concepts/code-blocks', { waitUntil: 'networkidle' });
+  test('code-block - with title - dark', async ({ page }) => {
+    await page.goto('/test-components/code-blocks', { waitUntil: 'networkidle' });
     await setTheme(page, 'dark');
     await page.waitForTimeout(500);
-    await argosScreenshot(page, 'code-blocks-dark-desktop', {
-      fullPage: true,
+    const codeBlock = page.locator('.expressive-code').nth(1);
+    await argosScreenshot(page, 'code-block-title-dark', {
+      element: codeBlock,
     });
   });
 
-  test('code-blocks page - light mode - mobile', async ({ page }) => {
-    await page.goto('/concepts/code-blocks', { waitUntil: 'networkidle' });
+  test('code-block - with highlighting - light', async ({ page }) => {
+    await page.goto('/test-components/code-blocks', { waitUntil: 'networkidle' });
     await setTheme(page, 'light');
     await page.waitForTimeout(500);
-    await argosScreenshot(page, 'code-blocks-light-mobile', {
-      fullPage: true,
+    const codeBlock = page.locator('.expressive-code').nth(2);
+    await argosScreenshot(page, 'code-block-highlight-light', {
+      element: codeBlock,
     });
   });
 
-  test('code-blocks page - dark mode - mobile', async ({ page }) => {
-    await page.goto('/concepts/code-blocks', { waitUntil: 'networkidle' });
+  test('code-block - with highlighting - dark', async ({ page }) => {
+    await page.goto('/test-components/code-blocks', { waitUntil: 'networkidle' });
     await setTheme(page, 'dark');
     await page.waitForTimeout(500);
-    await argosScreenshot(page, 'code-blocks-dark-mobile', {
-      fullPage: true,
-    });
-  });
-
-  test('on-this-page demo - light mode - desktop', async ({ page }) => {
-    await page.goto('/concepts/on-this-page');
-    await setTheme(page, 'light');
-    await argosScreenshot(page, 'on-this-page-light-desktop', {
-      fullPage: true,
-    });
-  });
-
-  test('on-this-page demo - dark mode - desktop', async ({ page }) => {
-    await page.goto('/concepts/on-this-page');
-    await setTheme(page, 'dark');
-    await argosScreenshot(page, 'on-this-page-dark-desktop', {
-      fullPage: true,
-    });
-  });
-
-  test('complex lists - light mode - desktop', async ({ page }) => {
-    await page.goto('/concepts/complex-lists');
-    await setTheme(page, 'light');
-    await argosScreenshot(page, 'complex-lists-light-desktop', {
-      fullPage: true,
-    });
-  });
-
-  test('complex lists - dark mode - desktop', async ({ page }) => {
-    await page.goto('/concepts/complex-lists');
-    await setTheme(page, 'dark');
-    await argosScreenshot(page, 'complex-lists-dark-desktop', {
-      fullPage: true,
+    const codeBlock = page.locator('.expressive-code').nth(2);
+    await argosScreenshot(page, 'code-block-highlight-dark', {
+      element: codeBlock,
     });
   });
 });
@@ -623,7 +573,7 @@ test.describe('Visual Regression - Special UI Components', () => {
 
     // Ensure menu is closed
     await argosScreenshot(page, 'mobile-menu-closed', {
-      fullPage: true,
+      fullPage: false,
     });
   });
 
@@ -639,7 +589,7 @@ test.describe('Visual Regression - Special UI Components', () => {
     await page.waitForTimeout(300);
 
     await argosScreenshot(page, 'mobile-menu-open-light', {
-      fullPage: true,
+      fullPage: false,
     });
   });
 
@@ -655,7 +605,7 @@ test.describe('Visual Regression - Special UI Components', () => {
     await page.waitForTimeout(300);
 
     await argosScreenshot(page, 'mobile-menu-open-dark', {
-      fullPage: true,
+      fullPage: false,
     });
   });
 
@@ -686,7 +636,9 @@ test.describe('Visual Regression - Search', () => {
     await page.waitForTimeout(300);
 
     // Screenshot the modal
-    await argosScreenshot(page, 'search-modal-initial-light');
+    await argosScreenshot(page, 'search-modal-initial-light', {
+      fullPage: false,
+    });
   });
 
   test('search modal - initial state - dark mode', async ({ page }) => {
@@ -700,7 +652,9 @@ test.describe('Visual Regression - Search', () => {
     await searchButton.click();
     await page.waitForTimeout(300);
 
-    await argosScreenshot(page, 'search-modal-initial-dark');
+    await argosScreenshot(page, 'search-modal-initial-dark', {
+      fullPage: false,
+    });
   });
 
   test('search modal - with query text - light mode', async ({ page }) => {
@@ -719,7 +673,9 @@ test.describe('Visual Regression - Search', () => {
     await searchInput.fill('installation');
     await page.waitForTimeout(500); // Wait for results to load
 
-    await argosScreenshot(page, 'search-modal-with-query-light');
+    await argosScreenshot(page, 'search-modal-with-query-light', {
+      fullPage: false,
+    });
   });
 
   test('search modal - with query text - dark mode', async ({ page }) => {
@@ -737,7 +693,9 @@ test.describe('Visual Regression - Search', () => {
     await searchInput.fill('installation');
     await page.waitForTimeout(500);
 
-    await argosScreenshot(page, 'search-modal-with-query-dark');
+    await argosScreenshot(page, 'search-modal-with-query-dark', {
+      fullPage: false,
+    });
   });
 
   test('search modal - with results - light mode', async ({ page }) => {
@@ -755,7 +713,9 @@ test.describe('Visual Regression - Search', () => {
     await searchInput.fill('getting started');
     await page.waitForTimeout(800); // Wait for results
 
-    await argosScreenshot(page, 'search-modal-results-light');
+    await argosScreenshot(page, 'search-modal-results-light', {
+      fullPage: false,
+    });
   });
 
   test('search modal - with results - dark mode', async ({ page }) => {
@@ -772,7 +732,9 @@ test.describe('Visual Regression - Search', () => {
     await searchInput.fill('getting started');
     await page.waitForTimeout(800);
 
-    await argosScreenshot(page, 'search-modal-results-dark');
+    await argosScreenshot(page, 'search-modal-results-dark', {
+      fullPage: false,
+    });
   });
 
   test('search modal - no results state', async ({ page }) => {
@@ -790,7 +752,9 @@ test.describe('Visual Regression - Search', () => {
     await searchInput.fill('xyzqwertynoresults123');
     await page.waitForTimeout(800);
 
-    await argosScreenshot(page, 'search-modal-no-results');
+    await argosScreenshot(page, 'search-modal-no-results', {
+      fullPage: false,
+    });
   });
 
   test('search modal - mobile - light mode', async ({ page }, testInfo) => {
@@ -805,7 +769,7 @@ test.describe('Visual Regression - Search', () => {
     await page.waitForTimeout(300);
 
     await argosScreenshot(page, 'search-modal-mobile-light', {
-      fullPage: true,
+      fullPage: false,
     });
   });
 
@@ -820,7 +784,7 @@ test.describe('Visual Regression - Search', () => {
     await page.waitForTimeout(300);
 
     await argosScreenshot(page, 'search-modal-mobile-dark', {
-      fullPage: true,
+      fullPage: false,
     });
   });
 
@@ -839,7 +803,7 @@ test.describe('Visual Regression - Search', () => {
     await page.waitForTimeout(800);
 
     await argosScreenshot(page, 'search-modal-mobile-results', {
-      fullPage: true,
+      fullPage: false,
     });
   });
 

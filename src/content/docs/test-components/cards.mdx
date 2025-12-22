@@ -1,0 +1,26 @@
+---
+title: Test - Cards
+description: Component test page for card variations
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## Single Card
+
+<Card title="Test Card" icon="star">
+  This is a test card with an icon.
+</Card>
+
+## Card Grid
+
+<CardGrid>
+  <Card title="Card 1" icon="rocket">
+    First card in grid
+  </Card>
+  <Card title="Card 2" icon="puzzle">
+    Second card in grid
+  </Card>
+  <Card title="Card 3" icon="seti:config">
+    Third card in grid
+  </Card>
+</CardGrid>
