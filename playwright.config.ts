@@ -14,7 +14,8 @@ export default defineConfig({
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
-  workers: process.env.CI ? 1 : undefined,
+  // Use more workers in CI for faster test execution (85+ tests)
+  workers: process.env.CI ? 4 : undefined,
 
   reporter: [
     process.env.CI ? ['dot'] : ['list'],
@@ -62,13 +63,21 @@ export default defineConfig({
     },
   ],
 
-  // Run dev server before tests
-  webServer: {
-    command: 'bun run dev',
-    url: 'http://localhost:4321',
-    reuseExistingServer: !process.env.CI,
-    timeout: 120000,
-  },
+  // Run production build for tests (required for search/Pagefind to work)
+  // Scripts set USE_PREVIEW=1 by default
+  webServer: process.env.USE_PREVIEW
+    ? {
+        command: 'bun run build && bun run preview',
+        url: 'http://localhost:4321',
+        reuseExistingServer: !process.env.CI,
+        timeout: 120000,
+      }
+    : {
+        command: 'bun run dev',
+        url: 'http://localhost:4321',
+        reuseExistingServer: !process.env.CI,
+        timeout: 120000,
+      },
 
   // Visual comparison settings
   expect: {
