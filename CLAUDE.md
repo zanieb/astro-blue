@@ -29,6 +29,12 @@ Style Astro Starlight to match Mintlify/PYX docs (https://docs.pyx.dev).
 
 **Package manager:** Use `bun` for all dependency management (not npm).
 
+**Installing dependencies:** If `bun run dev` fails with "command not found", install dependencies first:
+
+```bash
+bun install
+```
+
 **Dev server:** `bun run dev` (runs at http://localhost:4321)
 
 See `DEVELOPMENT.md` for MCP browser tools (uses Chrome or Chromium).
