@@ -903,7 +903,6 @@ aside.right-sidebar,
 }
 
 .sidebar-content summary:hover {
-  color: var(--theme-sidebar-link-hover);
   background: var(--theme-bg-hover);
 }
 
@@ -966,7 +965,6 @@ aside.right-sidebar,
 }
 
 .sidebar-content details details summary:hover {
-  color: var(--theme-sidebar-link-hover);
   background: var(--theme-bg-hover);
 }
 
@@ -1055,7 +1053,6 @@ nav.sidebar li {
 }
 
 .sidebar-content a:hover {
-  color: var(--theme-sidebar-link-hover);
   background: var(--theme-bg-hover);
 }
 
@@ -1075,6 +1072,20 @@ nav.sidebar li {
   text-shadow:
     -0.2px 0 0 currentColor,
     0.2px 0 0 currentColor;
+}
+
+/* Exception: group links inside summaries should NOT have background (summary already has it) */
+.sidebar-content summary .group-link[aria-current='page'],
+.sidebar-content summary .group-link[aria-current='page']:hover {
+  background: transparent;
+  color: inherit;
+  text-shadow: none;
+}
+
+/* Prevent color change on hover for group link text - keep it consistent */
+.sidebar-content summary .group-link:hover .large,
+.sidebar-content summary .group-link:focus .large {
+  color: var(--sl-color-white);
 }
 
 /* Remove Starlight's default top-level styling */
