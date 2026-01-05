@@ -652,16 +652,22 @@ summary {
 }
 
 /* ===========================================
-   Search Bar (Mintlify style - fixed width, centered)
+   Search Bar (Mintlify style - fixed width, centered in viewport)
    =========================================== */
 /* Match Mintlify's exact search bar width and styling */
 @media (min-width: 50rem) {
-  /* The container holding site-search - center it in header */
+  /* Make inner header the positioning context */
+  header.header .header {
+    position: relative;
+  }
+
+  /* Absolutely position search container to center in viewport */
   header.header .header > .sl-flex:has(site-search) {
-    flex: 1 1 auto;
-    justify-content: center;
-    max-width: none;
-    margin: 0 2rem;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 50%;
+    margin-top: -18px; /* Half of 36px button height */
   }
 
   /* Search button - fixed width like Mintlify (424px) */
@@ -669,6 +675,11 @@ summary {
     width: 424px;
     min-width: 424px;
     max-width: 424px;
+  }
+
+  /* Push right group to the right edge */
+  header.header .header > .right-group {
+    margin-left: auto;
   }
 }
 
