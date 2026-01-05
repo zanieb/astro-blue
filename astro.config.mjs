@@ -17,6 +17,7 @@ export default defineConfig({
         PageTitle: './src/components/PageTitle.astro',
         SiteTitle: './src/components/SiteTitle.astro',
         Sidebar: './src/components/Sidebar.astro',
+        Search: './src/components/Search.astro',
       },
       plugins: [starlightLinksValidator()],
       social: [

@@ -74,8 +74,6 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
 </script>
 
 <script>
-  import { pagefindUserConfig } from 'virtual:starlight/pagefind-config';
-
   class SiteSearch extends HTMLElement {
     constructor() {
       super();
@@ -147,51 +145,80 @@ if (project.trailingSlash === 'never') dataAttributes['data-strip-trailing-slash
         }
       });
 
-      let translations = {};
-      try {
-        translations = JSON.parse(this.dataset.translations || '{}');
-      } catch {
-        // Ignore JSON parse errors and use empty object
-      }
-
-      const shouldStrip = this.dataset.stripTrailingSlash !== undefined;
-      const stripTrailingSlash = (path: string) => path.replace(/(.)\/(#.*)?$/, '$1$2');
-      const formatURL = shouldStrip ? stripTrailingSlash : (path: string) => path;
-
-      window.addEventListener('DOMContentLoaded', () => {
-        if (import.meta.env.DEV) return;
-        const onIdle = window.requestIdleCallback || ((cb) => setTimeout(cb, 1));
-        onIdle(async () => {
-          // @ts-expect-error — Missing types for @pagefind/default-ui package.
-          const { PagefindUI } = await import('@pagefind/default-ui');
-          new PagefindUI({
-            ...pagefindUserConfig,
-            element: '#starlight__search',
-            baseUrl: import.meta.env.BASE_URL,
-            bundlePath: import.meta.env.BASE_URL.replace(/\/$/, '') + '/pagefind/',
-            showImages: false,
-            translations,
-            showSubResults: true,
-            processResult: (result: { url: string; sub_results: Array<{ url: string }> }) => {
-              result.url = formatURL(result.url);
-              result.sub_results = result.sub_results.map((sub_result) => {
-                sub_result.url = formatURL(sub_result.url);
-                return sub_result;
-              });
-            },
-          });
-
-          // Mark as initialized and open modal if there was a pending request
-          pagefindInitialized = true;
-          if (pendingOpen) {
-            pendingOpen = false;
-            openModal();
-          }
-        });
+      // Listen for pagefind ready event from the initialization script
+      this.addEventListener('pagefind:ready', () => {
+        pagefindInitialized = true;
+        if (pendingOpen) {
+          pendingOpen = false;
+          openModal();
+        }
       });
     }
   }
   customElements.define('site-search', SiteSearch);
+</script>
+
+<script is:inline>
+  // Inline script for view transition handling
+  (function () {
+    function initializePagefind() {
+      const searchContainer = document.getElementById('starlight__search');
+      if (!searchContainer || searchContainer.hasChildNodes()) return;
+
+      // Prevent duplicate initialization (async race condition)
+      if (searchContainer.dataset.pagefindInit) return;
+      searchContainer.dataset.pagefindInit = 'true';
+
+      const onIdle = window.requestIdleCallback || ((cb) => setTimeout(cb, 1));
+      onIdle(async () => {
+        // Load pagefind-ui.js which attaches PagefindUI to window
+        await import('/pagefind/pagefind-ui.js');
+        const PagefindUI = window.PagefindUI;
+        if (!PagefindUI) return;
+
+        // Get translations from site-search element
+        const siteSearch = document.querySelector('site-search');
+        let translations = {};
+        try {
+          translations = JSON.parse(siteSearch?.dataset.translations || '{}');
+        } catch {
+          // Ignore
+        }
+
+        const shouldStrip = siteSearch?.dataset.stripTrailingSlash !== undefined;
+        const stripTrailingSlash = (path) => path.replace(/(.)\/(#.*)?$/, '$1$2');
+        const formatURL = shouldStrip ? stripTrailingSlash : (path) => path;
+
+        new PagefindUI({
+          element: searchContainer,
+          baseUrl: '/',
+          bundlePath: '/pagefind/',
+          showImages: false,
+          translations,
+          showSubResults: true,
+          ranking: {
+            pageLength: 0.1,
+            termFrequency: 0.1,
+            termSaturation: 2,
+            termSimilarity: 9,
+          },
+          processResult: (result) => {
+            result.url = formatURL(result.url);
+            result.sub_results = result.sub_results.map((sub_result) => {
+              sub_result.url = formatURL(sub_result.url);
+              return sub_result;
+            });
+          },
+        });
+
+        // Notify the custom element that pagefind is ready
+        siteSearch?.dispatchEvent(new CustomEvent('pagefind:ready'));
+      });
+    }
+
+    // Only use astro:page-load which fires on both initial load and view transitions
+    document.addEventListener('astro:page-load', initializePagefind);
+  })();
 </script>
 
 <style>
