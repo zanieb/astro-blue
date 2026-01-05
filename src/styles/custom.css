@@ -504,23 +504,26 @@ pre {
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;
+  overflow: visible;
 }
 
 .expressive-code .copy button {
-  all: unset;
+  background: none;
+  border: none;
+  margin: 0;
   opacity: 1;
   border-radius: 0.25rem;
   padding: 0.25rem;
   width: 1.5rem;
   height: 1.5rem;
   cursor: pointer;
+  position: relative;
   transition: opacity 0.15s ease;
   display: block;
 }
 
-/* Hide the default expressive-code icon (::before/::after pseudo-elements) */
-.expressive-code .copy button::before,
-.expressive-code .copy button::after {
+/* Hide the default expressive-code icon (::before pseudo-element) */
+.expressive-code .copy button::before {
   display: none;
   content: none;
 }
@@ -546,6 +549,47 @@ pre {
 
 .expressive-code .copy button:hover div {
   background: var(--theme-text);
+}
+
+/* Hide default expressive-code "Copied" feedback */
+.expressive-code .copy .feedback {
+  display: none !important;
+}
+
+/* Copy button tooltip - show "Copy" text on hover (PYX style - purple pill to the left) */
+.expressive-code .copy::after {
+  content: 'Copy';
+  position: absolute;
+  top: 50%;
+  right: calc(100% + 0.5rem);
+  transform: translateY(-50%);
+  background: var(--astral-primary-dark);
+  color: white;
+  padding: 0.375rem 0.75rem;
+  border-radius: 1.5rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
+  line-height: 1.2;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  z-index: 10;
+}
+
+.expressive-code .copy:hover::after {
+  opacity: 1;
+}
+
+/* Show "Copied" after clicking */
+.expressive-code .copy.copied::after,
+.expressive-code .copy[data-copied]::after {
+  content: 'Copied';
+  opacity: 1;
 }
 
 /* ===========================================
