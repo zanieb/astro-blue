@@ -1077,6 +1077,14 @@ nav.sidebar li {
     0.2px 0 0 currentColor;
 }
 
+/* Exception: group links inside summaries should NOT have background (summary already has it) */
+.sidebar-content summary .group-link[aria-current='page'],
+.sidebar-content summary .group-link[aria-current='page']:hover {
+  background: transparent;
+  color: inherit;
+  text-shadow: none;
+}
+
 /* Remove Starlight's default top-level styling */
 .sidebar-content .top-level > li {
   margin-bottom: 0.5rem;
